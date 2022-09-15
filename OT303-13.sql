@@ -27,8 +27,8 @@ Si la fecha de nacimiento > fecha_actual, la edad resulta en negativo (podrían 
 SELECT FC.universidad AS university,
        FC.carrera AS career,
        FC.fecha_de_inscripcion AS inscription_date,
-       regexp_replace(name, '\s\S+', '') AS first_name,
-       regexp_replace(name, '.+[\s]', '') AS last_name,
+       regexp_replace(FC.name, '\s\S+', '') AS first_name,
+       regexp_replace(FC.name, '.+[\s]', '') AS last_name,
        FC.sexo AS gender,
        EXTRACT(YEAR
                FROM AGE(TO_DATE(FC.fecha_nacimiento, 'YYYY-MM-DD'))) AS age,
