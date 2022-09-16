@@ -1,4 +1,10 @@
+--COMO: Analista de datos
+--QUIERO: Escribir el código de dos consultas SQL, una para cada universidad.
+--PARA: Obtener los datos de las pesonas anotadas en entre las fechas 01/9/2020 al 01/02/2021 para las siguientes facultades:
 
+--Universidad Tecnológica Nacional
+
+--Universidad Nacional De Tres De Febrero
 
 -- jujuy_utn--
 	SELECT
@@ -12,6 +18,7 @@
     l.codigo_postal AS postal_code,
     f.location AS location,
     f.email AS email,
+	--se agrego un case debido a que muchas fechas estaban en texto y no en entero--
 	 DATE_PART(
         'year',
         AGE(
