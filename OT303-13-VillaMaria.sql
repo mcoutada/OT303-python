@@ -29,28 +29,6 @@ o personas inscriptas con mas de 90/100 años)
 Solución: se interpretaron correctamente los rangos de inscripción. Se controló la edad negativa.
 */
 
-
--- Script para Universidad De Flores. 
-SELECT FC.universidad AS university,
-       FC.carrera AS career,
-       FC.fecha_de_inscripcion AS inscription_date,
-       --Replace all characters after first white space to get name.
-       regexp_replace(FC.name, '\s\S+', '') AS first_name,
-       --Replace all characters before first white space to get last name.
-       regexp_replace(FC.name, '.+[\s]', '') AS last_name,
-       FC.sexo AS gender,
-       EXTRACT(YEAR
-               FROM AGE(TO_DATE(FC.fecha_nacimiento, 'YYYY-MM-DD'))) AS age,
-       FC.codigo_postal AS postal_code,
-       L.localidad AS location,
-       FC.correo_electronico AS email
-FROM flores_comahue FC
-INNER JOIN localidad2 L ON CAST(FC.codigo_postal AS INT) = L.codigo_postal
-WHERE FC.universidad = UPPER('Universidad De Flores')
-  AND TO_DATE(FC.fecha_de_inscripcion, 'YYYY-MM-DD') 
-  	BETWEEN TO_DATE('01/9/2020', 'DD-MM-YYYY') AND TO_DATE('01/02/2021', 'DD-MM-YYYY');
-
-
 -- Script para Universidad Nacional De Villa María.
 
 
