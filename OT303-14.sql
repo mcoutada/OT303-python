@@ -63,7 +63,19 @@ SELECT
     SPLIT_PART(svm.nombre, '_', 1) AS first_name,
     SPLIT_PART(svm.nombre, '_', 2) AS last_name,
     svm.sexo AS gender,
-    DATE_PART('year', AGE(TO_DATE(svm.fecha_nacimiento,'DD-Mon-YY'))) AS age,
+    DATE_PART(
+        'year',
+        AGE(
+            CASE
+                WHEN
+                    TO_DATE(svm.fecha_nacimiento,'DD-Mon-YY') > NOW()
+                THEN
+                    TO_DATE(svm.fecha_nacimiento,'DD-Mon-YY') - interval '100 year'
+                ELSE
+                    TO_DATE(svm.fecha_nacimiento,'DD-Mon-YY')
+                END
+        )
+    ) AS age,
     l.codigo_postal AS postal_code,
     l.localidad AS location,
     svm.email
