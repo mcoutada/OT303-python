@@ -73,7 +73,7 @@ SELECT
                     TO_DATE(svm.fecha_nacimiento,'DD-Mon-YY') - interval '100 year'
                 ELSE
                     TO_DATE(svm.fecha_nacimiento,'DD-Mon-YY')
-                END
+            END
         )
     ) AS age,
     l.codigo_postal AS postal_code,
