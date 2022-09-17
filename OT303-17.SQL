@@ -1,4 +1,6 @@
 -- Universidad de La Pampa
+
+
 SELECT 
     universidad AS university,
     carrerra AS career,
@@ -20,6 +22,8 @@ ORDER BY
     nombrre;
 
 -- Universidad Interamericana 
+
+
 SELECT 
     it.univiersities AS university,
     it.carrera AS career,
