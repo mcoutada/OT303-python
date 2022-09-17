@@ -1,3 +1,4 @@
+-- Universidad de La Pampa
 SELECT 
     universidad AS university,
     carrerra AS career,
@@ -18,7 +19,7 @@ AND
 ORDER BY 
     nombrre;
 
-
+-- Universidad Interamericana 
 SELECT 
     it.univiersities AS university,
     it.carrera AS career,
@@ -26,7 +27,17 @@ SELECT
     split_part(it.names, '-', 1) AS first_name,
     split_part(it.names, '-', 2) AS last_name,
     it.sexo AS gender,
-    date_part('year',age(now()::date,TO_DATE(it.fechas_nacimiento,'YY-Mon-DD'))) AS age,
+    DATE_PART(
+        'year',
+        AGE(
+            CASE
+                WHEN
+                    TO_DATE(it.fechas_nacimiento ,'YY-Mon-DD') > NOW()
+                THEN
+                    TO_DATE(it.fechas_nacimiento ,'YY-Mon-DD') - interval '100 year'
+                ELSE
+                    TO_DATE(it.fechas_nacimiento ,'YY-Mon-DD')
+            END  )) AS age,
     lo.codigo_postal AS postal_code,
     it.localidad AS location,
     it.email
