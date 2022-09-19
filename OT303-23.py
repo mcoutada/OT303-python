@@ -1,7 +1,7 @@
 from airflow import DAG
 from airflow.operators.dummy import DummyOperator
 from datetime import timedelta,datetime
-print(datetime.today)
+
 
 with DAG(
     "DAG_universidades_C",
