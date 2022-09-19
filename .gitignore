@@ -1,0 +1,5 @@
+# Carpeta del entorno virtual.
+venv
+
+# Archivo que contiene las variables de entorno.
+.env
