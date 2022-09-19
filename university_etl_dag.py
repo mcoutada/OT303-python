@@ -26,6 +26,7 @@ from utils.university_etl_functions import extract_data, transform_data, load_da
 
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
+#from airflow.sensors.external_task_sensor import ExternalTaskSensor
 
 #from airflow.operators.empty import EmptyOperator
 
@@ -77,6 +78,17 @@ with DAG(
         tags=['university_etl']
 ) as dag:
 
+    # Use ExternalTaskSensor to listen to the Parent_dag and connection task
+    # when connection is finished, extract will be triggered
+    # wait_for_connection = ExternalTaskSensor(
+    #    task_id='wait_for_connection',
+    #    external_dag_id='connection_db_dag',
+    #    external_task_id='connection',
+    #    start_date=datetime(2022, 9, 16),
+    #    execution_delta=timedelta(hours=1),
+    #    timeout=5400,
+    # )
+
     # Could use xcom to share data between tasks. (Next Sprint)
     # Use PythonOperator to execute each task. Like:
     extract_task = PythonOperator(
@@ -103,4 +115,6 @@ with DAG(
     #load = EmptyOperator(task_id='load')
 
     # Podria agregarse al principio el dag del retry connection (el codigo del retry aca)
+    #wait_for_connection >> extract_task >> transform_task >> load_task
+
     extract_task >> transform_task >> load_task
