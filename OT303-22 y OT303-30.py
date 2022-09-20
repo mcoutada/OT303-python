@@ -150,11 +150,13 @@ with DAG(
     with TaskGroup(group_id="tg_extract") as tg_extract:
         t_get_engine = get_db_conn()
         t_extract = extract(e_conn=t_get_engine)
+        # Setting up Dependencies for this TaskGroup
         t_get_engine >> t_extract
 
     with TaskGroup(group_id="tg_transform") as tg_transform:
         t_task1 = task1()
         t_task2 = task2()
+        # Setting up Dependencies for this TaskGroup
         t_task1 >> t_task2
 
     t_load = load()
