@@ -72,7 +72,7 @@ The state of a task instance's PK in the database is (dag_id, task_id, execution
 
 
 @task(task_id="t_get_db_conn", retries=5)
-def get_db_conn(**kwargs):
+def get_db_conn():
 
     # https://airflow.apache.org/docs/apache-airflow/stable/best-practices.html
     # top-level imports might take surprisingly a lot of time and they can generate
