@@ -1,51 +1,47 @@
 '''
-TASK ID: OT303-21
+TASK ID: OT303-37
 
 COMO: Analista de datos
-QUIERO: Configurar un DAG, sin operators.
-PARA: Hacer un ETL para 2 universidades distintas.
+QUIERO: Configurar los log
+PARA: Mostrarlos en consola
 
 Criterios de aceptación: 
-Configurar el DAG para las siguientes universidades:
 
-Universidad De Flores
-Universidad Nacional De Villa María
+Configurar logs para Universidad De Flores
 
-Documentar los operators que se deberían utilizar a futuro:
-    * se va a hacer dos consultas SQL (una para cada universidad), 
-    * se van a procesar los datos con pandas 
-    * se van a cargar los datos en S3.  
-    * Scheduler: El DAG se debe ejecutar cada 1 hora, todos los días.
+Configurar logs para Universidad Nacional De Villa María
+
+Utilizar la librería de Loggin de python: https://docs.python.org/3/howto/logging.html
+
+Realizar un log al empezar cada DAG con el nombre del logger
+
+Formato del log: %Y-%m-%d - nombre_logger - mensaje
 '''
 
-import logging
-
 from datetime import timedelta, datetime
+from statistics import mode
 from config.common_args import default_args
+from config.cfg import LOG_ETL, LOGS_PATH
 from utils.university_etl_functions import extract_data, transform_data, load_data
+from utils.logger import create_logger
+
 
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 #from airflow.sensors.external_task_sensor import ExternalTaskSensor
-
-#from airflow.operators.empty import EmptyOperator
-
-# Create and configure log
-today = datetime.now().date()
-logging.basicConfig(
-    format='%(asctime)s %(message)s',
-    filemode='w',
-    level='DEBUG')
-
+log_name = LOG_ETL + datetime.today().strftime('%Y-%m-%d')
+logger = create_logger(name_logger=log_name, log_path=LOGS_PATH)
 
 # Esta task levanta los datos de la fuente (en este caso ejecuta la consulta .sql) y
 # los guarda en un archivo .csv
+
+
 def extract():
-    """Extract data from some source and save data like .csv for each university.
+    """Extract data from some sql query and save data as .csv for each university.
     """
     # Extract data.
     extract_data()
-    logging.info('Data extracted successfully.')
+    logger.info('Data extracted successfully.')
 
 
 # Esta task procesa los datos extraidos anteriormente y los transforma para
@@ -55,7 +51,7 @@ def transform(**kgwards):
     """
     # TODO: implement transform next sprint.
     transform_data()
-    logging.info('Data transformed successfully.')
+    logger.info('Data transformed successfully.')
 
 
 # Esta task va a ejecutar el proceso de carga de datos a S3, recive un dataframe o un path .csv,
@@ -65,16 +61,18 @@ def load(**kgwards):
     """
     # TODO: implement transform next sprint.
     load_data()
-    logging.info('Data loaded to S3 succesfully.')
+    logger.info('Data loaded to S3 succesfully.')
+    # Clear Handlers.
+    logger.handlers.clear()
 
 
 # Configure DAG parameters.
 with DAG(
         'university_etl_dag',
         default_args=default_args,
-        description='ETL DAG for 2 universities.Task id OT303-21',
+        description='ETL DAG for 2 universities.',
         schedule_interval=timedelta(hours=1),
-        start_date=datetime(2022, 9, 16),
+        start_date=datetime(2022, 9, 18),
         tags=['university_etl']
 ) as dag:
 
@@ -84,9 +82,9 @@ with DAG(
     #    task_id='wait_for_connection',
     #    external_dag_id='connection_db_dag',
     #    external_task_id='connection',
-    #    start_date=datetime(2022, 9, 16),
+    #    start_date=datetime(2022, 9, 17),
     #    execution_delta=timedelta(hours=1),
-    #    timeout=5400,
+    #    timeout=3600,
     # )
 
     # Could use xcom to share data between tasks. (Next Sprint)
@@ -108,11 +106,6 @@ with DAG(
         python_callable=load,
         provide_context=True
     )
-
-    # First try: EmptyOperator
-    #extract = EmptyOperator(task_id='extract')
-    #transform = EmptyOperator(task_id='transform')
-    #load = EmptyOperator(task_id='load')
 
     # Podria agregarse al principio el dag del retry connection (el codigo del retry aca)
     #wait_for_connection >> extract_task >> transform_task >> load_task

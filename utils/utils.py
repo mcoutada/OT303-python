@@ -1,6 +1,7 @@
 import os
 from config.cfg import ROOT_SQL
 
+
 def get_src_querys():
     """Get filename and src_path from querys.
 
@@ -9,7 +10,7 @@ def get_src_querys():
     """
     files_path = {}
     for name in os.listdir(ROOT_SQL):
-        files_path[name] = os.path.join(ROOT_SQL,name)
+        files_path[name] = os.path.join(ROOT_SQL, name)
     return files_path
 
 
