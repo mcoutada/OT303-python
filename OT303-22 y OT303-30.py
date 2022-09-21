@@ -80,7 +80,7 @@ def get_db_conn():
     # local imports inside Python callables
 
     from decouple import config
-    from sqlalchemy import create_engine, exc, inspect
+    from sqlalchemy import create_engine
 
     POSTGRES_USER = config("POSTGRES_USER")
     POSTGRES_PASSWORD = config("POSTGRES_PASSWORD")
