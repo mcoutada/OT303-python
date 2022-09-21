@@ -1,5 +1,5 @@
 import os
-from config.cfg import ROOT_CSV, ROOT_SQL
+from config.cfg import ROOT_SQL
 
 def get_src_querys():
     """Get filename and src_path from querys.
@@ -13,8 +13,8 @@ def get_src_querys():
     return files_path
 
 
-def create_csv_folder():
-    """Create folder to save .csv files if doesnt exist.
+def create_folder(path):
+    """Create folder if doesnt exist.
     """
-    if not os.path.exists(ROOT_CSV):
-        os.makedirs(ROOT_CSV)
+    if not os.path.exists(path):
+        os.makedirs(path)

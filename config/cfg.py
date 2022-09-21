@@ -18,8 +18,13 @@ DB_NAME=config('DB_NAME')
 ROOT = Path().resolve().parent
 ROOT_SQL = os.path.join(ROOT,'airflow/dags/sql')
 ROOT_CSV = os.path.join(ROOT,'airflow/dags/csv')
+LOGS_PATH = os.path.join(ROOT,'airflow/dags/logs')
 
 #Tables Names
 FLORES='flores_comahue'
 VILLA_MARIA='salvador_villa_maria'
 LOCALIDAD='localidad2'
+
+#Loggers
+LOG_DB='Connection_db_log'
+LOG_ETL='ETL_task_log'

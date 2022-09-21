@@ -6,7 +6,7 @@ from datetime import datetime
 
 from config.cfg import ROOT_CSV
 from db.db_connection import create_engine_connection
-from utils.utils import create_csv_folder, get_src_querys
+from utils.utils import create_folder, get_src_querys
 
 # Create and configure log
 today = datetime.now().date()
@@ -20,7 +20,7 @@ def extract_data():
     """Get data from both universities.
     """
     # First create csv folder if doesn't exist.
-    create_csv_folder()
+    create_folder(ROOT_CSV)
     # Create engine
     engine = create_engine_connection()
     # Get sql files and full path.
