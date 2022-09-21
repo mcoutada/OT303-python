@@ -26,6 +26,10 @@
 * Archivo /utils/logger.py contiene la estructura del log utilizado.
 * Se actualizaron los dags y agregaron logs en las distintas task.
 
+## TASK ID: OT303-45 (Extract)
+* Carpeta csv contiene los archivos .csv extraidos de la base de datos para las universidades Flores y Villa Maria.
+* university_etl_dag.py (task extract), university_etl_functions.py (funcion extract implementada)
+
 #
 # Aclaración:
 * Para ejecutar los DAGs, dentro de la carpeta /airflow/dags/ copiar los archivos usados o cambiar las rutas en los scripts.py.

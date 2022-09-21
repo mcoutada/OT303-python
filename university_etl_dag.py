@@ -37,7 +37,7 @@ logger = create_logger(name_logger=log_name, log_path=LOGS_PATH)
 
 
 def extract():
-    """Extract data from some sql query and save data as .csv for each university.
+    """Extract data from .sql query and save data as .csv for each university. TASK OT303-45
     """
     # Extract data.
     extract_data()

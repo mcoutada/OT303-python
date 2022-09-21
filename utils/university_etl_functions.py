@@ -14,7 +14,7 @@ logger = logging.getLogger(log_name)
 
 
 def extract_data():
-    """Get data from both universities.
+    """Get data from both universities. TASK OT303-45
     """
     logger.info('*-----------EXTRACT TASK-----------*')
     # First create csv folder if doesn't exist.
@@ -36,7 +36,7 @@ def extract_data():
                 # Create a pandas dataframe with the result.
                 df = pd.DataFrame(result)
                 logger.info('Writing information to csv.')
-                # Create .csv file.
+                # Create .csv file. The name is the same as .sql filename.
                 df.to_csv(os.path.join(
                     ROOT_CSV, f'{sql_file_name[:-4]}.csv'), index=False)
     logger.info('Extracting data from database.')
