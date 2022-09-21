@@ -10,6 +10,9 @@ DAG.PY :
 // retries.py
 se implementaron los retries para los ingresos a la base de datos de las universidades
 
-SPRINT 2/5
+# SPRINT 2/5
+
 //carpeta de logs : tiene los logs generados para ambas universidades 
 // logger.py con su estructura
+
+//sql operator:
