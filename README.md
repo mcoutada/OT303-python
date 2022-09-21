@@ -13,15 +13,16 @@
 * Carpeta sql contiene las querys de cada universidad.
 * Archivos university_etl_dag.py, university_etl_functions.py, utils.py, db_connection.py, cfg.py, common_args.py y carpeta sql componen la task OT303-21.
 
+
+
+
+# SPRINT II
+
 ## TASK ID: OT303-29 (Retry connection)
 * El archivo connection_db_dag.py contiene el dag de retry connection.
 * La función que se encarga de conectar con la base de datos se encuentra en db_connection.py
 * Archivos connection_db_dag.py, db_connection.py, cfg.py componen la task OT303-29.
 
-## TASK ID: OT303-37 (Logs)
-* Carpeta logs contiene los .log generados al ejecutar los dag.
-* Archivo /utils/logger.py contiene la estructura del log utilizado.
-* Se actualizaron los dags y agregaron logs en las distintas task.
 
-## Aclaración:
+# Aclaración:
 * Para ejecutar los DAGs, dentro de la carpeta /airflow/dags/ copiar los archivos usados o cambiar las rutas en los scripts.py.
