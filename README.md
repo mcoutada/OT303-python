@@ -30,6 +30,12 @@
 * Carpeta csv contiene los archivos .csv extraidos de la base de datos para las universidades Flores y Villa Maria.
 * university_etl_dag.py (task extract), university_etl_functions.py (funcion extract implementada)
 
+## TASK ID: OT303-61 (Transform)
+* En la carpeta extras se encuentra el jupyter notebook creado para transformar los datos, previo a implementarlo como scripts de python.
+* Carpeta clear_data contiene los archivos .txt generados de aplicar las transformaciones para las universidades Flores y Villa Maria.
+* university_etl_functions.py (funcion transform implementada)
+* transform.py (funcion que depura los datos usandos pandas)
+
 #
 # Aclaración:
 * Para ejecutar los DAGs, dentro de la carpeta /airflow/dags/ copiar los archivos usados o cambiar las rutas en los scripts.py.

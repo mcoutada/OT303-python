@@ -4,9 +4,10 @@ import os
 import pandas as pd
 from datetime import datetime
 
-from config.cfg import LOG_ETL, ROOT_CSV
+from config.cfg import LOG_ETL, ROOT_CSV, ROOT_SQL, ROOT_TXT
 from db.db_connection import create_engine_connection
-from utils.utils import create_folder, get_src_querys
+from utils.utils import create_folder, create_txt, get_filename_path
+from utils.transform import normalize_data
 
 # Use log created before.
 log_name = LOG_ETL + datetime.today().strftime('%Y-%m-%d')
@@ -22,7 +23,7 @@ def extract_data():
     # Create engine
     engine = create_engine_connection()
     # Get sql files and full path.
-    sql_files = get_src_querys()
+    sql_files = get_filename_path(ROOT_SQL)
     # Connect engine.
     with engine.connect() as connection:
         # Execute each query and create a .csv
@@ -46,6 +47,20 @@ def transform_data():
     """TODO: Transform data for both universities.
     """
     logger.info('*-----------TRANSFORM TASK-----------*')
+    # First create txt folder if doesn't exist.
+    create_folder(ROOT_TXT)
+    # Get csv files and full path.
+    csv_files = get_filename_path(ROOT_CSV)
+    for csv_name, csv_path in csv_files.items():
+        logger.info('Working on {csv_name} file.')
+        # Read csv file and create dataframe.
+        dataframe = pd.read_csv(csv_path)
+        # Normalize data.
+        logger.info('Clearing data on {csv_name} file.')
+        dataframe = normalize_data(dataframe)
+        # Create the txt file to save the changes.
+        logger.info('Creating txt for {csv_name} file.')
+        create_txt(dataframe, csv_name)
     logger.info('Transform data from dataframe/csv.')
 
 

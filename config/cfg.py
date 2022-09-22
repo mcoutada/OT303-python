@@ -18,6 +18,7 @@ DB_NAME = config('DB_NAME')
 ROOT = Path().resolve().parent
 ROOT_SQL = os.path.join(ROOT, 'lautaro/airflow/dags/sql')
 ROOT_CSV = os.path.join(ROOT, 'lautaro/airflow/dags/csv')
+ROOT_TXT = os.path.join(ROOT, 'lautaro/airflow/dags/clear_data')
 LOGS_PATH = os.path.join(ROOT, 'lautaro/airflow/dags/logs')
 
 # Tables Names
