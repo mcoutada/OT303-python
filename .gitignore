@@ -3,3 +3,6 @@ venv
 
 # Archivo que contiene las variables de entorno.
 .env
+
+test.py
+__pycache__
