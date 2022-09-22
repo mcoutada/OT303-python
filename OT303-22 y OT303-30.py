@@ -33,6 +33,8 @@ from datetime import datetime, timedelta
 
 from airflow import DAG
 from airflow.decorators import task
+from airflow.utils.task_group import TaskGroup
+
 
 """
 Arguments details
