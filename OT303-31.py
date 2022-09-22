@@ -32,5 +32,4 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime.today(),
     ) as dag:
-    task_check_db_connection = PythonOperator(task_id= "check_db_connection",
-    python_callable = "check_db_connection")
+    task_check_db_connection = PythonOperator(task_id= "check_db_connection", python_callable = "check_db_connection")
