@@ -1,4 +1,3 @@
-import pandas as pd
 '''
 TASK ID: OT303-61
 
@@ -32,6 +31,8 @@ Las aclaraciones se tuvieron en cuenta en las consultas sql.
 # Aclaración: ambas universidades tienen el mismo formato, la edad y la localidad/codigo postal
 # fueron calculadas mediante la query.
 
+import pandas as pd
+import numpy as np
 
 def normalize_data(df: pd.DataFrame):
     """Normalize data from pandas dataframe.
