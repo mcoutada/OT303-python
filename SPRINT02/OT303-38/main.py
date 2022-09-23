@@ -32,6 +32,7 @@ def main(args):
 
     log.info("Start Main")
 
+    # This is left on purpose to test the additional functionality of logging an error
     a = 1 / 0
 
 
