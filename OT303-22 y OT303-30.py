@@ -35,7 +35,6 @@ from airflow import DAG
 from airflow.decorators import task
 from airflow.utils.task_group import TaskGroup
 
-
 """
 Arguments details
 
@@ -97,12 +96,14 @@ def get_db_conn():
 
     return engine
 
+
 # Extract task
 
 
 @task(task_id="t_extract")
 def extract(e_conn):
     pass
+
 
 # Transform task1
 
@@ -111,6 +112,7 @@ def extract(e_conn):
 def task1(**kwargs):
     pass
 
+
 # Transform task2
 
 
@@ -118,12 +120,14 @@ def task1(**kwargs):
 def task2(**kwargs):
     pass
 
+
 # Load task
 
 
 @task(task_id="t_load")
 def load(**kwargs):
     pass
+
 
 ##########################################################################
 # This is just a template, the proper naming and grouping will be done
