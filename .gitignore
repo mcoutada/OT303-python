@@ -3,7 +3,7 @@ airflowhome/logs/
 airflowhome/standalone_admin_password.txt
 airflowhome/airflow-webserver.pid
 .vscode/
-
+**/.env
 ############################################################################
 # Gitignore template downloaded from:
 # https://github.com/github/gitignore/blob/main/Python.gitignore
@@ -167,3 +167,5 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+.gitignore
+.gitignore
