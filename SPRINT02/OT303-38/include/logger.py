@@ -11,6 +11,7 @@ import sys
 global debug_flg
 debug_flg = False
 
+
 def set_logger(logger_name, is_debug=debug_flg):
     """
     Sets up the logger for the file that called this function
@@ -37,11 +38,11 @@ def set_logger(logger_name, is_debug=debug_flg):
     # Example: /path/to/root_folder/main.py --> root_folder_name = root_folder
     root_folder_name = os.path.basename(os.getcwd())
 
-
     log_file_abs_path = os.path.join(
         # TODO: Once developing is finished, switch lines to get one log file per run
         # log_abs_path, f"{root_folder_name}_{datetime.datetime.now():%Y%m%d_%H%M%S_%f}.log"
-        log_abs_path,f"{root_folder_name}.log"
+        log_abs_path,
+        f"{root_folder_name}.log",
     )
 
     if not os.path.exists(log_abs_path):
@@ -102,7 +103,8 @@ def set_logger(logger_name, is_debug=debug_flg):
 
     # Modify system's excepthook function (triggered everytime our script fails)
     # so we can log the error after failure
-    new_excepthook = lambda *exc_info: log_unhandled_exception(logger, *exc_info)
+    new_excepthook = lambda *exc_info: log_unhandled_exception(
+        logger, *exc_info)
     sys.excepthook = new_excepthook
 
     return logger
