@@ -7,7 +7,7 @@ from airflow.utils.task_group import TaskGroup
 
 @task(task_id="t_get_db_conn", retries=5)
 def get_db_conn():
-    from src.db_utils import get_db_conn
+    from include.db_utils import get_db_conn
 
     return get_db_conn()
 
