@@ -3,8 +3,6 @@ airflowhome/logs/
 airflowhome/standalone_admin_password.txt
 airflowhome/airflow-webserver.pid
 .vscode/
-# The lines below are comented in the template as they are required in the exercise, and have to be uploaded to the repository.
-# .env
 
 ############################################################################
 # Gitignore template downloaded from:
@@ -131,7 +129,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-# .env
+.env
 .venv
 env/
 venv/
