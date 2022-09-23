@@ -16,6 +16,7 @@ def get_engine():
 def connect_db():
     """
     Esta función se conecta a la base de datos. Intenta conectarse 5 veces, si falla se cancela la conexion.
+    Devuelve un elemento de conexion.
     """
     rety_flag = True
     retry_count = 0
@@ -39,3 +40,4 @@ def connect_db():
             
 if __name__ == '__main__':
     connect_db()
+    print(connect_db())
