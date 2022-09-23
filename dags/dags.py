@@ -5,8 +5,8 @@ from datetime import timedelta, datetime
 print(datetime.today)
 
 with DAG    (
-            "DAG_universidades_A",
-            description = "DAG_universidades_A",
+            "DAG_universidades_D",
+            description = "DAG_universidades_D",
             schedule_interval = timedelta(hours=1),
             start_date = datetime.today()
                 ) as dag:
@@ -16,11 +16,11 @@ with DAG    (
              dag = dag,
              )
 
-     options = ['DAG_universidades_A'] ,
+     options = ['DAG_universidades_D'] ,
 
         branching = BranchPythonOperator(
             task_id = 'branching',
-            python_callable = lambda: random.choice(DAG_universidades_A),
+            python_callable = lambda: random.choice(DAG_universidades_D),
             dag = dag,
             )
 
