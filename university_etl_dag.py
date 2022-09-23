@@ -32,10 +32,9 @@ from airflow.operators.python_operator import PythonOperator
 log_name = LOG_ETL + datetime.today().strftime('%Y-%m-%d')
 logger = create_logger(name_logger=log_name, log_path=LOGS_PATH)
 
+
 # Esta task levanta los datos de la fuente (en este caso ejecuta la consulta .sql) y
 # los guarda en un archivo .csv
-
-
 def extract():
     """Extract data from .sql query and save data as .csv for each university. TASK OT303-45
     """
@@ -46,10 +45,9 @@ def extract():
 
 # Esta task procesa los datos extraidos anteriormente y los transforma para
 # cumplir con los requerimientos utilizando pandas.
-def transform(**kgwards):
+def transform():
     """Transform data from some source.
     """
-    # TODO: implement transform next sprint.
     transform_data()
     logger.info('Data transformed successfully.')
 

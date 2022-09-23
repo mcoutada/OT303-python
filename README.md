@@ -31,7 +31,7 @@
 * university_etl_dag.py (task extract), university_etl_functions.py (funcion extract implementada)
 
 ## TASK ID: OT303-61 (Transform)
-* En la carpeta extras se encuentra el jupyter notebook creado para transformar los datos, previo a implementarlo como scripts de python.
+* En la carpeta extras se encuentra el jupyter notebook creado para transformar los datos, previo a implementarlo como scripts de python (ver para entender mejor esta task).
 * Carpeta clear_data contiene los archivos .txt generados de aplicar las transformaciones para las universidades Flores y Villa Maria.
 * university_etl_functions.py (funcion transform implementada)
 * transform.py (funcion que depura los datos usandos pandas)

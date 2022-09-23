@@ -44,7 +44,7 @@ def extract_data():
 
 
 def transform_data():
-    """TODO: Transform data for both universities.
+    """Transform data for both universities.
     """
     logger.info('*-----------TRANSFORM TASK-----------*')
     # First create txt folder if doesn't exist.
