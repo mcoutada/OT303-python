@@ -1,5 +1,6 @@
 # My lines:
-airflowhome/
+airflowhome/logs/
+airflowhome/standalone_admin_password.txt
 .vscode/
 # The lines below are comented in the template as they are required in the exercise, and have to be uploaded to the repository.
 # .env
