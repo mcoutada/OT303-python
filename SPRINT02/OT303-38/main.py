@@ -1,11 +1,11 @@
-'''
+"""
 https://alkemy-labs.atlassian.net/browse/OT303-38
 
 COMO: Analista de datos
 QUIERO: Configurar los log
 PARA: Mostrarlos en consola
 
-Criterios de aceptación: 
+Criterios de aceptación:
 
 Configurar logs para Univ. Nacional Del Comahue
 
@@ -18,9 +18,10 @@ Realizar un log al empezar cada DAG con el nombre del logger
 Formato del log: %Y-%m-%d - nombre_logger - mensaje
 Aclaración:
 Deben dejar la configuración lista para que se pueda incluir dentro de las funciones futuras. No es necesario empezar a escribir logs.
-'''
-import include.logger as logger
+"""
 import sys
+
+import include.logger as logger
 
 
 def main(args):
@@ -32,7 +33,8 @@ def main(args):
 
     log.info("Start Main")
 
-    # This is left on purpose to test the additional functionality of logging an error
+    # This is left on purpose to test the additional functionality of logging
+    # an error
     a = 1 / 0
 
 
