@@ -235,7 +235,7 @@ universidad nacional de villa maría,medicina,2020-10-09,janice,richardson,femal
 universidad nacional de villa maría,ingeniería en informática,2020-10-18,sabrina,chambers,female,22,2128,arroyo seco,esanchez@hotmail.com
 universidad nacional de villa maría,licenciatura en musicoterapia,2021-01-24,wanda,barron,female,2,2128,arroyo seco,jwhite@hotmail.com
 universidad nacional de villa maría,licenciatura en ciencia política,2020-09-29,robert,thomas,male,14,2128,arroyo seco,sullivanmichael@gmail.com
-universidad nacional de villa maría,actuario,2021-01-20,kelsey,ward,female,22,2132,aero club rosario,veronicalewis@gmail.com
+universidad nacional de villa maría,actuario,2021-01-20,kelsey,ward,female,23,2132,aero club rosario,veronicalewis@gmail.com
 universidad nacional de villa maría,medicina,2021-01-24,kelly,henry,female,22,2132,aero club rosario,suttongregory@gmail.com
 universidad nacional de villa maría,bioquímica,2021-01-30,patrick,pugh,male,62,2132,aero club rosario,leeterri@gmail.com
 universidad nacional de villa maría,licenciatura en terapia ocupacional,2020-11-22,beverly phd,phd,female,86,2136,san geronimo,gelliott@hotmail.com
@@ -472,7 +472,7 @@ universidad nacional de villa maría,actuario,2020-12-28,andrew,nelson,male,24,2
 universidad nacional de villa maría,licenciatura en relaciones del trabajo,2020-11-05,melissa,perry,female,93,2854,dos hermanas,kimberlywelch@yahoo.com
 universidad nacional de villa maría,licenciatura en producción de bioimagenes,2020-12-09,timothy,stokes,male,90,2854,dos hermanas,joshua06@yahoo.com
 universidad nacional de villa maría,técnico para bioterios,2020-09-27,brittany,mitchell,female,6,2854,dos hermanas,schmidtjane@hotmail.com
-universidad nacional de villa maría,licenciatura en ciencias de la computación,2020-10-25,sarah,mason,female,24,2854,dos hermanas,joshua32@gmail.com
+universidad nacional de villa maría,licenciatura en ciencias de la computación,2020-10-25,sarah,mason,female,25,2854,dos hermanas,joshua32@gmail.com
 universidad nacional de villa maría,diseño de imagen y sonido,2020-11-24,christine,mitchell,female,10,2900,san nicolas de los arroyos,malonejoseph@hotmail.com
 universidad nacional de villa maría,licenciatura en ciencia política,2020-10-24,johnny,fernandez,male,11,2907,general conesa,jasminegonzales@gmail.com
 universidad nacional de villa maría,diseño industrial,2020-11-07,robert,mosley,male,5,2909,estancias,zmoreno@gmail.com
@@ -1283,7 +1283,7 @@ universidad nacional de villa maría,farmacia,2020-12-22,jo,larson,female,13,544
 universidad nacional de villa maría,licenciatura en relaciones del trabajo,2020-10-06,jack,berry,male,32,5446,balde de leyes,zdeleon@hotmail.com
 universidad nacional de villa maría,bioquímica,2020-12-07,rebecca,anderson,female,3,5447,agua cercada,stewartanthony@yahoo.com
 universidad nacional de villa maría,bioquímica,2020-11-03,wayne,snyder,male,75,5447,agua cercada,christianwilliams@yahoo.com
-universidad nacional de villa maría,bioquímica,2021-01-14,travis,baldwin,male,49,5447,agua cercada,jasonhoover@gmail.com
+universidad nacional de villa maría,bioquímica,2021-01-14,travis,baldwin,male,50,5447,agua cercada,jasonhoover@gmail.com
 universidad nacional de villa maría,ingeniería en informática,2020-12-29,kelly,jennings,female,11,5449,aguango,lopezlaura@gmail.com
 universidad nacional de villa maría,licenciatura en planificación y diseño del paisaje,2020-11-02,angela,mayer,female,82,5460,agua de la zorra,carolbullock@gmail.com
 universidad nacional de villa maría,licenciatura en kinesiología y fisiatría,2020-09-09,brittney,hunter,female,2,5460,agua de la zorra,lcuevas@hotmail.com
@@ -1369,7 +1369,7 @@ universidad nacional de villa maría,licenciatura en sociología,2020-09-13,sara
 universidad nacional de villa maría,ingeniería en informática,2020-11-18,stephanie,allison,female,53,5572,alto grande,peggybrown@gmail.com
 universidad nacional de villa maría,diseño industrial,2020-09-20,ashley,allen,female,78,5573,colonia delfino,justin19@yahoo.com
 universidad nacional de villa maría,licenciatura en artes,2020-12-20,cathy,rivera,female,4,5575,andrade,griffinmicheal@gmail.com
-universidad nacional de villa maría,licenciatura en gestión de agroalimentos,2020-12-26,jeffrey,brewer,male,46,5577,el alto,jamestravis@yahoo.com
+universidad nacional de villa maría,licenciatura en gestión de agroalimentos,2020-12-26,jeffrey,brewer,male,47,5577,el alto,jamestravis@yahoo.com
 universidad nacional de villa maría,licenciatura en ciencias ambientales,2020-11-20,danny,hodges,male,79,5579,barrio lencina,elee@gmail.com
 universidad nacional de villa maría,medicina,2020-10-22,veronica,morrison,female,97,5584,barrio villa adela,williamsabigail@yahoo.com
 universidad nacional de villa maría,licenciatura en relaciones del trabajo,2020-12-22,michael,williams,male,88,5585,el cipres,michaeljohnson@gmail.com
@@ -1751,7 +1751,7 @@ universidad nacional de villa maría,licenciatura en musicoterapia,2020-10-22,le
 universidad nacional de villa maría,licenciatura en ciencias de la computación,2020-09-06,heather,graves,female,81,6721,azcuenaga,heathersimmons@hotmail.com
 universidad nacional de villa maría,ingeniería en informática,2021-01-03,amy,robertson,female,15,6721,azcuenaga,shannoncox@hotmail.com
 universidad nacional de villa maría,licenciatura en gestión de agroalimentos,2020-12-26,robert,smith,male,38,6723,cucullu,ehart@gmail.com
-universidad nacional de villa maría,licenciatura en ciencias de la educación,2020-12-13,rebecca,smith,female,39,6723,cucullu,leerebecca@hotmail.com
+universidad nacional de villa maría,licenciatura en ciencias de la educación,2020-12-13,rebecca,smith,female,40,6723,cucullu,leerebecca@hotmail.com
 universidad nacional de villa maría,ingeniería electrónica,2020-10-19,deborah dds,dds,female,34,6734,rawson,qho@gmail.com
 universidad nacional de villa maría,licenciatura en gestión de agroalimentos,2020-10-21,chase,elliott,male,26,6740,chacabuco,ogray@hotmail.com
 universidad nacional de villa maría,licenciatura en ciencias de la educación,2020-11-17,paige,vega,female,14,6743,coliqueo,vhanson@hotmail.com

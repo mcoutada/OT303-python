@@ -44,7 +44,7 @@ def extract_data():
 
 
 def transform_data():
-    """Transform data for both universities.
+    """Transform data for both universities. TASK OT303-53
     """
     logger.info('*-----------TRANSFORM TASK-----------*')
     # First create txt folder if doesn't exist.
@@ -52,15 +52,15 @@ def transform_data():
     # Get csv files and full path.
     csv_files = get_filename_path(ROOT_CSV)
     for csv_name, csv_path in csv_files.items():
-        logger.info('Working on {csv_name} file.')
+        logger.info('Working on {} file.'.format(csv_name))
         # Read csv file and create dataframe.
         dataframe = pd.read_csv(csv_path)
         # Normalize data.
-        logger.info('Clearing data on {csv_name} file.')
+        logger.info('Clearing data on {} file.'.format(csv_name))
         dataframe = normalize_data(dataframe)
         # Create the txt file to save the changes.
-        logger.info('Creating txt for {csv_name} file.')
-        create_txt(dataframe, csv_name)
+        logger.info('Creating txt for {} file.'.format(csv_name))
+        create_txt(dataframe, csv_name[:-4])
     logger.info('Transform data from dataframe/csv.')
 
 

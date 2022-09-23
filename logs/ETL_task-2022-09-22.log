@@ -1,0 +1,19 @@
+2022-09-22 - ETL_task-2022-09-22 - *-----------EXTRACT TASK-----------*
+2022-09-22 - ETL_task-2022-09-22 - Extracting data from OT303-Universidad-Flores.sql
+2022-09-22 - ETL_task-2022-09-22 - Writing information to csv.
+2022-09-22 - ETL_task-2022-09-22 - Extracting data from OT303-Universidad-VillaMaria.sql
+2022-09-22 - ETL_task-2022-09-22 - Writing information to csv.
+2022-09-22 - ETL_task-2022-09-22 - Extracting data from database.
+2022-09-22 - ETL_task-2022-09-22 - Data extracted successfully.
+2022-09-22 - ETL_task-2022-09-22 - *-----------TRANSFORM TASK-----------*
+2022-09-22 - ETL_task-2022-09-22 - Working on OT303-Universidad-VillaMaria.csv file.
+2022-09-22 - ETL_task-2022-09-22 - Clearing data on OT303-Universidad-VillaMaria.csv file.
+2022-09-22 - ETL_task-2022-09-22 - Creating txt for OT303-Universidad-VillaMaria.csv file.
+2022-09-22 - ETL_task-2022-09-22 - Working on OT303-Universidad-Flores.csv file.
+2022-09-22 - ETL_task-2022-09-22 - Clearing data on OT303-Universidad-Flores.csv file.
+2022-09-22 - ETL_task-2022-09-22 - Creating txt for OT303-Universidad-Flores.csv file.
+2022-09-22 - ETL_task-2022-09-22 - Transform data from dataframe/csv.
+2022-09-22 - ETL_task-2022-09-22 - Data transformed successfully.
+2022-09-22 - ETL_task-2022-09-22 - *-----------LOAD TASK-----------*
+2022-09-22 - ETL_task-2022-09-22 - Loading data to S3.
+2022-09-22 - ETL_task-2022-09-22 - Data loaded to S3 succesfully.

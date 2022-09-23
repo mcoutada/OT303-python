@@ -1,23 +1,3 @@
-'''
-TASK ID: OT303-37
-
-COMO: Analista de datos
-QUIERO: Configurar los log
-PARA: Mostrarlos en consola
-
-Criterios de aceptación: 
-
-Configurar logs para Universidad De Flores
-
-Configurar logs para Universidad Nacional De Villa María
-
-Utilizar la librería de Loggin de python: https://docs.python.org/3/howto/logging.html
-
-Realizar un log al empezar cada DAG con el nombre del logger
-
-Formato del log: %Y-%m-%d - nombre_logger - mensaje
-'''
-
 from datetime import timedelta, datetime
 from statistics import mode
 from config.common_args import default_args
@@ -46,7 +26,7 @@ def extract():
 # Esta task procesa los datos extraidos anteriormente y los transforma para
 # cumplir con los requerimientos utilizando pandas.
 def transform():
-    """Transform data from some source.
+    """Transform data from .csv source. TASK OT303-53
     """
     transform_data()
     logger.info('Data transformed successfully.')
