@@ -1,3 +1,4 @@
+from asyncio.log import logger
 from distutils.command.config import config
 
 from airflow import DAG
@@ -10,7 +11,11 @@ from datetime import timedelta,datetime
 import time
 import logging
 
-from sqlalchemy import exc, create_engine,inspect
+from functions.logger_universidades import logger_universidades
+from functions.data_cleaning import norm_universidades
+from functions.dbconnection import quering_data
+
+from sqlalchemy import exc, create_engine, inspect
 
 from decouple import config
 
@@ -18,7 +23,7 @@ from decouple import config
 # default args for my config
 default_args = {
     'owner':'Pablo',
-    'retries':5,
+    'retries':1,
     'retry_delay':timedelta(minutes=2)
 }
 
@@ -31,8 +36,11 @@ with DAG(
     schedule_interval="@hourly"
 
 ) as dag:
+
+
+
     logging.info('Trying to connect to the database...')
-    @task(task_id='check_db_connection')
+    @task(task_id='check_db_conn')
     
     # checking the db connection 
     def check_db_connection():
@@ -51,15 +59,22 @@ with DAG(
             except exc.SQLAlchemyError:
                 retry_count=retry_count+1
                 time.sleep(60)
+
     run_this = check_db_connection()
 
 
-    # TO DO: Connection with postgres db 
-    # TO DO: Establish connection with S3
-    logging.info('Processing: Universidad de La Pampa')
+    task_1 = PythonOperator(
+        task_id='logger', 
+        python_callable=logger_universidades,
+    )
+
+    logger
+
 
     with TaskGroup(group_id='la_pampa_group') as la_pampa_group:
         extract_la_pampa = DummyOperator(task_id='extract_la_pampa')
+
+        
         # TO DO: Query data from postgres and save it
         transform_la_pampa = DummyOperator(task_id='transform_la_pampa')
         load_la_pampa= DummyOperator(task_id='load_la_pampa')
