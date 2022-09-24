@@ -5,7 +5,7 @@ SELECT
     SPLIT_PART(nombrre, ' ', 1) AS first_name,
     SPLIT_PART(nombrre, ' ', 2) AS last_name,
     sexo AS gender,
-    date_part('year', age(TO_DATE(nacimiento,'DD/MM/YYYY'))) AS age,
+    nacimiento AS fecha_nacimiento,
     direccion AS direccion,
     eemail AS email
 FROM
