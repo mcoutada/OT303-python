@@ -5,7 +5,7 @@ import sys
 # Set a global variable flag to set the logger's log level.
 # True --> logger's level = DEBUG
 # False --> logger's level = INFO
-# By dafault it's set to False, but it can be changed when calling our main script with argument DEBUG
+# By default it's set to False, but it can be changed when calling our main script with argument DEBUG
 # Example: python main.py DEBUG
 
 global debug_flg
@@ -26,16 +26,16 @@ def set_logger(logger_name, is_debug=debug_flg):
 
     # The path where the first file has been triggered
     # Example:
-    # cd /path/to/rootfolder/main.py
+    # cd /path/to/root_folder/main.py
     # python main.py
-    # --> root_abs_path = /path/to/rootfolder
+    # --> root_abs_path = /path/to/root_folder
     root_abs_path = os.getcwd()
 
     # The folder to store the log files
     log_abs_path = os.path.join(root_abs_path, "logs")
 
     # Set the logger's name to the base project's folder name
-    # Example: /path/to/rootfolder/main.py --> root_folder_name = rootfolder
+    # Example: /path/to/root_folder/main.py --> root_folder_name = root_folder
     root_folder_name = os.path.basename(os.getcwd())
 
     log_file_abs_path = os.path.join(
@@ -52,7 +52,7 @@ def set_logger(logger_name, is_debug=debug_flg):
     logger = logging.getLogger(logger_name)
 
     # Set up the logging level (to know which messages to log)
-    # Logging messages whith less severe level will be ignored, higher ones will be emitted.
+    # Logging messages with less severe level will be ignored, higher ones will be emitted.
     # +----------+---------------+-----------------------------------------------------------------------------------------------------------------------------+
     # | Level    | Numeric value | Description                                                                                                                 |
     # +----------+---------------+-----------------------------------------------------------------------------------------------------------------------------+
@@ -154,3 +154,7 @@ def get_rel_path(in_file_name):
     """
 
     return os.sep + os.path.relpath(in_file_name, start=os.getcwd())
+
+############# esto hace ahora!!!!
+def log_basics():
+    pass
