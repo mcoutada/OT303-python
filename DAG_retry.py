@@ -8,7 +8,7 @@ from decouple  import config
 def check_db_connection():
     retry_flag = True
     retry_count = 0
-    while retry_flag and retry_count < 10:
+    while retry_flag and retry_count <5:
         try:
             engine = create_engine(config("DB_DATA_CONNECT"))
             engine.connect()
@@ -21,9 +21,9 @@ def check_db_connection():
             else:
                 retry_count = retry_count + 1
                 time.sleep(60)   
-default_args = {
-    "retries":5,
-    "retry_delay":timedelta(seconds=30)
+        except exc.SQLAlchemyError:
+                retry_count=retry_count+1
+                time.sleep(60)    
 }
 
 with DAG(
