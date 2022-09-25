@@ -1,9 +1,10 @@
 import time
-from sqlalchemy import create_engine, exc, insp
+from datetime import datetime
+from sqlalchemy import create_engine, exc, inspect
 from logger import set_logger
 
 # Logs configuration 
-log_name= "Conexion DB" + datetime.today().strftime('%Y-%m-%d')
+log_name= "Conexion DB " + datetime.today().strftime('%Y-%m-%d')
 logger=set_logger(name_logger=log_name)
 
 
@@ -14,7 +15,7 @@ def get_engine():
     url = "postgresql://alkymer2:Alkemy23@training-main.cghe7e6sfljt.us-east-1.rds.amazonaws.com:5432/training"
     return create_engine(url)
 
-def check_db_connection():
+def db_connection():
     """
     Conect to DB. Try 5 times, if fail cancel connection.
     """
@@ -25,20 +26,23 @@ def check_db_connection():
             engine = get_engine()
             engine.connect()
             insp = inspect(engine)
-            log.info('Establishing connection to the database.')
+            logger.info('Establishing connection to the database.')
             
             #check if the tables exist, if not try connecting again
 
-            if insp.has_table(jujuy_utn) and insp.has_table(palermo_tres_de_febrero):
-                log.info("The connection to the database has been established.")
+            if insp.has_table("jujuy_utn") and insp.has_table("palermo_tres_de_febrero"):
+                logger.info("The connection to the database has been established.")
                 retry_flag=False
             else:
                 retry_count = retry_count + 1
                 time.sleep(60)   
         except exc.SQLAlchemyError:
-                log.info('The connection to the database could not be established.')
+                logger.info('The connection to the database could not be established.')
                 retry_count=retry_count+1
                 time.sleep(60)    
 
+if __name__ == '__main__':
+    db_connection()
+    
     
 
