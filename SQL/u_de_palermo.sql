@@ -1,18 +1,5 @@
 --Universidad de Palermo
 
-CREATE OR REPLACE FUNCTION calculate_age(p.birth_dates DATE) RETURNS integer
-	DECLARE 
-		born_year integer := date_part('year', (p.birth_dates);
-		current_year integer := date_part('year', CURRENT_DATE);
-	BEGIN
-		IF born_year > current_year THEN
-			RETURN current_year - (born_year - 100);
-		ELSE
-			RETURN ROUND((CURRENT_DATE - (p.birth_dates)/365.25);
-		END IF;
-	END
-
-
 SELECT 
 	p.universidad as university, 
 	p.careers as career, 
@@ -20,7 +7,19 @@ SELECT
 	split_part(p.names ,'_',1) AS first_name,
 	split_part(p.names ,'_',2) AS last_name,
 	p.sexo  as gender,
-	calculate_age(TO_DATE(p.birth_dates, 'DD-Mon-YY')) as age,
+	DATE_PART(
+        'year',
+        AGE(
+            CASE
+                WHEN
+                    TO_DATE(p.birth_dates,'DD-Mon-YY') > NOW()
+                THEN
+                    TO_DATE(p.birth_dates,'DD-Mon-YY') - interval '100 year'
+                ELSE
+                    TO_DATE(p.birth_dates,'DD-Mon-YY')
+            END
+        )
+    ) AS age,
 	p.codigo_postal  as postal_code,
 	lower(l.localidad) as location,
 	p.correos_electronicos as email  
