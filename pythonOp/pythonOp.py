@@ -52,7 +52,11 @@ with DAG(
         tags=['ETL_par_univ']
 ) as dag:
 
+    logging.info('Trying to connect to the database')
 
+    task(task_id='check_db_conn')
+
+    run_this = check_db_connection()
 
     extract_task = PythonOperator(
         task_id='extract',
