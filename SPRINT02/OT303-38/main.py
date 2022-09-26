@@ -31,11 +31,24 @@ def main(args):
     # Set the logger for this file
     log = logger.set_logger(logger_name=logger.get_rel_path(__file__))
 
-    log.info("Start Main")
+    log.info(f"Start {log.name}")
 
     # This is left on purpose to test the additional functionality of logging
     # an error
-    a = 1 / 0
+    # a = 1 / 0
+    import os
+
+    f_idx = os.listdir(os.getcwd()).index(
+        lambda f: "comahue".lower() in f.lower() and f.lower().endswith(".sql")
+    )
+    if f_idx == -1:
+        print("not found")
+
+    else:
+        print(os.listdir(os.getcwd())[f_idx])
+
+    # for asd in os.listdir(os.getcwd()):
+    #     print(asd)
 
 
 if __name__ == "__main__":
