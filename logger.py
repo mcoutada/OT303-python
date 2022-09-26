@@ -20,8 +20,8 @@ def set_logger(name_logger):
     # Create format.
     format = logging.Formatter(
         # %Y-%m-%d - nombre_logger - mensaje
-        fmt='%(asctime)s - %(name)s - %(message)s',
-        datefmt='%Y-%m-%d')
+        fmt ='%(asctime)s - %(name)s - %(message)s',
+        datefmt ='%Y-%m-%d')
 
     ch.setFormatter(format)        
 

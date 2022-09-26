@@ -5,16 +5,16 @@ import logging
 from logger import set_logger
 
 # Logs configuration for the dag
-log_name= "DAG_C_u_de_palermo" + datetime.today().strftime('%Y-%m-%d')
+log_name= "DAG_C_u_de_jujuy" + datetime.today().strftime('%Y-%m-%d')
 logger=set_logger(name_logger=log_name)
 logger.info("DAG started")
 
-# Retries config
+
 
 with DAG(
     "DAG_C_u_de_jujuy",
     description="DAG_C_u_de_jujuy",
-    schedule_interval=timedelta(hours=1), 
+    schedule_interval=None, 
     start_date=datetime.today()     
 
 ) as dag:

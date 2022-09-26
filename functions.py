@@ -2,12 +2,13 @@ from datetime import datetime, timedelta
 import os
 import pandas as pd
 from sqlalchemy import create_engine
+from config import LOG_NAME
 from logger import set_logger
 from DB_connection import get_engine, db_connection
 import logging
 
 # Logs configuration 
-log_name= "Extraccion" + datetime.today().strftime('%Y-%m-%d')
+log_name= LOG_NAME + datetime.today().strftime('%Y-%m-%d')
 logger=set_logger(name_logger=log_name)
 
 def extract():
