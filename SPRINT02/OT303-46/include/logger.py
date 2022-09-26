@@ -1,6 +1,8 @@
 import logging
 import os
 import sys
+from functools import wraps
+import time
 
 # Set a global variable flag to set the logger's log level.
 # True --> logger's level = DEBUG
@@ -50,6 +52,10 @@ def set_logger(logger_name, is_debug=debug_flg):
 
     # Set up the logger (to avoid using the default/root logger)
     logger = logging.getLogger(logger_name)
+
+    # Prevents duplicate log messages when passing the log into an object (class instance)
+    # https://stackoverflow.com/questions/7173033/duplicate-log-output-when-using-python-logging-module
+    logger.propagate = False
 
     # Set up the logging level (to know which messages to log)
     # Logging messages with less severe level will be ignored, higher ones will be emitted.
@@ -155,6 +161,21 @@ def get_rel_path(in_file_name):
 
     return os.sep + os.path.relpath(in_file_name, start=os.getcwd())
 
-############# esto hace ahora!!!!
-def log_basics():
-    pass
+# log a function's start, end, elapsed time, and input parameters
+# https://dev.to/kcdchennai/python-decorator-to-measure-execution-time-54hk
+# https://stackoverflow.com/questions/6200270/decorator-that-prints-function-call-details-parameters-names-and-effective-valu
+
+def log_basics(p_log):
+    def decorator(function):
+        # wraps preserves the function's metadata (attributes such as __name__, __doc__) to not get lost through nested calls
+        @wraps(function)
+        def wrapper(*args, **kwargs):
+            p_log.info(f"Starting {function.__name__}() with args: {args} and kwargs: {kwargs}")
+            start_time = time.perf_counter()
+            result = function(*args, **kwargs)
+            end_time = time.perf_counter()
+            total_time = end_time - start_time
+            p_log.info(f"Ended {function.__name__}() elapsed: {total_time:.4f} seconds")
+            return result
+        return wrapper
+    return decorator

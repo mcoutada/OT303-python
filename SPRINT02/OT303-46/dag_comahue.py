@@ -1,31 +1,35 @@
+import pandas as pd
 from datetime import datetime, timedelta
 
 from airflow import DAG
 from airflow.decorators import task
 from airflow.utils.task_group import TaskGroup
-
-from include import utils, logger
-
+from include import logger, utils
 
 UNIVERSITY_NAME = "Comahue"
 
 log = logger.set_logger(logger_name=logger.get_rel_path(__file__))
 uni = utils.University(UNIVERSITY_NAME, log)
 
-
-
-@task(task_id="t_get_db_conn", retries=5)
-def get_db_connection():
-    return utils.get_db_conn()
-
-
 # Extract task
-@task(task_id="t_extract")
-def extract(e_conn):
+@task(task_id="t_extract", retries=5)
+def extract():
     import pandas as pd
 
-    pd.read_sql(sql = uni.sql_query, con=e_conn).to_csv(path_or_buf=uni.csv_file, index=False)
+    UNIVERSITY_NAME = "Comahue"
 
+    log = logger.set_logger(logger_name=logger.get_rel_path(__file__))
+    uni = utils.University(UNIVERSITY_NAME, log)
+
+    pd.read_sql(sql=uni.sql_query, con=utils.get_db_conn()).to_csv(
+        path_or_buf=uni.csv_file, index=False
+    )
+
+    @logger.log_basics(log)
+    def abc():
+        log.info('asd')
+        return None
+    abc()
 
 # Transform task1
 @task(task_id="t_task1")
@@ -60,11 +64,7 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    with TaskGroup(group_id="tg_extract") as tg_extract:
-        t_get_engine = get_db_connection()
-        t_extract = extract(e_conn=t_get_engine)
-        # Setting up Dependencies for this TaskGroup
-        t_get_engine >> t_extract
+    t_extract = extract()
 
     with TaskGroup(group_id="tg_transform") as tg_transform:
         t_task1 = task1()
@@ -75,8 +75,4 @@ with DAG(
     t_load = load()
 
     # Setting up Dependencies for this DAG
-    tg_extract >> tg_transform >> t_load
-
-import pandas as pd
-
-pd.read_sql(uni.sql_query, con=utils.get_db_conn()).to_csv(uni.csv_file, index=False)
+    t_extract >> tg_transform >> t_load

@@ -1,7 +1,8 @@
-from decouple import config
-from sqlalchemy import create_engine
 import os
 from getpass import getuser
+
+from decouple import config
+from sqlalchemy import create_engine
 
 
 def get_db_conn():
@@ -33,7 +34,7 @@ class University:
         self.csv_name = os.path.splitext(self.sql_name)[0] + ".csv"
         self.csv_file = os.path.join(self.sql_folder, self.csv_name)
         self.sql_query = self.read_sql()
-        p_log.inf(f"Finished setting files and folders for {self.name}")
+        self.log.info(f"Finished setting files and folders for {self.name}")
 
     def find_file(self, p_fpath, p_ext):
         for folder, folders_in_folder, files_in_folder in os.walk(p_fpath):
@@ -43,7 +44,8 @@ class University:
                 ):
                     return folder, file, os.path.join(folder, file)
         # If file not found log error and raise FileNotFoundError
-        self.log.error(f"No {p_ext} file found for University {self.name} in {p_fpath}")
+        self.log.error(
+            f"No {p_ext} file found for University {self.name} in {p_fpath}")
         raise FileNotFoundError
 
     def read_sql(self):
