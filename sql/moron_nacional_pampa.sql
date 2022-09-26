@@ -5,8 +5,9 @@ SELECT
     SPLIT_PART(nombrre, ' ', 1) AS first_name,
     SPLIT_PART(nombrre, ' ', 2) AS last_name,
     sexo AS gender,
-    nacimiento AS fecha_nacimiento,
-    direccion AS direccion,
+    date_part('year', age(TO_DATE(nacimiento,'DD/MM/YYYY'))) as age,
+    codgoposstal AS postal_code,
+    direccion AS location,
     eemail AS email
 FROM
     public.moron_nacional_pampa
