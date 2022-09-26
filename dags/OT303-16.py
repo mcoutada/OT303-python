@@ -12,8 +12,8 @@ import time
 import logging
 
 from functions.logger_universidades import logger_universidades
-from functions.data_cleaning import norm_universidades
-from functions.dbconnection import quering_data
+from functions.norm_universidades import norm_universidades
+from functions.extracting_univ import extracting_univ
 
 from sqlalchemy import exc, create_engine, inspect
 
@@ -38,6 +38,9 @@ with DAG(
 ) as dag:
 
 
+    logger=PythonOperator(task_id="logger",python_callable=logger_universidades,dag=dag)
+
+    logger
 
     logging.info('Trying to connect to the database...')
     @task(task_id='check_db_conn')
@@ -61,37 +64,50 @@ with DAG(
                 time.sleep(60)
 
     run_this = check_db_connection()
+    
+
+    # db connection, querying data and downloading into csv (universidad de la pampa)
+    def extract_la_pampa():
+        logging.info('Downloading data...')
+        extracting_univ(
+        "path_univ_de_la_pampa.SQL",
+        "la_pampa")
+        logging.info('Done')
+    dag_extract_la_pampa=PythonOperator(task_id="dag_extract_la_pampa",
+    python_callable=extract_la_pampa,
+    dag=dag)
+    dag_extract_la_pampa
 
 
-    task_1 = PythonOperator(
-        task_id='logger', 
-        python_callable=logger_universidades,
-    )
+    # Pandas data cleaning with Pandas (universidad de la pampa)
+    #@task(task_id='transform_la_pampa')
+    #def transform_la_pampa():
+    #    normalizado=norm_universidades("{{path}}la_pampa_raw.csv")
+    #    normalizado.to_csv("la_pampa.csv",header=True,index=False)
 
-    logger
-
-
-    with TaskGroup(group_id='la_pampa_group') as la_pampa_group:
-        extract_la_pampa = DummyOperator(task_id='extract_la_pampa')
-
-        
-        # TO DO: Query data from postgres and save it
-        transform_la_pampa = DummyOperator(task_id='transform_la_pampa')
-        load_la_pampa= DummyOperator(task_id='load_la_pampa')
-        # Upload data to S3
-        extract_la_pampa >> transform_la_pampa >> load_la_pampa
+    #transform_la_pampa = DummyOperator(task_id='transform_la_pampa')
+    #load_la_pampa= DummyOperator(task_id='load_la_pampa')
+    # Upload data to S3
 
 
-    with TaskGroup(group_id='abierta_interamericana_group') as abierta_interamericana_group:
-        logging.info('Processing: Universidad Abierta Interamericana')
-        extract_abierta_interamericana = DummyOperator(task_id='extract_abierta_interamericana')
-        # TO DO: Query data from postgres and save it
-        transform_abierta_interamericana = DummyOperator(task_id='transform_abierta_interamericana')
-        load_abierta_interamericana= DummyOperator(task_id='load_abierta_interamericana')
-        # Upload data to S3
-        extract_abierta_interamericana >> transform_abierta_interamericana >> load_abierta_interamericana
+
+    # db connection, querying data and downloading into csv (universidad de abierta interamericana)
+    def extract_abierta_interamericana():
+        logging.info('Downloading data...')
+        extracting_univ(
+        "path_univ_interamericana.SQL",
+        "interamericana_raw")
+        logging.info('Done')
+
+    dag_extract_abierta_interamericana=PythonOperator(task_id="dag_extract_abierta_interamericana",
+    python_callable=extract_abierta_interamericana,
+    dag=dag)
+    dag_extract_abierta_interamericana
 
 
-check_db_connection
-la_pampa_group
-abierta_interamericana_group
+    # Pandas data cleaning with Pandas (universidad de la pampa)
+
+    #transform_abierta_interamericana = DummyOperator(task_id='transform_abierta_interamericana')
+    #load_abierta_interamericana= DummyOperator(task_id='load_abierta_interamericana')
+    # Upload data to S3
+
