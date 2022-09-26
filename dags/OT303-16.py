@@ -105,7 +105,7 @@ with DAG(
     dag_extract_abierta_interamericana
 
 
-    # Pandas data cleaning with Pandas (universidad de la pampa)
+    # Pandas data cleaning with Pandas (universidad Abierta Interamericana)
 
     #transform_abierta_interamericana = DummyOperator(task_id='transform_abierta_interamericana')
     #load_abierta_interamericana= DummyOperator(task_id='load_abierta_interamericana')
