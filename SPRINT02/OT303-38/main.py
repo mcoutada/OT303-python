@@ -35,21 +35,7 @@ def main(args):
 
     # This is left on purpose to test the additional functionality of logging
     # an error
-    # a = 1 / 0
-    import os
-
-    f_idx = os.listdir(os.getcwd()).index(
-        lambda f: "comahue".lower() in f.lower() and f.lower().endswith(".sql")
-    )
-    if f_idx == -1:
-        print("not found")
-
-    else:
-        print(os.listdir(os.getcwd())[f_idx])
-
-    # for asd in os.listdir(os.getcwd()):
-    #     print(asd)
-
+    a = 1 / 0
 
 if __name__ == "__main__":
     args = sys.argv[1:]
