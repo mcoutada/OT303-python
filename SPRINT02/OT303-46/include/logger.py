@@ -1,8 +1,8 @@
 import logging
 import os
 import sys
-from functools import wraps
 import time
+from functools import wraps
 
 # Set a global variable flag to set the logger's log level.
 # True --> logger's level = DEBUG
@@ -161,21 +161,29 @@ def get_rel_path(in_file_name):
 
     return os.sep + os.path.relpath(in_file_name, start=os.getcwd())
 
+
 # log a function's start, end, elapsed time, and input parameters
 # https://dev.to/kcdchennai/python-decorator-to-measure-execution-time-54hk
 # https://stackoverflow.com/questions/6200270/decorator-that-prints-function-call-details-parameters-names-and-effective-valu
 
+
 def log_basics(p_log):
     def decorator(function):
-        # wraps preserves the function's metadata (attributes such as __name__, __doc__) to not get lost through nested calls
+        # wraps preserves the function's metadata (attributes such as __name__,
+        # __doc__) to not get lost through nested calls
         @wraps(function)
         def wrapper(*args, **kwargs):
-            p_log.info(f"Starting {function.__name__}() with args: {args} and kwargs: {kwargs}")
+            p_log.info(
+                f"Starting {function.__name__}() with args: {args} and kwargs: {kwargs}"
+            )
             start_time = time.perf_counter()
             result = function(*args, **kwargs)
             end_time = time.perf_counter()
             total_time = end_time - start_time
-            p_log.info(f"Ended {function.__name__}() elapsed: {total_time:.4f} seconds")
+            p_log.info(
+                f"Ended {function.__name__}() elapsed: {total_time:.4f} seconds")
             return result
+
         return wrapper
+
     return decorator

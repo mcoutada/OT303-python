@@ -1,35 +1,22 @@
-import pandas as pd
 from datetime import datetime, timedelta
 
+import pandas as pd
 from airflow import DAG
 from airflow.decorators import task
 from airflow.utils.task_group import TaskGroup
 from include import logger, utils
 
 UNIVERSITY_NAME = "Comahue"
-
-log = logger.set_logger(logger_name=logger.get_rel_path(__file__))
-uni = utils.University(UNIVERSITY_NAME, log)
+uni_log = utils.set_logger(file_path=__file__)
+uni_obj = utils.University(UNIVERSITY_NAME, uni_log)
 
 # Extract task
+
+
 @task(task_id="t_extract", retries=5)
 def extract():
-    import pandas as pd
+    uni_obj.extract()
 
-    UNIVERSITY_NAME = "Comahue"
-
-    log = logger.set_logger(logger_name=logger.get_rel_path(__file__))
-    uni = utils.University(UNIVERSITY_NAME, log)
-
-    pd.read_sql(sql=uni.sql_query, con=utils.get_db_conn()).to_csv(
-        path_or_buf=uni.csv_file, index=False
-    )
-
-    @logger.log_basics(log)
-    def abc():
-        log.info('asd')
-        return None
-    abc()
 
 # Transform task1
 @task(task_id="t_task1")
@@ -50,14 +37,15 @@ def load(**kwargs):
 
 
 default_args = {
-    "owner": uni.os_user,
+    "owner": uni_obj.os_user,
     "retries": 1,
     "retry_delay": timedelta(minutes=1),
 }
 
+
 with DAG(
-    dag_id=uni.name,
-    description=f"Process (ETL) University {uni.name}",
+    dag_id=uni_obj.name,
+    description=f"Process (ETL) University {uni_obj.name}",
     default_args=default_args,
     start_date=datetime(year=2022, day=19, month=9),
     schedule="@hourly",

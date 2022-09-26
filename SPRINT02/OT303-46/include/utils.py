@@ -1,26 +1,14 @@
 import os
 from getpass import getuser
 
+from . import logger
+import pandas as pd
 from decouple import config
 from sqlalchemy import create_engine
 
 
-def get_db_conn():
-
-    POSTGRES_USER = config("POSTGRES_USER")
-    POSTGRES_PASSWORD = config("POSTGRES_PASSWORD")
-    POSTGRES_DB = config("POSTGRES_DB")
-    POSTGRES_PORT = config("POSTGRES_PORT")
-    POSTGRES_HOST = config("POSTGRES_HOST")
-    POSTGRES_SCHEMA = config("POSTGRES_SCHEMA")
-
-    url = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
-    engine = create_engine(
-        url, connect_args={"options": f"-csearch_path={POSTGRES_SCHEMA}"}
-    )
-    engine.connect()
-
-    return engine
+def set_logger(file_path):
+    return logger.set_logger(logger_name=logger.get_rel_path(file_path))
 
 
 class University:
@@ -52,3 +40,26 @@ class University:
         with open(self.sql_file, "r") as file:
             sql_query = file.read()
         return sql_query
+
+    def get_db_conn(self):
+
+        POSTGRES_USER = config("POSTGRES_USER")
+        POSTGRES_PASSWORD = config("POSTGRES_PASSWORD")
+        POSTGRES_DB = config("POSTGRES_DB")
+        POSTGRES_PORT = config("POSTGRES_PORT")
+        POSTGRES_HOST = config("POSTGRES_HOST")
+        POSTGRES_SCHEMA = config("POSTGRES_SCHEMA")
+
+        url = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+        engine = create_engine(
+            url, connect_args={"options": f"-csearch_path={POSTGRES_SCHEMA}"}
+        )
+        engine.connect()
+
+        return engine
+
+    def extract(self):
+
+        pd.read_sql(sql=self.sql_query, con=self.get_db_conn()).to_csv(
+            path_or_buf=self.csv_file, index=False
+        )
