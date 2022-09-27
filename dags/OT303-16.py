@@ -40,7 +40,7 @@ with DAG(
 
     logger=PythonOperator(task_id="logger",python_callable=logger_universidades,dag=dag)
 
-    logger
+    
 
     logging.info('Trying to connect to the database...')
     @task(task_id='check_db_conn')
@@ -63,8 +63,8 @@ with DAG(
                 retry_count=retry_count+1
                 time.sleep(60)
 
-    run_this = check_db_connection()
-    
+    #run_this = check_db_connection()
+    logger
 
     # db connection, querying data and downloading into csv (universidad de la pampa)
     def extract_la_pampa():
@@ -76,14 +76,21 @@ with DAG(
     dag_extract_la_pampa=PythonOperator(task_id="dag_extract_la_pampa",
     python_callable=extract_la_pampa,
     dag=dag)
-    dag_extract_la_pampa
+    
 
+    # Using raw data from csv file la_pampa_raw.csv
+    # Then returning csv  
+    def transform_la_pampa():
+        logging.info('Cleaning data...')
+        norm_universidades(
+        "PATH_la_pampa_RAW.csv",
+        "la_pampa")
+        logging.info('Done')
+    dag_transform_la_pampa=PythonOperator(task_id="dag_transform_la_pampa",
+    python_callable=transform_la_pampa,
+    dag=dag)
+    logger >> dag_extract_la_pampa >> dag_transform_la_pampa
 
-    # Pandas data cleaning with Pandas (universidad de la pampa)
-    #@task(task_id='transform_la_pampa')
-    #def transform_la_pampa():
-    #    normalizado=norm_universidades("{{path}}la_pampa_raw.csv")
-    #    normalizado.to_csv("la_pampa.csv",header=True,index=False)
 
     #transform_la_pampa = DummyOperator(task_id='transform_la_pampa')
     #load_la_pampa= DummyOperator(task_id='load_la_pampa')
@@ -96,18 +103,27 @@ with DAG(
         logging.info('Downloading data...')
         extracting_univ(
         "path_univ_interamericana.SQL",
-        "interamericana_raw")
+        "abierta_interamericana_raw")
         logging.info('Done')
 
     dag_extract_abierta_interamericana=PythonOperator(task_id="dag_extract_abierta_interamericana",
     python_callable=extract_abierta_interamericana,
     dag=dag)
-    dag_extract_abierta_interamericana
+    
 
+    # Using raw data from csv file abierta_interamericana_raw.csv
+    # Then returning csv  
+    def transform_abierta_interamericana():
+        logging.info('Cleaning data...')
+        norm_universidades(
+        "PATH_interamericana_RAW.csv",
+        "abierta_interamericana")
+        logging.info('Done')
+    dag_transform_abierta_interamericana=PythonOperator(task_id="dag_transform_abierta_interamericana",
+    python_callable=transform_abierta_interamericana,
+    dag=dag)
+    logger >> dag_extract_abierta_interamericana >> dag_transform_abierta_interamericana
 
-    # Pandas data cleaning with Pandas (universidad Abierta Interamericana)
-
-    #transform_abierta_interamericana = DummyOperator(task_id='transform_abierta_interamericana')
     #load_abierta_interamericana= DummyOperator(task_id='load_abierta_interamericana')
     # Upload data to S3
 
