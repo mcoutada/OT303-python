@@ -37,6 +37,7 @@ def main(args):
     # an error
     a = 1 / 0
 
+
 if __name__ == "__main__":
     args = sys.argv[1:]
     main(args)

@@ -1,21 +1,20 @@
-from asyncio.format_helpers import extract_stack
 import os
+from asyncio.format_helpers import extract_stack
 from getpass import getuser
 
-from . import logger
 import pandas as pd
 from decouple import config
 from sqlalchemy import create_engine
 
-
-def set_logger(p_name, file_path):
-    return 
+from . import logger
 
 
 class University:
     def __init__(self, p_name, p_dag_file):
         self.name = p_name
-        self.log = logger.set_logger(logger_name=f"{self.name}@{logger.get_rel_path(p_dag_file)}")
+        self.log = logger.set_logger(
+            logger_name=f"{self.name}@{logger.get_rel_path(p_dag_file)}"
+        )
         self.os_user = getuser()
         self.sql_folder, self.sql_name, self.sql_file = self.find_file(
             os.path.dirname(__file__), ".sql"
@@ -33,7 +32,8 @@ class University:
                 ):
                     return folder, file, os.path.join(folder, file)
         # If file not found log error and raise FileNotFoundError
-        self.log.error(f"No {p_ext} file found for University {self.name} in {p_fpath}")
+        self.log.error(
+            f"No {p_ext} file found for University {self.name} in {p_fpath}")
         raise FileNotFoundError
 
     def read_sql(self):
@@ -73,11 +73,18 @@ class University:
         # location: str minúscula sin espacios extras, ni guiones
         # email: str minúsculas, sin espacios extras, ni guiones
 
-        cols = ["university", "career", "first_name", "last_name", "location", "email"]
+        cols = [
+            "university",
+            "career",
+            "first_name",
+            "last_name",
+            "location",
+            "email"]
 
         # Remove Hyphen -, en dash –, em dash —, Underscore _
         # Set to lowercase
-        # remove all leading, trailing, and duplicate whitespace characters (space, tab, newline, and so on)
+        # remove all leading, trailing, and duplicate whitespace characters
+        # (space, tab, newline, and so on)
 
         # replace seems to achieve the best replacement performance
         # https://stackoverflow.com/questions/3411771/best-way-to-replace-multiple-characters-in-a-string
@@ -98,7 +105,8 @@ class University:
         ).dt.strftime("%Y-%m-%d")
 
         # postal_code: str
-        # str(x) is needed in case you rerun (it doesn't matter if you do .astype(str), pandas takes it as an int on next run)
+        # str(x) is needed in case you rerun (it doesn't matter if you do
+        # .astype(str), pandas takes it as an int on next run)
         uni_df["postal_code"] = (
             uni_df["postal_code"]
             .apply(lambda x: "".join(filter(str.isdigit, str(x))))
