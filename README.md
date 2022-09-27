@@ -8,6 +8,11 @@ Task OT303-15: Escribir el código de dos consultas SQL, una para cada universid
 Task OT303-23: Configurar un DAG, sin consultas, ni procesamiento para el grupo de universidades C
 * DAGs divididos por universidad en carpeta DAGS
 
+Task OT303-31: Configurar los retries con la conexión al a base de datos para el grupo de universidades C
+* El archivo DB_connection.py contiene las funciones para establecer conexion y retries a la BD
+* El archivo config.py se encuentran los datos para la conexion. 
+
+
 # Sprint 2:
 
 Task OT303-39: Configurar los log para el grupo de universidades C
