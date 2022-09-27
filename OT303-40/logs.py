@@ -62,7 +62,11 @@ def get_lloger(module_name):
     return loggint.getLogger(name_logger).getChild(module_name)
 default_args ={
     'owner': 'Aiflow' ,
+<<<<<<< HEAD
     'retries': 3 ,
+=======
+    'retries': 5 ,
+>>>>>>> 22bb690bd042ff0ed2bc7c89d0d2f33fc215f772
     'retry_delay':timedelta(minutes=2)
 }
 

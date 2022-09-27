@@ -34,7 +34,11 @@ from .base import *
 #trae los registros e inicia el motor
 DATABASES =  {
         'ENGINE': 'create_engine_connection()',
+<<<<<<< HEAD
         'NAME': 'Universidades_D',
+=======
+        'NAME': 'Universidades_A',
+>>>>>>> 22bb690bd042ff0ed2bc7c89d0d2f33fc215f772
         'USER':  config('USER'),
         'PASSWORD':  config('PASSWORD'),
         'HOST': config('SERVER'),
@@ -51,6 +55,7 @@ def extract_data():
 
     engine = create_engine_connection()
 
+<<<<<<< HEAD
 #consulta sql para uni tres de febrero
 
     log.info('Obteniendo datos de Universidad tres de febrero.')
@@ -66,12 +71,22 @@ def extract_data():
         table_df = pd.read_sql.append(query, connection)
 
 
+=======
+    sql_files = get_src_querys()
+>>>>>>> 22bb690bd042ff0ed2bc7c89d0d2f33fc215f772
 
     with engine.connect() as connection:
 
         for sql_file_name, sql_full_path in sql_files.items():
+<<<<<<< HEAD
 
                 logger.info('Extracting data from {}')
+=======
+            with open(sql_full_path) as f:
+
+                query = f.read()
+                logger.info('Extracting data from {}'.format(sql_file_name))
+>>>>>>> 22bb690bd042ff0ed2bc7c89d0d2f33fc215f772
 
                 result = connection.execute(query)
 
@@ -79,9 +94,14 @@ def extract_data():
                 logger.info('Writing information to csv.')
 
                 df.to_csv(os.path.join(
+<<<<<<< HEAD
                     ROOT_CSV, f'{sql_file_name[:-4]}.csv'), index=True)
     logger.info('Extracting data from database.')
     return df
+=======
+                    ROOT_CSV, f'{sql_file_name[:-4]}.csv'), index=False)
+    logger.info('Extracting data from database.')
+>>>>>>> 22bb690bd042ff0ed2bc7c89d0d2f33fc215f772
 
 #transformacion de datos de las universidades
 def transform_data():

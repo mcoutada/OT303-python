@@ -1,4 +1,5 @@
 #COMO: Analista de datos
+<<<<<<< HEAD
 #QUIERO: Implementar el Python Operator
 #PARA: procesar los datos obtenidos de la base de datos dentro del DAG
 
@@ -8,6 +9,24 @@
 #Universidad Tecnológica Nacional
 
 #Universidad Nacional De Tres De Febrero
+=======
+#QUIERO: Configurar los log
+#PARA: Mostrarlos en consola
+
+#Criterios de aceptación:
+
+#Configurar logs para Universidad Tecnológica Nacional
+
+#Configurar logs para Universidad Nacional De Tres De Febrero
+
+#Utilizar la librería de Loggin de python: https://docs.python.org/3/howto/logging.html
+
+#Realizar un log al empezar cada DAG con el nombre del logger
+
+#Formato del log: %Y-%m-%d - nombre_logger - mensaje
+#Aclaración:
+#Deben dejar la configuración lista para que se pueda incluir dentro de las funciones futuras. No es necesario empezar a escribir logs.
+>>>>>>> 22bb690bd042ff0ed2bc7c89d0d2f33fc215f772
 
 from datetime import timedelta, datetime
 
@@ -29,11 +48,19 @@ def extract():
     logger.info('Data extracted succefully')
 
 
+<<<<<<< HEAD
 def transform(**kwards):
     logger.info('Data transformed succefully')
 
 
 def load(**kwards):
+=======
+def transform(kwards):
+    logger.info('Data transformed succefully')
+
+
+def load(kwards):
+>>>>>>> 22bb690bd042ff0ed2bc7c89d0d2f33fc215f772
     logger.info('Data loaded succefully to s3')
 
     logger.handlers.clear()
@@ -52,7 +79,11 @@ with DAG(
         ## definicion de logs para dags universidades
 ) as dag:
 
+<<<<<<< HEAD
     extract_task=PythonOperator(
+=======
+    extrat_task=PythonOperator(
+>>>>>>> 22bb690bd042ff0ed2bc7c89d0d2f33fc215f772
         task_id='extract' ,
         python_callable=extract,
         provide_context=True
