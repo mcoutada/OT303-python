@@ -15,4 +15,8 @@ se implementaron los retries para los ingresos a la base de datos de las univers
 //carpeta de logs : tiene los logs generados para ambas universidades 
 // logger.py con su estructura
 
-//sql operator:
+//sql operator: se implemento un extractor de sql en codigo para utilizarlo para extraer la informacion de los dag y posteriormente procesarlos con pandas
+
+//PythonOperator : implementacion de un codigo.py para procesar los datos en formato csv y obtener informacion desde la base de datos
+
+//pandasOperator : implementacion de task en Dag de funcion- de normalizacion de datos con pandas para su extraccion en formato txt proveninentes de los archivos csv posteriormente obtenidos 
