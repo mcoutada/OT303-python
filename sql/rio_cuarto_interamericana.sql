@@ -12,17 +12,19 @@ CREATE OR REPLACE FUNCTION calcular_edad(fechas_nacimiento DATE) RETURNS integer
 $$ LANGUAGE plpgsql;
 
 SELECT 
-    univiersities AS university,
-    carrera AS career,
-    TO_DATE(inscription_dates,'YY/Mon/DD') AS inscription_date,
-    SPLIT_PART(names, '-', 1) AS first_name,
-    SPLIT_PART(names, '-', 2) AS last_name,
-    sexo AS gender,
-    calcular_edad(TO_DATE(fechas_nacimiento, 'YY/Mon/DD')) as age,
-    SPLIT_PART(direcciones, '-', 6) AS postal_code,
-    direcciones AS location,
-    email AS email
+    RCI.univiersities AS university,
+    RCI.carrera AS career,
+    TO_DATE(RCI.inscription_dates,'YY/Mon/DD') AS inscription_date,
+    SPLIT_PART(RCI.names, '-', 1) AS first_name,
+    SPLIT_PART(RCI.names, '-', 2) AS last_name,
+    RCI.sexo AS gender,
+    calcular_edad(TO_DATE(RCI.fechas_nacimiento, 'YY/Mon/DD')) as age,
+    L.codigo_postal AS postal_code,
+    REPLACE(RCI.localidad, '-', ' ') AS location,
+    RCI.email AS email
 FROM 
-    public.rio_cuarto_interamericana
+    rio_cuarto_interamericana RCI
+JOIN localidad2 L 
+ON LOWER(REPLACE(RCI.localidad, '-', ' ')) = LOWER(L.localidad)
 WHERE
-    TO_DATE(inscription_dates,'YY/Mon/DD') BETWEEN '2020-09-01' AND '2021-02-01';
+    TO_DATE(RCI.inscription_dates,'YY/Mon/DD') BETWEEN '2020-09-01' AND '2021-02-01';
