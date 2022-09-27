@@ -11,19 +11,21 @@ import logging
 log_name= LOG_NAME + datetime.today().strftime('%Y-%m-%d')
 logger=set_logger(name_logger=log_name)
 
+universidad = "u_de_palermo"
+
 def extract():
     """Get data from universities. TASK OT303-45
     """    
-        engine = get_engine()
-        db_connection()
-        logger.info('Getting data.')
+    engine = get_engine()
+    db_connection()
+    logger.info('Getting data.')
                 
-        query = open(f"SQL/{universidad}.sql", 'r').read()
-        df = pd.read_sql(query, engine)
-        df.to_csv(f"files/{universidad}.csv", index=False)
-        logger.info(f"Extraction complete of {universidad}")
+    query = open(f"SQL/{universidad}.sql", 'r').read()
+    df = pd.read_sql(query, engine)
+    df.to_csv(f"files/{universidad}.csv", index=False)
+    logger.info(f"Extraction complete of {universidad}")
 
-        return df
+    return df
 
 def normalization():
     """Normalize data. TASK 
@@ -74,7 +76,7 @@ def normalization():
 
     return df.to_csv(f"files/{universidad}.txt")        
 
-def load()
+def load():
     """
     Load data to S3.
     """    
