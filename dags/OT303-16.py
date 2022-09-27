@@ -92,7 +92,6 @@ with DAG(
     logger >> dag_extract_la_pampa >> dag_transform_la_pampa
 
 
-    #transform_la_pampa = DummyOperator(task_id='transform_la_pampa')
     #load_la_pampa= DummyOperator(task_id='load_la_pampa')
     # Upload data to S3
 
