@@ -13,13 +13,13 @@ log_name= LOG_NAME + datetime.today().strftime('%Y-%m-%d')
 logger=set_logger(name_logger=log_name)
 logger.info("DAG started")
 
-universidad = "u_de_palermo"
+university = "u_de_palermo"
 
-def extract_data():
-    extract()
+def extract_data(p_university=university):
+    extract(p_university)
 
-def transform():
-    normalization()
+def transform(p_university=university):
+    normalization(p_university)
 
 with DAG(
     "DAG_palermo",
