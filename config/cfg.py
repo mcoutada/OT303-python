@@ -12,6 +12,10 @@ DB_HOST = config('DB_HOST')
 DB_PORT = config('DB_PORT')
 DB_NAME = config('DB_NAME')
 
+# S3 Information
+CONNECTION = config('CONNECTION')
+BUCKET_NAME = config('BUCKET_NAME')
+
 # Root Directory
 # /home/lautaro/airflow but in webserver is /home
 # so i need to add lautaro/airflow/ to every path.
