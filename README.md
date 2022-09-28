@@ -41,5 +41,12 @@
 * university_etl_dag.py se implementa la tarea de procesamiento (transform).
 
 #
+# SPRINT III
+## TASK ID: OT303-69 y OT303-70 (Load task)
+* university_etl_dag.py se implementa la tarea de upload (load).
+* university_etl_functions.py (funcion load_data implementada)
+
+
+#
 # Aclaración:
 * Para ejecutar los DAGs, dentro de la carpeta /airflow/dags/ copiar los archivos usados o cambiar las rutas en los scripts.py.
