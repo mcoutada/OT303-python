@@ -1,6 +1,7 @@
 from airflow import DAG
 from airflow.operators.dummy import DummyOperator
 from airflow.operators.python_operator import PythonOperator
+import os
 from datetime import timedelta,datetime
 import logging
 from functions import extract, normalization
@@ -14,6 +15,9 @@ logger=set_logger(name_logger=log_name)
 logger.info("DAG started")
 
 university = "u_de_palermo"
+
+if os.getcwd() != os.path.dirname(os.path.realpath(__file__)):
+    os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 def extract_data(p_university=university):
     extract(p_university)
