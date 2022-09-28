@@ -28,8 +28,8 @@ def create_logger(name_logger, log_path):
     logger.setLevel(logging.INFO)
     # Create formatter.
     formatter = logging.Formatter(
-        # %Y-%m-%d - nombre_logger - mensaje
-        fmt='%(asctime)s - %(name)s - %(message)s',
+        # %Y-%m-%d - level_name - nombre_logger - mensaje
+        fmt='%(asctime)s_%(levelname)s_%(name)s_%(message)s',
         datefmt='%Y-%m-%d')
 
     # Stream Handler (for console)
