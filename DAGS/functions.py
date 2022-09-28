@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from importlib.metadata import files
 import os
 import pandas as pd
 from sqlalchemy import create_engine
@@ -20,6 +21,9 @@ def extract(university):
 
     query = open(f"SQL/{university}.sql", "r").read()
     df = pd.read_sql(query, engine)
+
+    if not os.path.exists("files"):
+        os.mkdir("files")
 
     df.to_csv(f"files/{university}.csv", index=False)
     logger.info(f"Extraction complete of {university}")
