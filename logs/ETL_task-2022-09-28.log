@@ -1,0 +1,21 @@
+2022-09-28 - ETL_task-2022-09-28 - *-----------EXTRACT TASK-----------*
+2022-09-28 - ETL_task-2022-09-28 - Extracting data from OT303-Universidad-Flores.sql
+2022-09-28 - ETL_task-2022-09-28 - Writing information to csv.
+2022-09-28 - ETL_task-2022-09-28 - Extracting data from OT303-Universidad-VillaMaria.sql
+2022-09-28 - ETL_task-2022-09-28 - Writing information to csv.
+2022-09-28 - ETL_task-2022-09-28 - Extracting data from database.
+2022-09-28 - ETL_task-2022-09-28 - Data extracted successfully.
+2022-09-28 - ETL_task-2022-09-28 - *-----------TRANSFORM TASK-----------*
+2022-09-28 - ETL_task-2022-09-28 - Working on OT303-Universidad-VillaMaria.csv file.
+2022-09-28 - ETL_task-2022-09-28 - Clearing data on OT303-Universidad-VillaMaria.csv file.
+2022-09-28 - ETL_task-2022-09-28 - Creating txt for OT303-Universidad-VillaMaria.csv file.
+2022-09-28 - ETL_task-2022-09-28 - Working on OT303-Universidad-Flores.csv file.
+2022-09-28 - ETL_task-2022-09-28 - Clearing data on OT303-Universidad-Flores.csv file.
+2022-09-28 - ETL_task-2022-09-28 - Creating txt for OT303-Universidad-Flores.csv file.
+2022-09-28 - ETL_task-2022-09-28 - Transform data from dataframe/csv.
+2022-09-28 - ETL_task-2022-09-28 - Data transformed successfully.
+2022-09-28 - ETL_task-2022-09-28 - *-----------LOAD TASK-----------*
+2022-09-28 - ETL_task-2022-09-28 - Loading data to S3.
+2022-09-28 - ETL_task-2022-09-28 - Uploading OT303-Universidad-VillaMaria.txt to S3.
+2022-09-28 - ETL_task-2022-09-28 - Uploading OT303-Universidad-Flores.txt to S3.
+2022-09-28 - ETL_task-2022-09-28 - Data loaded to S3 succesfully.

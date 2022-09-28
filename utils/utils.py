@@ -26,7 +26,7 @@ def create_folder(path):
         os.makedirs(path)
 
 
-def create_txt(df: pd.DataFrame, file_name: str):
+def create_txt(df: pd.DataFrame, file_name: str) -> str:
     """Create file.txt from pandas dataframe and return the file.
 
     Args:
@@ -34,9 +34,11 @@ def create_txt(df: pd.DataFrame, file_name: str):
         file_name (str): Filename.
 
     Returns:
-        text_file: text_file generated.
+        path: route to the file generated.
     """
+    # Route to save the dataframe.
     path = os.path.join(ROOT_TXT, file_name+'.txt')
-    text_file = df.to_csv(path, index=False)
+    # Save the dataframe.
+    df.to_csv(path, index=False)
 
-    return text_file
+    return path

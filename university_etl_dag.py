@@ -25,20 +25,25 @@ def extract():
 
 # Esta task procesa los datos extraidos anteriormente y los transforma para
 # cumplir con los requerimientos utilizando pandas.
-def transform():
+def transform(**kwargs):
     """Transform data from .csv source. TASK OT303-53
     """
-    transform_data()
+    # Get task instance.
+    ti = kwargs['ti']
+    routes = transform_data()
+    ti.xcom_push(key='routes', value=routes)
     logger.info('Data transformed successfully.')
 
 
-# Esta task va a ejecutar el proceso de carga de datos a S3, recive un dataframe o un path .csv,
+# Esta task ejecuta el proceso de carga de datos a S3, recive un path
 # y carga los datos a la base.
-def load(**kgwards):
-    """Load data to some database.
+def load(**kwargs):
+    """Upload data to Simple Storage Service (S3). TASK OT303-69/70
     """
-    # TODO: implement transform next sprint.
-    load_data()
+    # Get task instance.
+    ti = kwargs['ti']
+    routes = ti.xcom_pull(task_ids='transform', key='routes')
+    load_data(routes)
     logger.info('Data loaded to S3 succesfully.')
     # Clear Handlers.
     logger.handlers.clear()
@@ -50,7 +55,7 @@ with DAG(
         default_args=default_args,
         description='ETL DAG for 2 universities.',
         schedule_interval=timedelta(hours=1),
-        start_date=datetime(2022, 9, 18),
+        start_date=datetime(2022, 9, 28),
         tags=['university_etl']
 ) as dag:
 
@@ -84,8 +89,5 @@ with DAG(
         python_callable=load,
         provide_context=True
     )
-
-    # Podria agregarse al principio el dag del retry connection (el codigo del retry aca)
-    #wait_for_connection >> extract_task >> transform_task >> load_task
 
     extract_task >> transform_task >> load_task
