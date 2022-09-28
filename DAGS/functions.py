@@ -76,7 +76,7 @@ def normalization(university):
 
     logger.info("Normalized Dataframe .")
 
-    return df.to_csv(f"files/{university}.txt")
+    return df.to_csv(f"files/{university}.txt", index=False)
 
 
 def load():
