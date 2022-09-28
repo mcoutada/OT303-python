@@ -1,5 +1,4 @@
 import os
-from asyncio.format_helpers import extract_stack
 from getpass import getuser
 
 import pandas as pd
@@ -130,4 +129,3 @@ class University:
         self.log.info(
             f"Transform finished. {self.csv_name} first lines:\n{uni_df.head()}"
         )
-        self.log.info("Transform finished")
