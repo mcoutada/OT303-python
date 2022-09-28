@@ -1,7 +1,6 @@
 # My lines:
-airflowhome/logs/
-airflowhome/standalone_admin_password.txt
-airflowhome/airflow-webserver.pid
+airflowhome/
+!airflowhome/airflow.cfg
 .vscode/
 **/.env
 ############################################################################
