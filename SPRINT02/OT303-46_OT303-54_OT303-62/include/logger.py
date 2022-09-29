@@ -26,38 +26,73 @@ def set_logger(logger_name, is_debug=debug_flg):
         logging.Logger: file's logger
     """
 
-    # The path where the first file has been triggered
-    # Example:
-    # cd /path/to/root_folder/main.py
-    # python main.py
-    # --> root_abs_path = /path/to/root_folder
-    root_abs_path = os.getcwd()
-
-    # The folder to store the log files
-    log_abs_path = os.path.join(root_abs_path, "logs")
-
-    # Set the logger's name to the base project's folder name
-    # Example: /path/to/root_folder/main.py --> root_folder_name = root_folder
-    root_folder_name = os.path.basename(os.getcwd())
-
-    log_file_abs_path = os.path.join(
-        # TODO: Once developing is finished, switch lines to get one log file per run
-        # log_abs_path, f"{root_folder_name}_{datetime.datetime.now():%Y%m%d_%H%M%S_%f}.log"
-        log_abs_path,
-        f"{root_folder_name}.log",
-    )
-
-    if not os.path.exists(log_abs_path):
-        os.mkdir(log_abs_path)
-
-    # Set up the logger (to avoid using the default/root logger)
+    # Get the logger (to avoid using the default/root logger)
     logger = logging.getLogger(logger_name)
 
-    # Prevents duplicate log messages when passing the log into an object (class instance)
-    # https://stackoverflow.com/questions/7173033/duplicate-log-output-when-using-python-logging-module
-    logger.propagate = False
+    # If it's new, then set it up
+    if not logging.getLogger(name=logger_name).hasHandlers():
 
-    # Set up the logging level (to know which messages to log)
+        # The path where the first file has been triggered
+        # Example:
+        # cd /path/to/root_folder/main.py
+        # python main.py
+        # --> root_abs_path = /path/to/root_folder
+        root_abs_path = os.getcwd()
+
+        # The folder to store the log files
+        log_abs_path = os.path.join(root_abs_path, "logs")
+
+        # Set the logger's name to the base project's folder name
+        # Example: /path/to/root_folder/main.py --> root_folder_name = root_folder
+        root_folder_name = os.path.basename(os.getcwd())
+
+        log_file_abs_path = os.path.join(
+            # TODO: Once developing is finished, switch lines to get one log file per run
+            # log_abs_path, f"{root_folder_name}_{datetime.datetime.now():%Y%m%d_%H%M%S_%f}.log"
+            log_abs_path,
+            f"{root_folder_name}.log",
+        )
+
+        if not os.path.exists(log_abs_path):
+            os.mkdir(log_abs_path)
+
+        # Prevents duplicate log messages when passing the log into an object (class instance)
+        # https://stackoverflow.com/questions/7173033/duplicate-log-output-when-using-python-logging-module
+        logger.propagate = False
+
+        # Set up a logging format
+        formatter = logging.Formatter(
+            # The format I like:
+            # fmt="%(asctime)s.%(msecs)03d [%(name)-20s:%(lineno)-4d] %(levelname)8s: %(message)s",
+            # datefmt="%Y-%m-%d %H:%M:%S",
+            # The format requested by the task:
+            fmt="%(asctime)s - %(name)s - %(message)s",
+            datefmt="%Y-%m-%d",
+        )
+
+        # Set up a console handler
+        sh = logging.StreamHandler(sys.stdout)
+        sh.setFormatter(formatter)
+
+        # Add the console handler to the logger for the messages to be shown on
+        # the console
+        logger.handlers.clear()
+        logger.addHandler(sh)
+
+        # Set up a file handler if a file name is provided for the messages to be
+        # logged to a log file
+        if log_file_abs_path:
+            fh = logging.FileHandler(log_file_abs_path)
+            fh.setFormatter(formatter)
+            # Add the file handler to the logger
+            logger.addHandler(fh)
+
+        # Modify system's excepthook function (triggered everytime our script fails)
+        # so we can log the error after failure
+        new_excepthook = lambda *exc_info: log_unhandled_exception(logger, *exc_info)
+        sys.excepthook = new_excepthook
+
+    # Set or reset the logging level (to know which messages to log)
     # Logging messages with less severe level will be ignored, higher ones will be emitted.
     # +----------+---------------+-----------------------------------------------------------------------------------------------------------------------------+
     # | Level    | Numeric value | Description                                                                                                                 |
@@ -79,39 +114,6 @@ def set_logger(logger_name, is_debug=debug_flg):
     # +----------+---------------+-----------------------------------------------------------------------------------------------------------------------------+
 
     logger.setLevel(logging.DEBUG if is_debug else logging.INFO)
-
-    # Set up a logging format
-    formatter = logging.Formatter(
-        # The format I like:
-        # fmt="%(asctime)s.%(msecs)03d [%(name)-20s:%(lineno)-4d] %(levelname)8s: %(message)s",
-        # datefmt="%Y-%m-%d %H:%M:%S",
-        # The format requested by the task:
-        fmt="%(asctime)s - %(name)s - %(message)s",
-        datefmt="%Y-%m-%d",
-    )
-
-    # Set up a console handler
-    sh = logging.StreamHandler(sys.stdout)
-    sh.setFormatter(formatter)
-
-    # Add the console handler to the logger for the messages to be shown on
-    # the console
-    logger.handlers.clear()
-    logger.addHandler(sh)
-
-    # Set up a file handler if a file name is provided for the messages to be
-    # logged to a log file
-    if log_file_abs_path:
-        fh = logging.FileHandler(log_file_abs_path)
-        fh.setFormatter(formatter)
-        # Add the file handler to the logger
-        logger.addHandler(fh)
-
-    # Modify system's excepthook function (triggered everytime our script fails)
-    # so we can log the error after failure
-    new_excepthook = lambda *exc_info: log_unhandled_exception(
-        logger, *exc_info)
-    sys.excepthook = new_excepthook
 
     return logger
 
@@ -180,8 +182,7 @@ def log_basics(p_log):
             result = function(*args, **kwargs)
             end_time = time.perf_counter()
             total_time = end_time - start_time
-            p_log.info(
-                f"Ended {function.__name__}() elapsed: {total_time:.4f} seconds")
+            p_log.info(f"Ended {function.__name__}() elapsed: {total_time:.4f} seconds")
             return result
 
         return wrapper

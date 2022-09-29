@@ -21,6 +21,9 @@ class University:
         self.csv_name = os.path.splitext(self.sql_name)[0] + ".csv"
         self.csv_file = os.path.join(self.sql_folder, self.csv_name)
         self.sql_query = self.read_sql()
+        # decorate/wrap functions with log_basics, to log the function's start, end and elapsed time
+        self.extract = logger.log_basics(self.log)(self.extract)
+        self.transform = logger.log_basics(self.log)(self.transform)
         self.log.info(f"Finished setting files and folders for {self.name}")
 
     def find_file(self, p_fpath, p_ext):
