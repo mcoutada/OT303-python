@@ -6,7 +6,7 @@ from sqlalchemy import create_engine, inspect, exc
 from datetime import datetime
 
 # Use log created before.
-log_name = LOG_DB + datetime.today().strftime('%Y-%m-%d')
+log_name = LOG_DB + '-' + datetime.today().strftime('%Y-%m-%d')
 logger = logging.getLogger(log_name)
 
 

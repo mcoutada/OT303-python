@@ -2,7 +2,7 @@
 import logging
 import os
 import pandas as pd
-# Use ntpath instead os.path.basename(__path__). It works in linux and windows.
+# Use ntpath instead os.path.basename(__path__). It works on linux and windows.
 import ntpath
 
 from datetime import datetime
@@ -16,7 +16,7 @@ from airflow.hooks.S3_hook import S3Hook
 
 
 # Use log created before.
-log_name = LOG_ETL + datetime.today().strftime('%Y-%m-%d')
+log_name = LOG_ETL + '-' + datetime.today().strftime('%Y-%m-%d')
 logger = logging.getLogger(log_name)
 
 

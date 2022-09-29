@@ -28,7 +28,7 @@ from db.db_connection import connection_db
 from utils.logger import create_logger
 
 # Create and configure log
-log_name = LOG_DB + datetime.today().strftime('%Y-%m-%d')
+log_name = LOG_DB + '-' + datetime.today().strftime('%Y-%m-%d')
 logger = create_logger(log_name, LOGS_PATH)
 
 # Configure DAG parameters.
