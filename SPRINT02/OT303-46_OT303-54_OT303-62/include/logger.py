@@ -4,19 +4,13 @@ import sys
 import time
 from functools import wraps
 
-# Set a global variable flag to set the logger's log level.
-# True --> logger's level = DEBUG
-# False --> logger's level = INFO
-# By default it's set to False, but it can be changed when calling our main script with argument DEBUG
-# Example: python main.py DEBUG
 
-global debug_flg
-debug_flg = False
-
-
-def set_logger(logger_name, is_debug=debug_flg):
+def set_logger(logger_name, is_debug):
     """
-    Sets up the logger for the file that called this function
+    Sets up the logger for the file that called this function.
+    If it's called for the first time, it will set up the logger.
+    If not, it will just return the logger all set, and just adjust
+    the DEBUG flag if needed.
 
     Args:
         logger_name (str): main logger's name.
@@ -29,8 +23,8 @@ def set_logger(logger_name, is_debug=debug_flg):
     # Get the logger (to avoid using the default/root logger)
     logger = logging.getLogger(logger_name)
 
-    # If it's new, then set it up
-    if not logging.getLogger(name=logger_name).hasHandlers():
+    # If it's new, then it has no handler, so we need to set it up
+    if len(logger.handlers) == 0:
 
         # The path where the first file has been triggered
         # Example:
