@@ -11,7 +11,10 @@ def create_dag(p_university_name):
     @task(task_id="t_extract", retries=5)
     def extract():
         from include import utils
-        uni_obj = utils.University(p_name=p_university_name, p_dag_file=__file__)
+
+        uni_obj = utils.University(
+            p_name=p_university_name,
+            p_dag_file=__file__)
         uni_obj.extract()
 
     # Transform task
@@ -19,7 +22,9 @@ def create_dag(p_university_name):
     def transform():
         from include import utils
 
-        uni_obj = utils.University(p_name=p_university_name, p_dag_file=__file__)
+        uni_obj = utils.University(
+            p_name=p_university_name,
+            p_dag_file=__file__)
         uni_obj.transform()
 
     # Load task
@@ -53,3 +58,8 @@ def create_dag(p_university_name):
 
 for university_name in ["Salvador", "Comahue"]:
     globals()[university_name] = create_dag(p_university_name=university_name)
+    # print(__name__)
+    # from include import utils
+    # uni_obj = utils.University(p_name=university_name, p_dag_file=__file__)
+    # uni_obj.extract()
+    # uni_obj.transform()
