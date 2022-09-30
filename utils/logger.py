@@ -1,6 +1,9 @@
 from utils.utils import create_folder
 from config.cfg import LOGS_PATH
 import logging
+import logging.config
+import os
+from config.myHandler import MyFileHandler
 
 
 # Logging level:
@@ -45,3 +48,29 @@ def create_logger(name_logger, log_path):
     logger.addHandler(fh)
 
     return logger
+
+
+def create_logger_from_file(config: str) -> None:
+    """Create logger using config file.
+
+    Args:
+        config (str): logger config file name.
+    """
+    logging.handlers.MyFileHandler = MyFileHandler
+
+    log_file_path = os.path.join(
+        os.path.dirname(os.path.dirname(__file__)), 'config', config)
+
+    logging.config.fileConfig(log_file_path)
+
+
+def get_logger(name: str) -> logging.Logger:
+    """Get logger created before. 
+
+    Args:
+        name (str): logger name.
+
+    Returns:
+        logging.Logger: return a logger with the specific name.
+    """
+    return logging.getLogger(name)
