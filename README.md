@@ -46,6 +46,10 @@
 * university_etl_dag.py se implementa la tarea de upload (load).
 * university_etl_functions.py (funcion load_data implementada)
 
+## TASK ID: OT303-93 (Logs from file)
+* logger.py se crea el log a partir de un archivo de configuración.
+* logging.conf se declara la estructura del log, los handlers y formatters.
+* myHandler.py se crea un custom FileHandler para manejar los distintos parámetros.
 
 #
 # Aclaración:
