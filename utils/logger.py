@@ -51,7 +51,7 @@ def create_logger(name_logger, log_path):
 
 
 def create_logger_from_file(config: str) -> None:
-    """Create logger using config file.
+    """Create logger using config file. TASK ID OT303-93.
 
     Args:
         config (str): logger config file name.

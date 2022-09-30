@@ -1,14 +1,12 @@
-
-import logging
 import os
 import pandas as pd
 # Use ntpath instead os.path.basename(__path__). It works on linux and windows.
 import ntpath
 
-from datetime import datetime
 
 from config.cfg import LOG_ETL, ROOT_CSV, ROOT_SQL, ROOT_TXT, BUCKET_NAME, CONNECTION
 from db.db_connection import create_engine_connection
+from utils.logger import get_logger
 from utils.utils import create_folder, create_txt, get_filename_path
 from utils.transform import normalize_data
 
@@ -16,8 +14,13 @@ from airflow.hooks.S3_hook import S3Hook
 
 
 # Use log created before.
-log_name = LOG_ETL + '-' + datetime.today().strftime('%Y-%m-%d')
-logger = logging.getLogger(log_name)
+# OPT 1
+#from datetime import datetime
+#log_name = LOG_ETL + '-' + datetime.today().strftime('%Y-%m-%d')
+#logger = get_logger(log_name)
+
+# OPT 2
+logger = get_logger(LOG_ETL)
 
 
 def extract_data():

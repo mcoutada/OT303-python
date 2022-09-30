@@ -1,17 +1,25 @@
 from datetime import timedelta, datetime
-from statistics import mode
 from config.common_args import default_args
-from config.cfg import LOG_ETL, LOGS_PATH
+from config.cfg import LOG_CFG, LOG_ETL
 from utils.university_etl_functions import extract_data, transform_data, load_data
-from utils.logger import create_logger
+from utils.logger import create_logger_from_file, get_logger
 
 
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 #from airflow.sensors.external_task_sensor import ExternalTaskSensor
-log_name = LOG_ETL + '-' + datetime.today().strftime('%Y-%m-%d')
-logger = create_logger(name_logger=log_name, log_path=LOGS_PATH)
 
+# NOW WE NEED A LOG WITH A ROTATIVE SCHEDULER, SO WE USE (OPT 2)
+
+# Create and configure logger (OPT 1)
+#from config.cfg import LOGS_PATH
+#from utils.logger import create_logger
+#log_name = LOG_ETL + '-' + datetime.today().strftime('%Y-%m-%d')
+#logger = create_logger(name_logger=log_name, log_path=LOGS_PATH)
+
+# Create and configure logger (OPT 2)
+create_logger_from_file(LOG_CFG)
+logger = get_logger(LOG_ETL)
 
 # Esta task levanta los datos de la fuente (en este caso ejecuta la consulta .sql) y
 # los guarda en un archivo .csv

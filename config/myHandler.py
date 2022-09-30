@@ -1,7 +1,6 @@
 import logging.handlers
 import os
 from datetime import datetime
-from pathlib import Path
 
 from utils.utils import create_folder
 

@@ -1,0 +1,23 @@
+29-09-2022_INFO_ETLTask_*-----------EXTRACT TASK-----------*
+29-09-2022_INFO_ETLTask_Extracting data from OT303-Universidad-Flores.sql
+29-09-2022_INFO_ETLTask_Writing information to csv.
+29-09-2022_INFO_ETLTask_Extracting data from OT303-Universidad-VillaMaria.sql
+29-09-2022_INFO_ETLTask_Writing information to csv.
+29-09-2022_INFO_ETLTask_Extracting data from database.
+29-09-2022_INFO_ETLTask_Data extracted successfully.
+29-09-2022_INFO_ETLTask_*-----------TRANSFORM TASK-----------*
+29-09-2022_INFO_ETLTask_Working on OT303-Universidad-VillaMaria.csv file.
+29-09-2022_INFO_ETLTask_Clearing data on OT303-Universidad-VillaMaria.csv file.
+29-09-2022_INFO_ETLTask_Creating txt for OT303-Universidad-VillaMaria.csv file.
+29-09-2022_INFO_ETLTask_Working on OT303-Universidad-Flores.csv file.
+29-09-2022_INFO_ETLTask_Clearing data on OT303-Universidad-Flores.csv file.
+29-09-2022_INFO_ETLTask_Creating txt for OT303-Universidad-Flores.csv file.
+29-09-2022_INFO_ETLTask_Transform data from dataframe/csv.
+29-09-2022_INFO_ETLTask_Data transformed successfully.
+29-09-2022_INFO_ETLTask_*-----------LOAD TASK-----------*
+29-09-2022_INFO_ETLTask_Loading data to S3.
+29-09-2022_INFO_ETLTask_Uploading OT303-Universidad-VillaMaria.txt to S3.
+29-09-2022_INFO_ETLTask_Key OT303-Universidad-VillaMaria.txt already in use. Change the name of the file to force upload.
+29-09-2022_INFO_ETLTask_Uploading OT303-Universidad-Flores.txt to S3.
+29-09-2022_INFO_ETLTask_Key OT303-Universidad-Flores.txt already in use. Change the name of the file to force upload.
+29-09-2022_INFO_ETLTask_Data loaded to S3 succesfully.
