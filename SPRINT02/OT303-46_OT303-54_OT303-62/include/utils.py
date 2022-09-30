@@ -13,7 +13,6 @@ project_folder = os.path.dirname(os.path.realpath(sys.argv[0]))
 if curr_work_directory != project_folder:
     sys.path.append(project_folder)
     from include import logger
-
     sys.path.remove(project_folder)
 else:
     from include import logger
