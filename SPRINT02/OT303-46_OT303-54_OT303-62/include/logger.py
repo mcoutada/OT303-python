@@ -1,3 +1,4 @@
+import inspect
 import logging
 import os
 import sys
@@ -5,7 +6,7 @@ import time
 from functools import wraps
 
 
-def set_logger(logger_name, is_debug):
+def set_logger(logger_name, is_debug=False):
     """
     Sets up the logger for the file that called this function.
     If it's called for the first time, it will set up the logger.
@@ -37,7 +38,8 @@ def set_logger(logger_name, is_debug):
         log_abs_path = os.path.join(root_abs_path, "logs")
 
         # Set the logger's name to the base project's folder name
-        # Example: /path/to/root_folder/main.py --> root_folder_name = root_folder
+        # Example: /path/to/root_folder/main.py --> root_folder_name =
+        # root_folder
         root_folder_name = os.path.basename(os.getcwd())
 
         log_file_abs_path = os.path.join(
@@ -83,7 +85,8 @@ def set_logger(logger_name, is_debug):
 
         # Modify system's excepthook function (triggered everytime our script fails)
         # so we can log the error after failure
-        new_excepthook = lambda *exc_info: log_unhandled_exception(logger, *exc_info)
+        new_excepthook = lambda *exc_info: log_unhandled_exception(
+            logger, *exc_info)
         sys.excepthook = new_excepthook
 
     # Set or reset the logging level (to know which messages to log)
@@ -158,25 +161,60 @@ def get_rel_path(in_file_name):
     return os.sep + os.path.relpath(in_file_name, start=os.getcwd())
 
 
-# log a function's start, end, elapsed time, and input parameters
-# https://dev.to/kcdchennai/python-decorator-to-measure-execution-time-54hk
-# https://stackoverflow.com/questions/6200270/decorator-that-prints-function-call-details-parameters-names-and-effective-valu
+"""
+Decorator to log a function's start, end, elapsed time, and input parameters
+https://dev.to/kcdchennai/python-decorator-to-measure-execution-time-54hk
+https://stackoverflow.com/questions/6200270/decorator-that-prints-function-call-details-parameters-names-and-effective-valu
+
+Example:
+
+import logger
+log1 = logger.set_logger(__file__)
+
+# In a function:
+@logger.log_basics(log1)
+def func1(arg1):
+    return arg1 * 2
+
+# In a class. There are other ways to do it, google "self in decorator"
+# This one is pretty clear to me, even though it doesn't use the @ decorator's syntactic sugar
+class Myclass1:
+    def __init__(self, p_num, p_file):
+        self.num = p_num
+        self.log = logger.set_logger(logger_name=logger.get_rel_path(p_file))
+        self.duplicate = logger.log_basics(self.log)(self.duplicate)
+        self.log.info(f"Finished setting files and folders for {self.name}")
+    def duplicate(self):
+        return self.num * 2
+"""
 
 
 def log_basics(p_log):
-    def decorator(function):
+    def decorator(func):
         # wraps preserves the function's metadata (attributes such as __name__,
         # __doc__) to not get lost through nested calls
-        @wraps(function)
+        @wraps(func)
         def wrapper(*args, **kwargs):
-            p_log.info(
-                f"Starting {function.__name__}() with args: {args} and kwargs: {kwargs}"
+            # convert arguments to a printable string
+            # Example:
+            # def test(a, b=4, c="blah-blah", *args, **kwargs):
+            # pass
+            # test(1, 2, 3, 4, 5, d=6, g=12.9)
+            # >>> __main__.test ( a = 1, b = 2, c = 3, args = (4, 5), kwargs = {'d': 6, 'g': 12.9} )
+            # https://stackoverflow.com/questions/6200270/decorator-that-prints-function-call-details-parameters-names-and-effective-valu
+            func_args = inspect.signature(func).bind(*args, **kwargs).arguments
+            func_args_str = ", ".join(
+                map("{0[0]} = {0[1]!r}".format, func_args.items())
             )
+            func_call_str = f"{func.__module__}.{func.__qualname__}({func_args_str})"
+
+            p_log.info(f"Starting {func_call_str}")
             start_time = time.perf_counter()
-            result = function(*args, **kwargs)
+            result = func(*args, **kwargs)
             end_time = time.perf_counter()
             total_time = end_time - start_time
-            p_log.info(f"Ended {function.__name__}() elapsed: {total_time:.4f} seconds")
+            p_log.info(
+                f"Ended {func_call_str}. Elapsed: {total_time:.4f} seconds")
             return result
 
         return wrapper
