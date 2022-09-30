@@ -5,7 +5,7 @@ import pandas as pd
 from decouple import config
 from sqlalchemy import create_engine
 
-# Airflow tends to set $AIRFLOW_HOME as the current working directoty
+# Airflow sets $AIRFLOW_HOME as the current working directory
 # which makes same level imports to fail (like import logger.py from utils.py)
 curr_work_directory = os.getcwd()
 project_folder = os.path.dirname(os.path.realpath(sys.argv[0]))
