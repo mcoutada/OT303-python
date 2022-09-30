@@ -1,5 +1,4 @@
 import os
-from getpass import getuser
 
 import pandas as pd
 from decouple import config
