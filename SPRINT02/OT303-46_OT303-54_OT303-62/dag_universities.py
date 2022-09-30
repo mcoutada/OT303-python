@@ -1,10 +1,9 @@
 from datetime import datetime, timedelta
+from getpass import getuser
 
 from airflow import DAG
 from airflow.decorators import task
 from include import utils
-
-from getpass import getuser
 
 
 def create_dag(p_university_name):
@@ -12,13 +11,17 @@ def create_dag(p_university_name):
     # Extract task
     @task(task_id="t_extract", retries=5)
     def extract():
-        uni_obj = utils.University(p_name=p_university_name, p_dag_file=__file__)
+        uni_obj = utils.University(
+            p_name=p_university_name,
+            p_dag_file=__file__)
         uni_obj.extract()
 
     # Transform task
     @task(task_id="t_transform")
     def transform():
-        uni_obj = utils.University(p_name=p_university_name, p_dag_file=__file__)
+        uni_obj = utils.University(
+            p_name=p_university_name,
+            p_dag_file=__file__)
         uni_obj.transform()
 
     # Load task
@@ -51,7 +54,4 @@ def create_dag(p_university_name):
 
 
 for university_name in ["Salvador", "Comahue"]:
-    # globals()[university_name] = create_dag(p_university_name=university_name)
-    uni_obj = utils.University(p_name=university_name, p_dag_file=__file__)
-    uni_obj.extract()
-    uni_obj.transform()
+    globals()[university_name] = create_dag(p_university_name=university_name)
