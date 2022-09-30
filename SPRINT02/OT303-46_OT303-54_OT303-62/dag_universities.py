@@ -3,7 +3,6 @@ from getpass import getuser
 
 from airflow import DAG
 from airflow.decorators import task
-from include import utils
 
 
 def create_dag(p_university_name):
@@ -11,17 +10,16 @@ def create_dag(p_university_name):
     # Extract task
     @task(task_id="t_extract", retries=5)
     def extract():
-        uni_obj = utils.University(
-            p_name=p_university_name,
-            p_dag_file=__file__)
+        from include import utils
+        uni_obj = utils.University(p_name=p_university_name, p_dag_file=__file__)
         uni_obj.extract()
 
     # Transform task
     @task(task_id="t_transform")
     def transform():
-        uni_obj = utils.University(
-            p_name=p_university_name,
-            p_dag_file=__file__)
+        from include import utils
+
+        uni_obj = utils.University(p_name=p_university_name, p_dag_file=__file__)
         uni_obj.transform()
 
     # Load task
