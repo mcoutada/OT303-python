@@ -1,13 +1,17 @@
-
-import logging
 import time
 from config.cfg import DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME, VILLA_MARIA, FLORES, LOCALIDAD, LOG_DB
 from sqlalchemy import create_engine, inspect, exc
-from datetime import datetime
+from utils.logger import get_logger
+
 
 # Use log created before.
-log_name = LOG_DB + '-' + datetime.today().strftime('%Y-%m-%d')
-logger = logging.getLogger(log_name)
+# OPT 1
+#from datetime import datetime
+#log_name = LOG_DB + '-' + datetime.today().strftime('%Y-%m-%d')
+#logger = get_logger(log_name)
+
+# OPT 2
+logger = get_logger(LOG_DB)
 
 
 def create_engine_connection():

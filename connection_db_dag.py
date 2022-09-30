@@ -22,14 +22,23 @@ from airflow.operators.python_operator import PythonOperator
 from airflow import DAG
 
 from datetime import timedelta, datetime
-from config.cfg import LOG_DB, LOGS_PATH
+from config.cfg import LOG_CFG, LOG_DB
 from config.common_args import default_args
 from db.db_connection import connection_db
-from utils.logger import create_logger
+from utils.logger import create_logger_from_file, get_logger
 
-# Create and configure log
-log_name = LOG_DB + '-' + datetime.today().strftime('%Y-%m-%d')
-logger = create_logger(log_name, LOGS_PATH)
+
+# NOW WE NEED A LOG WITH A ROTATIVE SCHEDULER, SO WE USE (OPT 2)
+
+# Create and configure logger (OPT 1)
+#from utils.logger import create_logger
+#from config.cfg import LOGS_PATH
+#log_name = LOG_DB + '-' + datetime.today().strftime('%Y-%m-%d')
+#logger = create_logger(log_name, LOGS_PATH)
+
+# Create and configure logger (OPT 2)
+create_logger_from_file(LOG_CFG)
+logger = get_logger(LOG_DB)
 
 # Configure DAG parameters.
 with DAG(
