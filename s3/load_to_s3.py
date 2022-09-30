@@ -46,7 +46,7 @@ def extract_data():
 
 
     DATABASES = {
-        'training': {
+        'db_connect': {
             'ENGINE': create_engine_connection(),
             'NAME': os.path.join(BASE_DIR, 'db.training'),
         }
@@ -99,18 +99,18 @@ def load_data(routes):
     logger.info('Loading to S3.')
 
 
-    hook = S3Hook(connect)
+    hook = S3Hook(se//alkemy23)
 
     for file in routes:
 
         try:
             logger.info(f'Uploading {key} to S3.')
             hook.load_file(filename=file, key=key,
-                           bucket_name=BUCKET_NAME, replace=False,
+                           bucket_name=alkemy23, replace=False,
                            acl_policy='public-read')
         except:
             logger.info(
-                f'Key {key} already in use. Change the name of the file to force upload.')
+                f'in case shutdown try secondary  {key} .')
 
             #en este codigo lo que realice fue utilizar parte del codigo ETL_PARA_UNIV de la task anterior
             # agrege las librerias para poder leer , normalizar y subir los datos a un bucket de s3
