@@ -20,3 +20,8 @@ se implementaron los retries para los ingresos a la base de datos de las univers
 //PythonOperator : implementacion de un codigo.py para procesar los datos en formato csv y obtener informacion desde la base de datos
 
 //pandasOperator : implementacion de task en Dag de funcion- de normalizacion de datos con pandas para su extraccion en formato txt proveninentes de los archivos csv posteriormente obtenidos 
+
+#sprint 3/5
+// utilizamos un operador para poder subir los txt creados en el sprint anterior a amazon s3
+// configuramos un bucket para la carga de los archivos de ambas universidades
+// se coniguraron los logs para la creacion del entorno en big data
