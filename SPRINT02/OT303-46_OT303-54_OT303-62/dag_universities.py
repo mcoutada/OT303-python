@@ -4,18 +4,21 @@ from airflow import DAG
 from airflow.decorators import task
 from include import utils
 
+from getpass import getuser
+
 
 def create_dag(p_university_name):
-    uni_obj = utils.University(p_name=p_university_name, p_dag_file=__file__)
 
     # Extract task
     @task(task_id="t_extract", retries=5)
     def extract():
+        uni_obj = utils.University(p_name=p_university_name, p_dag_file=__file__)
         uni_obj.extract()
 
     # Transform task
     @task(task_id="t_transform")
     def transform():
+        uni_obj = utils.University(p_name=p_university_name, p_dag_file=__file__)
         uni_obj.transform()
 
     # Load task
@@ -24,14 +27,15 @@ def create_dag(p_university_name):
         pass
 
     default_args = {
-        "owner": uni_obj.os_user,
+        # Set the OS's username as the Dag owner
+        "owner": getuser(),
         "retries": 1,
         "retry_delay": timedelta(minutes=1),
     }
 
     with DAG(
-        dag_id=uni_obj.name,
-        description=f"Process (ETL) University {uni_obj.name}",
+        dag_id=p_university_name,
+        description=f"Process (ETL) University {p_university_name}",
         default_args=default_args,
         start_date=datetime(year=2022, day=19, month=9),
         schedule="@hourly",
@@ -47,4 +51,7 @@ def create_dag(p_university_name):
 
 
 for university_name in ["Salvador", "Comahue"]:
-    globals()[university_name] = create_dag(p_university_name=university_name)
+    # globals()[university_name] = create_dag(p_university_name=university_name)
+    uni_obj = utils.University(p_name=university_name, p_dag_file=__file__)
+    uni_obj.extract()
+    uni_obj.transform()
