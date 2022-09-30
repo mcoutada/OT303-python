@@ -31,5 +31,6 @@ VILLA_MARIA = 'salvador_villa_maria'
 LOCALIDAD = 'localidad2'
 
 # Loggers
-LOG_DB = 'Connection_db'
-LOG_ETL = 'ETL_task'
+LOG_DB = 'ConnectionDb'
+LOG_ETL = 'ETLTask'
+LOG_CFG = 'logging.conf'
