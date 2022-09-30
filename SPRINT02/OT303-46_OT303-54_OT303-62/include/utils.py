@@ -14,14 +14,14 @@ class University:
         self.log = logger.set_logger(
             logger_name=f"{self.name}@{logger.get_rel_path(p_dag_file)}"
         )
-        self.os_user = getuser()
         self.sql_folder, self.sql_name, self.sql_file = self.find_file(
             os.path.dirname(__file__), ".sql"
         )
         self.csv_name = os.path.splitext(self.sql_name)[0] + ".csv"
         self.csv_file = os.path.join(self.sql_folder, self.csv_name)
         self.sql_query = self.read_sql()
-        # decorate/wrap functions with log_basics, to log the function's start, end and elapsed time
+        # decorate/wrap functions with log_basics, to log the function's start,
+        # end and elapsed time
         self.extract = logger.log_basics(self.log)(self.extract)
         self.transform = logger.log_basics(self.log)(self.transform)
         self.log.info(f"Finished setting files and folders for {self.name}")
@@ -59,8 +59,6 @@ class University:
         pd.read_sql(sql=self.sql_query, con=engine).to_csv(
             path_or_buf=self.csv_file, index=False
         )
-
-        self.log.info("Extract finished")
 
     def transform(self):
 
@@ -129,6 +127,4 @@ class University:
 
         uni_df.to_csv(path_or_buf=self.csv_file, index=False)
 
-        self.log.info(
-            f"Transform finished. {self.csv_name} first lines:\n{uni_df.head()}"
-        )
+        self.log.info(f"{self.csv_name} first lines:\n{uni_df.head()}")
