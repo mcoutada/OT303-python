@@ -1,10 +1,22 @@
 import os
+import sys
 
 import pandas as pd
 from decouple import config
 from sqlalchemy import create_engine
 
-from . import logger
+# Airflow tends to set $AIRFLOW_HOME as the current working directoty
+# which makes same level imports to fail (like import logger.py from utils.py)
+curr_work_directory = os.getcwd()
+project_folder = os.path.dirname(os.path.realpath(sys.argv[0]))
+
+if curr_work_directory != project_folder:
+    sys.path.append(project_folder)
+    from include import logger
+
+    sys.path.remove(project_folder)
+else:
+    from include import logger
 
 
 class University:
