@@ -29,6 +29,8 @@ class University:
         )
         self.csv_name = os.path.splitext(self.sql_name)[0] + ".csv"
         self.csv_file = os.path.join(self.sql_folder, self.csv_name)
+        self.txt_name = os.path.splitext(self.sql_name)[0] + ".txt"
+        self.txt_file = os.path.join(self.sql_folder, self.txt_name)
         self.sql_query = self.read_sql()
         # decorate/wrap functions with log_basics, to log the function's start,
         # end and elapsed time
@@ -135,6 +137,6 @@ class University:
         # age: int
         uni_df = uni_df.astype({"age": int})
 
-        uni_df.to_csv(path_or_buf=self.csv_file, index=False)
+        uni_df.to_csv(path_or_buf=self.txt_file, index=False)
 
-        self.log.info(f"{self.csv_name} first lines:\n{uni_df.head()}")
+        self.log.info(f"{self.txt_file} first lines:\n{uni_df.head()}")
