@@ -1,7 +1,6 @@
 from sqlalchemy import create_engine, exc, inspect
-from decouple import config
 
-from config.config import *
+from config.config import DB_USER, PASSWORD, HOST, PORT, DB_NAME
 from config.logger_base import log
 
 import time
@@ -10,7 +9,7 @@ def get_engine():
     """
     Se crea el engine de la base de datos.
     """
-    url = f"postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB_NAME}"
+    url = f"postgresql://{DB_USER}:{PASSWORD}@{HOST}:{PORT}/{DB_NAME}"
     return create_engine(url)
 
 def connect_db():

@@ -3,7 +3,7 @@ Este script se encargará de ejecutar las consultas SQL para extraer la informac
 """
 import pandas as pd
 
-from Sprint2.conexion_db import get_engine
+from conexion_db import get_engine
 from config.logger_base import log
 
 def extract_data():
@@ -12,19 +12,19 @@ def extract_data():
 
     # Ejecutando la consulta SQL para la Universidad de Moron.
     log.info('Obteniendo datos de la Universidad de Moron.')
-    with open("sql\moron_nacional_pampa.sql") as file:
+    with open("Sprint2/sql/moron_nacional_pampa.sql") as file:
         query = file.read()
         table_df = pd.read_sql(query, connection)
     
     # Ejecutando la consulta SQL para la Universidad Nacional del Rio Cuarto.
     log.info('Obteniendo datos de la Universidad Nacional del Rio Cuarto.')
-    with open("sql/rio_cuarto_interamericana.sql") as file:
+    with open("Sprint2/sql/rio_cuarto_interamericana.sql") as file:
         query = file.read()
         table_df = table_df.append(pd.read_sql(query, connection), ignore_index = True)
     
     # Guardando los datos en el archivo .csv
     log.info('Guardando los datos obtenidos.')
-    table_df.to_csv(path_or_buf = 'files/universidades.csv')
+    table_df.to_csv(path_or_buf = 'Sprint2/files/universidades.csv')
     
     log.info('Se han guardado todos los datos correctamente.')
     

@@ -1,7 +1,7 @@
 from decouple import config
 
 # Datos para la conexión a la base de datos.
-USER = config('USER')
+DB_USER = config('DB_USER')
 PASSWORD = config('PASSWORD')
 HOST = config('HOST')
 PORT = config('PORT')

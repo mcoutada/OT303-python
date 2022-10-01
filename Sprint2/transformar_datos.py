@@ -5,7 +5,7 @@ encontrará en la carpeta files.
 """
 import pandas as pd
 
-from Sprint2.obtener_datos import extract_data
+from obtener_datos import extract_data
 from config.logger_base import log
 
 def transform_data():
@@ -39,9 +39,23 @@ def transform_data():
     
     # Normalizando la columna email
     df.email = df.email.str.lower()
+
+    print(df)
+
+    # Filtrando la columna university para crear dos dataframes nuevos
+    df_moron = df[(df.university == 'universidad de morón') | (df.university == 'universidad nacional de la pampa')]
+    df_rio = df[(df.university == 'universidad nacional de río cuarto') | (df.university == 'universidad abierta interamericana')]
     
     # Guardando los datos en un archivo .txt
-    log.info('Guardando los datos normalizados en un archivo txt.')
-    df_file = open('files/universidades.txt', 'a')
-    df_file.write(df.to_string())
+    log.info('Guardando los datos normalizados de la Universidad de Moron en un archivo txt.')
+    df_file = open('Sprint2/files/universidad_moron.txt', 'a')
+    df_file.write(df_moron.to_string())
     df_file.close()
+
+    log.info('Guardando los datos normalizados de la Universidad de Río Cuarto en un archivo txt.')
+    df_file = open('Sprint2/files/universidad_rio.txt', 'a')
+    df_file.write(df_rio.to_string())
+    df_file.close()
+
+if __name__ == '__main__':
+    transform_data()
