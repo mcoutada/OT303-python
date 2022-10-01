@@ -3,7 +3,7 @@ Este script se encargará de ejecutar las consultas SQL para extraer la informac
 """
 import pandas as pd
 
-from conexion_db import get_engine
+from Sprint2.conexion_db import get_engine
 from config.logger_base import log
 
 def extract_data():

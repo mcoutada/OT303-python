@@ -5,7 +5,7 @@ from datetime import timedelta, datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 
-from conexion_db import connect_db
+from Sprint2.conexion_db import connect_db
 
 default_args = {
     'owner' : 'airflow',

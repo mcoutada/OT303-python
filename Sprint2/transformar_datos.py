@@ -5,7 +5,7 @@ encontrará en la carpeta files.
 """
 import pandas as pd
 
-from obtener_datos import extract_data
+from Sprint2.obtener_datos import extract_data
 from config.logger_base import log
 
 def transform_data():
