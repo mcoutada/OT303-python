@@ -50,7 +50,7 @@ def load(**kwargs):
     """
     # Get task instance.
     ti = kwargs['ti']
-    routes = ti.xcom_pull(task_ids='transform', key='routes')
+    routes = ti.xcom_pull(task_ids='transform_task', key='routes')
     load_data(routes)
     logger.info('Data loaded to S3 succesfully.')
     # Clear Handlers.
@@ -81,19 +81,19 @@ with DAG(
     # Could use xcom to share data between tasks. (Next Sprint)
     # Use PythonOperator to execute each task. Like:
     extract_task = PythonOperator(
-        task_id='extract',  # Id for the task
+        task_id='extract_task',  # Id for the task
         python_callable=extract,  # Execution task (extract function)
         provide_context=True  # For share data
     )
 
     transform_task = PythonOperator(
-        task_id='transform',
+        task_id='transform_task',
         python_callable=transform,
         provide_context=True
     )
 
     load_task = PythonOperator(
-        task_id='load',
+        task_id='load_task',
         python_callable=load,
         provide_context=True
     )

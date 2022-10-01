@@ -51,6 +51,13 @@
 * logging.conf se declara la estructura del log, los handlers y formatters.
 * myHandler.py se crea un custom FileHandler para manejar los distintos parámetros.
 
+## TASK ID: OT303-85 (Dynamic Dag)
+* Usando dag-factory: pip install dag-factory
+* No se modifica la lógica de procesamiento/negocio. 
+* Si no se quiere utilziar esta librería, el siguiente enlace contiene un tutorial de como implementar un DAG factory personalizado https://towardsdatascience.com/how-to-build-a-dag-factory-on-airflow-9a19ab84084c.
+* En config/config_dynamic_dag.yaml se implementa la estructura del dag.
+* dynamic_etl_dag.py crea el dag implementado.
+
 #
 # Aclaración:
 * Para ejecutar los DAGs, dentro de la carpeta /airflow/dags/ copiar los archivos usados o cambiar las rutas en los scripts.py.
