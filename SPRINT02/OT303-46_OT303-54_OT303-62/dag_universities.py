@@ -58,4 +58,3 @@ def create_dag(p_university_name):
 
 for university_name in ["Salvador", "Comahue"]:
     globals()[university_name] = create_dag(p_university_name=university_name)
-
