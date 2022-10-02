@@ -9,7 +9,7 @@ def create_dag(
         defaults_args):
  def dag_test ():
     print("dag.test.py")
- print("dag.test",(),format(str(dag_numer)))
+ print("dag.test",(),format(str(dag_number)))
 dag=DAG(
       dag_id,
       dag_number,
@@ -45,4 +45,4 @@ task = (dag_id)=create_dag(
     )
     
 
-#en esta carpeta se encuentra el dag dinaimco , su configuracion y una prueba del mismo
+#en esta carpeta se encuentra el dag dinaimco , su configuracion y una prueba del mismo para utilizar
