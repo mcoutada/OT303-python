@@ -1,6 +1,7 @@
 import os
 import sys
 
+import boto3
 import pandas as pd
 from decouple import config
 from sqlalchemy import create_engine
@@ -36,6 +37,7 @@ class University:
         # end and elapsed time
         self.extract = logger.log_basics(self.log)(self.extract)
         self.transform = logger.log_basics(self.log)(self.transform)
+        self.load = logger.log_basics(self.log)(self.load)
         self.log.info(f"Finished setting files and folders for {self.name}")
 
     def find_file(self, p_fpath, p_ext):
@@ -141,3 +143,27 @@ class University:
 
         self.log.info(f"{self.txt_file} first lines:\n{uni_df.head()}")
 
+    def load(self):
+
+        AWS_BUCKET_NAME = config("AWS_BUCKET_NAME")
+        AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+        AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+        REGION = config("REGION")
+
+        session = boto3.Session(
+            aws_access_key_id=AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+        )
+        s3 = session.resource("s3")
+        # Filename: File to upload
+        # Bucket: Bucket to upload to (the top level directory under AWS S3)
+        # Key - S3 object name. How and where the file is stored in S3.
+        # Key = filename --> file is stored in the S3's root folder with the same name from source.
+        # Key = subfolder/newname.ext --> file is renamed and stored in subfolder (it will be created if it doesn't exist in remote)
+        # Key = os.path.join(os.path.basename(project_folder), self.txt_name)
+        # --> /OT303-71/salvador.txt
+        s3.meta.client.upload_file(
+            Filename=self.txt_file,
+            Bucket=AWS_BUCKET_NAME,
+            Key=os.path.join(os.path.basename(project_folder), self.txt_name),
+        )

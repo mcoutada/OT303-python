@@ -3,7 +3,7 @@ from getpass import getuser
 
 from airflow import DAG
 from airflow.decorators import task
- 
+
 
 def create_dag(p_university_name):
 
@@ -29,8 +29,13 @@ def create_dag(p_university_name):
 
     # Load task
     @task(task_id="t_load")
-    def load(**kwargs):
-        pass
+    def load():
+        from include import utils
+
+        uni_obj = utils.University(
+            p_name=p_university_name,
+            p_dag_file=__file__)
+        uni_obj.load()
 
     default_args = {
         # Set the OS's username as the Dag owner
@@ -57,10 +62,13 @@ def create_dag(p_university_name):
 
 
 for university_name in ["Salvador", "Comahue"]:
-    globals()[university_name] = create_dag(p_university_name=university_name)
-    # print(__name__)
-    # from include import utils
-    # uni_obj = utils.University(p_name=university_name, p_dag_file=__file__)
-    # uni_obj.extract()
-    # uni_obj.transform()
-
+    if __name__ == "__main__":
+        # Test manually
+        from include import utils
+        uni_obj = utils.University(p_name=university_name, p_dag_file=__file__)
+        uni_obj.extract()
+        uni_obj.transform()
+        uni_obj.load()
+    else:
+        # Register dag
+        globals()[university_name] = create_dag(p_university_name=university_name)
