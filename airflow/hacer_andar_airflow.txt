@@ -220,7 +220,7 @@ sudo update
 sudo pipupgrade --verbose --latest --yes
 
 Ignorar estos errores:
-ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed....
 xxxxxxx 4.1.4 requires xxxxxxx<4,>=3.3, but you have xxxxxxx 5.2.2 which is incompatible.
 
 Se queja de que tenemos una versión más actualizada de la necesaria...
