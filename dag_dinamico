@@ -1,0 +1,25 @@
+#COMO: Analista de datos
+#QUIERO: Arreglar un Dag dinamico
+#PARA: Poder ejecutarlos normalmente
+
+#Criterios de aceptación:
+
+#El DAG a arreglar es el que procesa las siguientes universidades:
+
+#Universidad Tecnológica Nacional
+
+#Universidad Nacional De Tres De Febrero- Se debe arreglar el DAG factory
+
+#No se debe tocar la lógica de procesamiento o negocio
+
+
+
+from .dagfactory import DagFactory
+import yaml
+from airflow import DAG
+import datetime 
+
+dag_factory = dagfactory.DagFactory("/vs/nmoya/airflow/dags/config/dag_dinamico_config.yaml")
+
+dag_factory.clean_dags(globals())
+dag_factory.generate_dags(globals())
