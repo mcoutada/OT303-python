@@ -23,5 +23,9 @@ se implementaron los retries para los ingresos a la base de datos de las univers
 
 # sprint 3/5
 // utilizamos un operador para poder subir los txt creados en el sprint anterior a amazon s3
+
 // configuramos un bucket para la carga de los archivos de ambas universidades
+
 // se coniguraron los logs para la creacion del entorno en big data
+
+//implementacion de un dag dinamico
