@@ -281,5 +281,7 @@ export AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
 sudo airflow standalone
 
 Recomiendo usar el standalone en vez del el webserver y el triggerer por separado.
-El standalone además de setearnos el proyecto, nos dispara todos los componentes en el orden correcto (se puede ver en la consola, al iniciarlo, en diferentes colores: webserver, triggerer, etc...), de hecho está hecho para eso, para usarse en fase de desarrollo, en ambientes productivos ya es recomendable usarlos separado.
+El standalone además de setearnos el proyecto, nos dispara todos los componentes en el orden correcto (se puede ver en la consola,
+al iniciarlo, en diferentes colores: webserver, triggerer, etc...), de hecho está hecho para eso, para usarse en fase de desarrollo,
+en ambientes productivos ya es recomendable usarlos separado.
 Si se desea resetear el standalone, en la consola apretar ctrl+c repetidas veces y volver a dispararlo.
