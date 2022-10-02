@@ -629,7 +629,7 @@ univ. nacional del comahue,licenciatura en artes,2020-09-21,jacqueline,snyder,fe
 univ. nacional del comahue,licenciatura en ciencias biológicas,2021-01-27,michael,morales,male,18,2763,flamenco,mcfarlandjohnny@yahoo.com
 univ. nacional del comahue,ingeniería mecánica,2020-12-17,jonathan,gonzalez,male,37,3234,bonpland,stevearmstrong@gmail.com
 univ. nacional del comahue,agronomía,2020-10-31,bridget,james,female,23,4624,abra mayo,harrisonrandall@gmail.com
-univ. nacional del comahue,licenciatura en ciencias antropológicas,2021-01-20,katelyn,wright,female,90,3563,colonia san manuel,glewis@gmail.com
+univ. nacional del comahue,licenciatura en ciencias antropológicas,2021-01-20,katelyn,wright,female,91,3563,colonia san manuel,glewis@gmail.com
 univ. nacional del comahue,licenciatura en terapia ocupacional,2020-09-27,jeffrey,richardson,male,108,5303,anjullon,laura56@hotmail.com
 univ. nacional del comahue,ingeniería mecánica,2020-10-16,trevor,franklin,male,7,7263,el chumbeau,danielhines@yahoo.com
 univ. nacional del comahue,licenciatura en ciencias geológicas,2020-09-16,arthur,arellano,male,16,8200,colonia lia y allende,parrishkelly@yahoo.com
@@ -863,11 +863,11 @@ univ. nacional del comahue,licenciatura en administración,2020-09-23,paul,moore
 univ. nacional del comahue,licenciatura en ciencias geológicas,2020-11-09,christopher,rodriguez,male,16,6352,colonia la india,ljones@yahoo.com
 univ. nacional del comahue,licenciatura en gestión de agroalimentos,2020-10-08,william,thomas,male,87,4159,alto el puesto,orobinson@yahoo.com
 univ. nacional del comahue,licenciatura en ciencias biológicas,2020-09-27,anthony,sutton,male,59,1884,berazategui,jblanchard@yahoo.com
-univ. nacional del comahue,licenciatura en ciencias ambientales,2021-01-28,alicia,haley,female,21,3023,cululu,shafferjoseph@gmail.com
+univ. nacional del comahue,licenciatura en ciencias ambientales,2021-01-28,alicia,haley,female,22,3023,cululu,shafferjoseph@gmail.com
 univ. nacional del comahue,arquitectura,2021-01-08,daniel,pitts,male,52,6317,la florencia,williamsjessica@yahoo.com
 univ. nacional del comahue,licenciatura en artes,2020-11-26,james,suarez,male,13,3057,estancia las gamas,lrogers@hotmail.com
 univ. nacional del comahue,licenciatura en psicología,2020-10-18,karen,king,female,13,6018,colonia los bosques,sarah48@gmail.com
-univ. nacional del comahue,ingeniería en informática,2021-01-17,randy,rojas,male,114,4164,bajastine,cwebb@hotmail.com
+univ. nacional del comahue,ingeniería en informática,2021-01-17,randy,rojas,male,115,4164,bajastine,cwebb@hotmail.com
 univ. nacional del comahue,licenciatura en ciencia política,2020-09-08,megan,mendoza,female,37,3416,arroyo ceibal,michellelynch@hotmail.com
 univ. nacional del comahue,diseño de imagen y sonido,2020-12-14,joe,davis,male,82,5553,empalme frontera,susan59@hotmail.com
 univ. nacional del comahue,licenciatura en artes,2020-09-19,alexandria,lee,female,96,8305,aguada san roque,frankjason@gmail.com
@@ -1035,7 +1035,7 @@ univ. nacional del comahue,técnico para bioterios,2020-10-29,peter,ramos,male,2
 univ. nacional del comahue,actuario,2021-01-13,stephen,moore,male,116,5276,baldes de pacheco,randy37@yahoo.com
 univ. nacional del comahue,contador público,2020-10-01,william,thomas,male,43,3061,antonio pini,housealex@gmail.com
 univ. nacional del comahue,licenciatura en musicoterapia,2020-10-25,megan,wilson,female,115,7513,adolfo gonzales chaves,woodstephanie@yahoo.com
-univ. nacional del comahue,técnico para bioterios,2020-10-13,kimberly,poole,female,107,5601,capitan montoya,uoconnor@hotmail.com
+univ. nacional del comahue,técnico para bioterios,2020-10-13,kimberly,poole,female,108,5601,capitan montoya,uoconnor@hotmail.com
 univ. nacional del comahue,licenciatura en psicología,2020-11-29,denise,guzman,female,96,2713,manuel ocampo,andrewssamuel@yahoo.com
 univ. nacional del comahue,licenciatura en ciencias geológicas,2020-10-29,aaron,sims,male,38,5276,baldes de pacheco,msmith@gmail.com
 univ. nacional del comahue,licenciatura en relaciones del trabajo,2020-11-01,samantha,harper,female,17,1765,isidro casanova,asmith@hotmail.com
@@ -1261,7 +1261,7 @@ univ. nacional del comahue,licenciatura en artes,2020-11-12,joseph,thomas,male,1
 univ. nacional del comahue,diseño industrial,2021-01-12,laura,rivas,female,81,7305,antonio de los heros,bettyrodriguez@hotmail.com
 univ. nacional del comahue,licenciatura en ciencia y tecnología de alimentos,2020-10-28,william,mcbride,male,11,2720,colon,shepardcaleb@yahoo.com
 univ. nacional del comahue,ingeniería en informática,2020-12-22,steven,henderson,male,58,5429,el abanico,tiffanymoody@gmail.com
-univ. nacional del comahue,ingeniería electrónica,2020-11-15,zachary,pacheco,male,37,3466,abalo,zhardy@yahoo.com
+univ. nacional del comahue,ingeniería electrónica,2020-11-15,zachary,pacheco,male,38,3466,abalo,zhardy@yahoo.com
 univ. nacional del comahue,ingeniería electrónica,2020-12-01,thomas,meyers,male,112,5601,capitan montoya,nicholasblankenship@gmail.com
 univ. nacional del comahue,licenciatura en ciencias de la educación,2020-12-20,robert,hahn,male,115,8361,isla grande,edwardrodriguez@hotmail.com
 univ. nacional del comahue,diseño industrial,2021-01-29,melissa,daniels,female,48,4518,aguas calientes,riveraeric@yahoo.com
@@ -1633,7 +1633,7 @@ univ. nacional del comahue,ciencias veterinarias,2020-09-16,sherry,hoffman,femal
 univ. nacional del comahue,medicina,2021-01-24,cynthia,snyder,female,34,2175,barlett,webersabrina@yahoo.com
 univ. nacional del comahue,licenciatura en ciencias biológicas,2020-11-19,sharon,adams,female,61,5773,cañada,amanda92@hotmail.com
 univ. nacional del comahue,licenciatura en artes,2020-09-28,michele,lopez,female,105,8105,aguara,hendrixvincent@gmail.com
-univ. nacional del comahue,licenciatura en relaciones del trabajo,2020-09-26,brandon,hamilton,male,65,5407,dique toma,oholt@gmail.com
+univ. nacional del comahue,licenciatura en relaciones del trabajo,2020-09-26,brandon,hamilton,male,66,5407,dique toma,oholt@gmail.com
 univ. nacional del comahue,licenciatura en terapia ocupacional,2021-01-28,brian,richards,male,6,1735,el durazno,brownelizabeth@hotmail.com
 univ. nacional del comahue,licenciatura en ciencias de la educación,2021-01-17,joanna,montoya,female,29,3712,los frentones,tammyclark@hotmail.com
 univ. nacional del comahue,ingeniería electrónica,2020-09-02,julie,guerrero,female,86,3109,colonia centenario,warnershirley@gmail.com
@@ -1740,7 +1740,7 @@ univ. nacional del comahue,agronomía,2020-12-23,heidi,tyler,female,45,3487,pues
 univ. nacional del comahue,licenciatura en musicoterapia,2020-11-04,ruben,king,male,90,4163,huasa pampa norte,jordanterry@gmail.com
 univ. nacional del comahue,licenciatura en gestión de agroalimentos,2020-11-13,patrick,allen,male,105,5585,el cipres,gscott@yahoo.com
 univ. nacional del comahue,arquitectura,2020-12-19,rachel,farrell,female,51,8315,achico,jonathon82@yahoo.com
-univ. nacional del comahue,medicina,2020-10-28,susan,ayers,female,114,3378,22 de diciembre,zmarks@hotmail.com
+univ. nacional del comahue,medicina,2020-10-28,susan,ayers,female,115,3378,22 de diciembre,zmarks@hotmail.com
 univ. nacional del comahue,técnico para bioterios,2021-01-09,amy,smith,female,33,5750,alto de la leña,robertdaniels@hotmail.com
 univ. nacional del comahue,licenciatura en ciencia y tecnología de alimentos,2020-09-01,crystal,williams,female,73,6017,chancay,leebrad@yahoo.com
 univ. nacional del comahue,farmacia,2020-12-14,catherine,hubbard,female,79,3700,barrio gral jose de san martin,leslie55@hotmail.com
