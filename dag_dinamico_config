@@ -1,0 +1,36 @@
+
+        DEFAULT_CONFIG = {
+    "default_args": {
+        "owner": "airflow",
+        "start_date": datetime.date(2022, 10, 1),
+        "retries": 1,
+        "retry_delay_sec": 200,
+    }
+    "concurrency": 1,
+    "max_active_runs": 1,
+    "concurrency": 1,
+    "dagrun_timeout_sec": 60,
+    "schedule_interval": "0 1 * * *",
+        task=['ETL_university']
+"dependens_out_past" = false
+         "response_check_name": "print_DAG",
+}
+etl_dynamic_dag:
+        default_args:
+               "owner": 'nicomoya321'
+        "description": "dinamic_dag_for_universidades_D."
+        task:
+                extract_task:
+                        operator: airflow.operators.python_operator. PythonOperador
+                        python_callable_name: extract
+                        python_callable_file: /vs/nmoya/airflow/dags/ETL_para_univ_dag.py
+                transform_task:
+                        operator: airflow.operators.python_operator. PythonOperador
+                        python_callable_name: transform
+                        python_callable_file: /vs/nmoya/airflow/dags/ETL_para_univ_dag.py
+                        depends: [ extract_task ]
+                load_task:
+                        operator: airflow.operators.python_operator. PythonOperador
+                        python_callable_name: load
+                        python_callable_file: /vs/nmoya/airflow/dags/ETL_para_univ_dag.py
+                        depends: [ transform_task ]
