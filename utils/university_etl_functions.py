@@ -1,17 +1,26 @@
-import logging
-import logging
 import os
 import pandas as pd
-from datetime import datetime
+# Use ntpath instead os.path.basename(__path__). It works on linux and windows.
+import ntpath
 
-from config import LOG_ETL, ROOT_CSV, ROOT_SQL, ROOT_TXT
-from db_connections import create_engine_connection
-from utils import create_folder, create_txt, get_filename_path
-from transform import normalize_data
+
+from config.conf import LOG_ETL, ROOT_CSV, ROOT_SQL, ROOT_TXT, BUCKET_NAME, CONNECTION
+from db.db_connection import create_engine_connection
+from utils.logger import get_logger
+from utils.utils import create_folder, create_txt, get_filename_path
+from utils.transform import normalize_data
+
+from airflow.hooks.S3_hook import S3Hook
+
 
 # Use log created before.
-log_name = LOG_ETL + datetime.today().strftime('%Y-%m-%d')
-logger = logging.getLogger(log_name)
+# OPT 1
+#from datetime import datetime
+#log_name = LOG_ETL + '-' + datetime.today().strftime('%Y-%m-%d')
+#logger = get_logger(log_name)
+
+# OPT 2
+logger = get_logger(LOG_ETL)
 
 
 def extract_data():
@@ -45,12 +54,16 @@ def extract_data():
 
 def transform_data():
     """Transform data for both universities. TASK OT303-53
+    Returns:
+        routes (array[str]): routes to the .txt generated.
     """
     logger.info('*-----------TRANSFORM TASK-----------*')
     # First create txt folder if doesn't exist.
     create_folder(ROOT_TXT)
     # Get csv files and full path.
     csv_files = get_filename_path(ROOT_CSV)
+    # Define array with routes.
+    routes = []
     for csv_name, csv_path in csv_files.items():
         logger.info('Working on {} file.'.format(csv_name))
         # Read csv file and create dataframe.
@@ -60,19 +73,32 @@ def transform_data():
         dataframe = normalize_data(dataframe)
         # Create the txt file to save the changes.
         logger.info('Creating txt for {} file.'.format(csv_name))
-        create_txt(dataframe, csv_name[:-4])
+        routes.append(create_txt(dataframe, csv_name[:-4]))
     logger.info('Transform data from dataframe/csv.')
+    return routes
 
 
-def load_data():
-    """TODO: Load data for both universities.
+def load_data(routes):
+    """Upload data for both universities to S3. TASK OT303-69 and TASK OT303-70
+    Args:
+        routes ([str]): array with files path to upload.
     """
     logger.info('*-----------LOAD TASK-----------*')
     logger.info('Loading data to S3.')
 
+    # CONNECTION is the name of the connection defined in airflow.
+    hook = S3Hook(CONNECTION)
 
-# Test connection & functions.
-# Connection & Extract_Data working fine.
-# if __name__ == '__main__':
-#    extract_data()
+    for file in routes:
+        # Use the basepath as key.
+        key = ntpath.basename(file)
+        # Upload.
+        try:
+            logger.info(f'Uploading {key} to S3.')
+            hook.load_file(filename=file, key=key,
+                           bucket_name=BUCKET_NAME, replace=False,
+                           acl_policy='public-read')
+        except:
+            logger.info(
+                f'Key {key} already in use. Change the name of the file to force upload.')
 

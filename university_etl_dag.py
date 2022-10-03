@@ -1,42 +1,32 @@
-# Descripción "OT203-43"
 
-# CCOMO: Analista de datos
-# QUIERO: Configurar los log
-# PARA: Mostrarlos en consola
-
-# Criterios de aceptación: 
-
-# Configurar logs para Facultad Latinoamericana De Ciencias Sociales
-
-# Configurar logs para Universidad J. F. Kennedy
-
-# Utilizar la librería de Loggin de python: https://docs.python.org/3/howto/logging.html
-
-# Realizar un log al empezar cada DAG con el nombre del logger
-
-# Formato del log: %Y-%m-%d - nombre_logger - mensaje
-# Aclaración:
-# Deben dejar la configuración lista para que se pueda incluir dentro de las funciones futuras. No es necesario empezar a escribir logs
 
 from datetime import timedelta, datetime
-from statistics import mode
-from common_args import default_args
-from config import LOG_ETL, LOGS_PATH
-from university_etl_functions import extract_data, transform_data, load_data
-from logger import create_logger
+from config.common_args import default_args
+from config.conf import LOG_CFG, LOG_ETL
+from utils.university_etl_functions import extract_data, transform_data, load_data
+from utils.logger import create_logger_from_file, get_logger
 
 
 from airflow import DAG
-from airflow.operators.python import PythonOperator
+from airflow.operators.python_operator import PythonOperator
 #from airflow.sensors.external_task_sensor import ExternalTaskSensor
-log_name = LOG_ETL + datetime.today().strftime('%Y-%m-%d')
-logger = create_logger(name_logger=log_name, log_path=LOGS_PATH)
 
+# NOW WE NEED A LOG WITH A ROTATIVE SCHEDULER, SO WE USE (OPT 2)
+
+# Create and configure logger (OPT 1)
+#from config.cfg import LOGS_PATH
+#from utils.logger import create_logger
+#log_name = LOG_ETL + '-' + datetime.today().strftime('%Y-%m-%d')
+#logger = create_logger(name_logger=log_name, log_path=LOGS_PATH)
+
+# Create and configure logger (OPT 2)
+create_logger_from_file(LOG_CFG)
+logger = get_logger(LOG_ETL)
 
 # Esta task levanta los datos de la fuente (en este caso ejecuta la consulta .sql) y
 # los guarda en un archivo .csv
 def extract():
-    """Extract data from .sql query and save data as .csv for each university. TASK OT303-45
+    """Extract data from .sql query and save data as .csv for each university. 
     """
     # Extract data.
     extract_data()
@@ -45,20 +35,25 @@ def extract():
 
 # Esta task procesa los datos extraidos anteriormente y los transforma para
 # cumplir con los requerimientos utilizando pandas.
-def transform():
+def transform(**kwargs):
     """Transform data from .csv source. 
     """
-    transform_data()
+    # Get task instance.
+    ti = kwargs['ti']
+    routes = transform_data()
+    ti.xcom_push(key='routes', value=routes)
     logger.info('Data transformed successfully.')
 
 
-# Esta task va a ejecutar el proceso de carga de datos a S3, recive un dataframe o un path .csv,
+# Esta task ejecuta el proceso de carga de datos a S3, recive un path
 # y carga los datos a la base.
-def load(**kgwards):
-    """Load data to some database.
+def load(**kwargs):
+    """Upload data to Simple Storage Service (S3). TASK OT303-69/70
     """
-    # TODO: implement transform next sprint.
-    load_data()
+    # Get task instance.
+    ti = kwargs['ti']
+    routes = ti.xcom_pull(task_ids='transform_task', key='routes')
+    load_data(routes)
     logger.info('Data loaded to S3 succesfully.')
     # Clear Handlers.
     logger.handlers.clear()
@@ -70,7 +65,7 @@ with DAG(
         default_args=default_args,
         description='ETL DAG for 2 universities.',
         schedule_interval=timedelta(hours=1),
-        start_date=datetime(2022, 9, 18),
+        start_date=datetime(2022, 9, 28),
         tags=['university_etl']
 ) as dag:
 
@@ -88,24 +83,21 @@ with DAG(
     # Could use xcom to share data between tasks. (Next Sprint)
     # Use PythonOperator to execute each task. Like:
     extract_task = PythonOperator(
-        task_id='extract',  # Id for the task
+        task_id='extract_task',  # Id for the task
         python_callable=extract,  # Execution task (extract function)
         provide_context=True  # For share data
     )
 
     transform_task = PythonOperator(
-        task_id='transform',
+        task_id='transform_task',
         python_callable=transform,
         provide_context=True
     )
 
     load_task = PythonOperator(
-        task_id='load',
+        task_id='load_task',
         python_callable=load,
         provide_context=True
     )
-
-    # Podria agregarse al principio el dag del retry connection (el codigo del retry aca)
-    #wait_for_connection >> extract_task >> transform_task >> load_task
 
     extract_task >> transform_task >> load_task
