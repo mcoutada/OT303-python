@@ -10,8 +10,8 @@ from logger import set_logger
 from DB_connection import get_engine
 
 # Logs configuration for the dag
-log_name= LOG_NAME + datetime.today().strftime('%Y-%m-%d')
-logger=set_logger(name_logger=log_name)
+log_name = LOG_NAME + datetime.today().strftime('%Y-%m-%d')
+logger = set_logger(name_logger=log_name)
 logger.info("DAG started")
 
 university = "u_de_palermo"
@@ -33,15 +33,17 @@ with DAG(
     
 ) as dag:
 
-    u_palermo_extract = PythonOperator(task_id="u_palermo_extract",  # Id for the task
+    u_palermo_extract = PythonOperator(
+                        task_id="u_palermo_extract",  # Id for the task
                         python_callable=extract_data,  # Execution task (extract function)
                         provide_context=True  # For share data)
     )                    
 
-    u_palermo_transform = PythonOperator(task_id="u_palermo_transform",
-                          python_callable=transform,  # Execution task (transform function)
-                          provide_context=True  # For share data
-                          )
+    u_palermo_transform = PythonOperator(
+                        task_id="u_palermo_transform",
+                        python_callable=transform,  # Execution task (transform function)
+                        provide_context=True  # For share data
+                        )
 
     u_palermo_load = DummyOperator(task_id="u_palermo_load")
 
