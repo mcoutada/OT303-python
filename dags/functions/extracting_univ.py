@@ -1,13 +1,14 @@
 import psycopg2
 import pandas as pd
+from decouple import config
 
 def extracting_univ(path,name):
     conn = psycopg2.connect(
-        user = 'username',
-        password = 'password',
-        host = 'host.com',
-        port = '0000',
-        database = 'training'
+        user = config('DB_DATA_USERNAME'),
+        password = config('DB_DATA_PASS'),
+        host = config('DB_DATA_HOST'),
+        port = config('DB_DATA_PORT'),
+        database = config('DB_DATA_DATABASE')
     )
 
     sql_script=open(path,"r")

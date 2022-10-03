@@ -14,11 +14,11 @@ import logging
 from functions.logger_universidades import logger_universidades
 from functions.norm_universidades import norm_universidades
 from functions.extracting_univ import extracting_univ
+from functions.uploader_univ import uploader_txt_s3
 
 from sqlalchemy import exc, create_engine, inspect
 
 from decouple import config
-
 
 # default args for my config
 default_args = {
@@ -40,7 +40,6 @@ with DAG(
 
     logger=PythonOperator(task_id="logger",python_callable=logger_universidades,dag=dag)
 
-    
 
     logging.info('Trying to connect to the database...')
     @task(task_id='check_db_conn')
@@ -51,7 +50,7 @@ with DAG(
         retry_count = 0
         while retry_flag and retry_count<5:
             try:
-                engine = create_engine(config('DB_DATA_CONNECT'))
+                engine = create_engine(config('DB_DATA_CONNECT_POSTGRES'))
                 engine.connect()
                 insp = inspect(engine)
                 if insp.has_table("universidad_la_pampa") and insp.has_table("universidad_interamericana"):
@@ -62,16 +61,15 @@ with DAG(
             except exc.SQLAlchemyError:
                 retry_count=retry_count+1
                 time.sleep(60)
-
+    check_db_connection() >> logger
     #run_this = check_db_connection()
-    logger
 
     # db connection, querying data and downloading into csv (universidad de la pampa)
     def extract_la_pampa():
         logging.info('Downloading data...')
         extracting_univ(
-        "path_univ_de_la_pampa.SQL",
-        "la_pampa")
+        config('path_file_la_pampa'),
+        "la_pampa_raw")
         logging.info('Done')
     dag_extract_la_pampa=PythonOperator(task_id="dag_extract_la_pampa",
     python_callable=extract_la_pampa,
@@ -79,21 +77,33 @@ with DAG(
     
 
     # Using raw data from csv file la_pampa_raw.csv
-    # Then returning csv  
+    # Then returning .txt
     def transform_la_pampa():
         logging.info('Cleaning data...')
         norm_universidades(
-        "PATH_la_pampa_RAW.csv",
+        "PATH_la_pampa_raw.csv",
         "la_pampa")
         logging.info('Done')
     dag_transform_la_pampa=PythonOperator(task_id="dag_transform_la_pampa",
     python_callable=transform_la_pampa,
     dag=dag)
-    logger >> dag_extract_la_pampa >> dag_transform_la_pampa
 
 
-    #load_la_pampa= DummyOperator(task_id='load_la_pampa')
-    # Upload data to S3
+    ## Uploading .txt to S3 using BOTO3
+    def upload_la_pampa():
+        logging.info('Uploading_data...')
+        uploader_txt_s3(config('AWS_ACCESS_KEY'),
+        config('AWS_SECRET_ACCESS'),
+        config('s3_output_key'),
+        config('bucket_name'),
+        config('path_file_la_pampa'))
+    logging.info('Done')
+    dag_upload_la_pampa=PythonOperator(task_id='dag_upload_la_pampa',
+    python_callable=upload_la_pampa,
+    dag=dag)
+
+    logger >> dag_extract_la_pampa >> dag_transform_la_pampa >> dag_upload_la_pampa
+
 
 
 
@@ -101,7 +111,7 @@ with DAG(
     def extract_abierta_interamericana():
         logging.info('Downloading data...')
         extracting_univ(
-        "path_univ_interamericana.SQL",
+        config('path_file_la_interamericana'),
         "abierta_interamericana_raw")
         logging.info('Done')
 
@@ -111,18 +121,27 @@ with DAG(
     
 
     # Using raw data from csv file abierta_interamericana_raw.csv
-    # Then returning csv  
+    # Then returning .txt
     def transform_abierta_interamericana():
         logging.info('Cleaning data...')
         norm_universidades(
-        "PATH_interamericana_RAW.csv",
+        "PATH_abierta_interamericana_raw.csv",
         "abierta_interamericana")
         logging.info('Done')
     dag_transform_abierta_interamericana=PythonOperator(task_id="dag_transform_abierta_interamericana",
     python_callable=transform_abierta_interamericana,
     dag=dag)
-    logger >> dag_extract_abierta_interamericana >> dag_transform_abierta_interamericana
 
-    #load_abierta_interamericana= DummyOperator(task_id='load_abierta_interamericana')
-    # Upload data to S3
-
+    # Uploading .txt to S3 using BOTO3
+    def upload_interamericana():
+        logging.info('Uploading_data...')
+        uploader_txt_s3(config('AWS_ACCESS_KEY'),
+        config('AWS_SECRET_ACCESS'),
+        config('s3_output_key'),
+        config('bucket_name'),
+        config('path_file_interamericana'))
+    logging.info('Done')
+    dag_upload_interamericana=PythonOperator(task_id='dag_upload_interamericana',
+    python_callable=upload_interamericana,
+    dag=dag)
+    logger >> dag_extract_abierta_interamericana >> dag_transform_abierta_interamericana >> dag_upload_interamericana  

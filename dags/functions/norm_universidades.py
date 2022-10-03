@@ -22,4 +22,4 @@ def norm_universidades(path,name):
     univ_norm["postal_code"]=univ_norm["postal_code"].astype("str")
     univ_norm["location"]=univ_norm["location"].astype("str").str.lower().replace(["_","-","\xa0\xa0"],"")
     univ_norm["email"]=univ_norm["email"].astype("str").str.lower().replace(["\xa0"],"")
-    univ_norm.to_csv(name+".csv",header=True,index=False)
+    univ_norm.to_csv(name+".txt",header=True,index=False)
