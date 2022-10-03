@@ -1,0 +1,290 @@
+BY MARIANO COUTADA
+
+
+##########################################################
+# Actualizar WSL en Windows
+##########################################################
+
+Asegurarse de tener habilitadas las opciones:
+Virtual Machine Platform
+Windows Subsystem for Linux.
+
+Panel de control >> Programas >>  Activar o desactivar las características de Windows.
+Marcar las casillas Plataforma de máquina virtual y Subsistema de Windows para Linux 
+Aceptar
+
+En Windows, en una ventana de cmd, asegurarse que la distro esté usando WSL 2.
+En una ventana de cmd:
+wsl --list --verbose
+
+Debemos ver esto:
+  NAME                   STATE           VERSION
+  Ubuntu                 Running         2
+
+El STATE puede ser Stopped si no están usándola.
+Si dice version 1, actualizar WSL:
+abrir una ventana de cmd como administrador y correr
+wsl --update
+luego forzar la distro para usar la v2
+wsl --set-default-version 2
+wsl --set-version Ubuntu 2
+
+Tiene que decir:
+Conversion complete.
+
+Correr:
+wsl --list --verbose
+Y verificar version 2
+
+Si tienen este fallo:
+    WSL2: Virtual hard disk files must be uncompressed and unencrypted and must not be sparse
+
+    Ir al directorio de Ubuntu en la carpeta profile:
+        Abrir la carpeta: %USERPROFILE%\AppData\Local\Packages
+        Buscar una carpeta con nombre similar a:
+            CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc
+        Yo la tenía acá:
+            C:\Users\mcoutada\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc
+    Abrirla, adentro, clic derecho en:
+    "LocalState" >> Properties >> Advanced >> destildar "Compress contents"
+    Y destildar también "Encrypt contents" si está tildado.
+    Aceptar, cuando pregunta si desea aplicar los cambios a las subarpetas o solo a esa, poner solo a esa.
+    Ahora deberían funcionar:
+    wsl --set-default-version 2
+    wsl --set-version Ubuntu 2
+
+    Si no funciona, abrir un cmd como administrador y correr 
+    fsutil behavior set disableencryption 1
+    fsutil behavior set disablecompression 1
+    reiniciar la Pc, y volver a probar.
+
+    Fuente: https://github.com/microsoft/WSL/issues/4103
+
+Pueden ocurrir otros fallos, googlear y solucionar hasta lograr setear WSL2 en Ubuntu.
+
+##########################################################
+# Actualizar Ubuntu
+##########################################################
+
+Opcional: Resetear Ubuntu
+Inicio >> Clic derecho en el acceso directo >> More >> App settings >> Reset
+
+En una consola de Ubuntu:
+
+# Agregar repository universe
+sudo apt-add-repository universe -y
+
+# Actualizar todo:
+# Creamos un script que actualice todo:
+sudo touch /usr/local/bin/update
+sudo chmod 0755 /usr/local/bin/update
+sudo nano /usr/local/bin/update
+
+Copiamos lo siguiente:
+
+#######################################################
+#!/bin/bash
+
+if [ "$( /usr/bin/id -u )" -ne "0" ] ; then
+ echo 'Please run using sudo.'
+ exit 1
+fi
+set +e
+/bin/rm -f /var/cache/app-info/xmls/fwupd.xml
+/usr/bin/snap refresh
+/usr/bin/apt update
+/usr/bin/appstreamcli refresh --force
+/usr/bin/apt-file update
+/usr/bin/apt full-upgrade -y
+/usr/bin/apt autoremove --purge -y
+/usr/bin/apt clean
+/usr/bin/fwupdmgr refresh
+/usr/bin/fwupdmgr update
+# /usr/bin/updatedb # esta línea no es conveniente en WSL
+/sbin/fstrim --all
+/usr/lib/update-notifier/update-motd-reboot-required
+#######################################################
+
+Y pegamos (con clic derecho) en la terminal.
+Apretamos Ctrl+O para salvar el archivo. Letra O, no cero.
+Apretamos Enter para aceptar el nombre del archivo.
+Apretamos Ctrl+X salir de nano.
+
+(si no te gusta nano podes usar el vscode cambiando "nano" por "code")
+sudo code /usr/local/bin/update
+
+# Ahora corremos el script:
+sudo update
+
+Es probable que al terminar nos diga:
+*** System restart required ***
+
+Para restart, en una ventana de cmd de Windows:
+wsl --shutdown
+
+# Nuevamente, abrimos una consola en Ubuntu. Verificamos que no haya más nada
+sudo update
+
+# Si lo de arriba resulto complicado, correr al menos este comando, que no es tan completo, pero servirá
+sudo -- sh -c 'apt-get update; apt-get upgrade -y; apt-get full-upgrade -y; apt-get autoremove -y; apt-get autoclean -y'
+
+fuente:
+https://askubuntu.com/questions/1077086/a-new-command-combining-apt-update-apt-upgrade-in-18-04-or-some-later-beta
+
+##########################################################
+# Actualizar librerías Python
+##########################################################
+# Instalamos/actualizamos las librerías que usaremos
+sudo apt-get -y install python3-pip
+
+# Nos aseguramos de tener la última versión de pip
+sudo -H pip install --upgrade pip
+sudo -H pip3 install --upgrade pip # corriendo este por último, también defaulteamos a pip3 en caso de llamar pip
+
+sudo apt-get -y install python3-venv
+sudo pip3 uninstall decouple # un clásico error es instalar esta en vez de la de abajo
+sudo pip3 install python-decouple --upgrade
+sudo pip3 install SQLAlchemy --upgrade
+sudo pip3 install psycopg2-binary --upgrade
+
+
+
+# Actualizar todas las librerías de Python
+sudo pip3 install pipupgrade # usaremos pipugrade para actualizar todo
+sudo pipupgrade --verbose --latest --yes
+
+Acá pueden fallar varias librerías, lo bueno que pipupgrade nos da una linda lista coloreada de las actualizaciones que hace.
+Si ocurrieron muchas instalaciones, volvé a correrlo para que la que falla quede primera en la lista, y el error a mano.
+
+El error más común. Si pipugrade falla así:
+ERROR: Cannot uninstall 'xxxxxxxx'. It is a distutils installed project and thus we cannot ....
+
+Instalar el paquete problematico así:
+sudo pip3 install xxxxxxxx --ignore-installed 
+
+Y volver a correr pipupgrade hasta que no quede nada.
+
+Estas son las que tuve que hacer yo:
+sudo pip3 install blinker --ignore-installed 
+sudo pip3 install pyasn1-modules --ignore-installed 
+
+Si es otro fallo, generalmente, son por falta de librerías en Ubuntu, y hay que googlear...
+Te dejo las que tuve que hacer yo.
+
+sudo pip3 install pyOpenSSL --upgrade # solucionó un montón de errores para poder actualizar varios paquetes
+sudo pip3 install cryptography --upgrade # solucionó un montón de errores para poder actualizar varios paquetes
+sudo apt install -y build-essential libdbus-glib-1-dev libgirepository1.0-dev meson patchelf # solucionó poder actualizar dbus-python
+sudo apt-get install -y libcairo2-dev # solucionó poder actualizar PyGObject
+
+Correr pipupgrade nuevamente y verificar que no actualice nada.
+
+Se puede probar este comando como alternativa a pipupgrade
+sudo pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U 
+
+Este error
+ERROR: You must give at least one requirement to install (see "pip help install")
+Significa "pip3 list --outdated" no está trayendo nada, por tanto esta todo actualizado.
+
+##########################################################
+# Actualizar Airflow
+##########################################################
+Estos pasos sirven para instalar y/o actualizar.
+
+Si vas a instalar de cero, considera hacerlo en un virtual environment, airflow va a reinstalar versiones viejas en varias librerías.
+La versión actual hoy es la 2.4.1, fijarse acá la última y cambiar si hace falta
+https://pypi.org/project/apache-airflow/
+
+Si en $AIRFLOW_HOME tenemos un airflow.cfg personalizado, renombrarlo a airflow_viejo.cfg para que se genere uno nuevo.
+
+cd /home/mcoutada
+mkdir -p airflow # -p evita que falle si existe 
+export AIRFLOW_HOME=/home/mcoutada/airflow
+AIRFLOW_VERSION=2.4.1
+PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
+CONSTRAINT_URL=https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt
+sudo pip3 install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}" --upgrade
+sudo pip3 install --ignore-installed PyYAML # Salto un error de que hubo una desinstalacion incompleta, asi que la instale x las dudas
+sudo pip3 install pyOpenSSL --upgrade # aparantemente airflow las desinstaló y causaban error al disparar el standalone, tuve que reinstalarla
+sudo pip3 install cryptography --upgrade # aparantemente airflow las desinstaló y causaban error al disparar el standalone, tuve que reinstalarla
+sudo apt install -y python3-virtualenv # solucionó unos errores al disparar airflow luego de actualizado
+sudo pip3 install apache-airflow[cncf.kubernetes] --upgrade # esto se necesita para actualizar la db
+sudo airflow db upgrade
+sudo airflow standalone
+
+comparar el nuevo airflow.cfg con el airflow_viejo.cfg y pasar cualquier setting que nos interese conservar
+eliminar airflow_viejo.cfg
+
+ctrl+c repetidas veces para matar el standalone
+
+Por última vez, verificamos que no haya nada que actualizar
+sudo update
+
+# Recomiendan no reactualizar las librerías que airflow desactualizó, aunque yo lo hice y no tuve problema
+sudo pipupgrade --verbose --latest --yes
+
+Ignorar estos errores:
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed....
+xxxxxxx 4.1.4 requires xxxxxxx<4,>=3.3, but you have xxxxxxx 5.2.2 which is incompatible.
+
+Se queja de que tenemos una versión más actualizada de la necesaria...
+
+##########################################################
+# Setear Airflow
+##########################################################
+
+Recomiendo clonar el proyecto en Ubuntu:
+cd /home/mcoutada
+mkdir alkemy
+cd alkemy
+git clone https://github.com/alkemyTech/OT303-python
+cd OT303-python
+git config --global user.name "Mariano Ismael Coutada"
+git config --global user.email mcoutada@gmail.com
+# nos cambiamos a nuestra rama (ya creada en remoto):
+git switch marianocoutada
+# Le decimos a GIT que queremos que guarde nuestras credenciales para que no nos
+# pregunte en cada push (entendiendo que quedan guardadas en ~/.git-credentials
+# y que quedan accesibles a cualquiera que pueda abrir el archivo,
+# representando un problema de seguridad...)
+git config credential.helper store
+git commit --allow-empty -m "Test empty commit"
+git push
+
+user: mcoutada@gmail.com
+pass: Personal Access Token de Github
+
+en airflow.cfg, setear el directorio de los dags y deshabilitar ejemplos:
+
+export AIRFLOW_HOME=/home/mcoutada/airflow
+code $AIRFLOW_HOME/airflow.cfg
+
+Buscar y cambiar:
+dags_folder = /home/mcoutada/alkemy/OT303-python/SPRINT03/OT303-71
+load_examples = False
+
+guardar y cerrar el vscode
+
+##########################################################
+# Abrir Airflow
+##########################################################
+
+cd /home/mcoutada/alkemy/OT303-python
+
+# Abrir el projecto en el vscode
+code .
+
+# Abrir el proyecto desde el explorador de carpetas
+explorer.exe .
+
+# Abrir Airflow
+export AIRFLOW_HOME=/home/mcoutada/airflow
+# para verificar nuestra carpeta de dags, y ver nuestro airflow.cfg en http://localhost:8080/configuration
+export AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
+# Sin sudo me traia unos errores en Ubuntu 20.04 LTS con Python 3.8.2, probar con y sin
+sudo airflow standalone
+
+Recomiendo usar el standalone en vez del el webserver y el triggerer por separado.
+El standalone además de setearnos el proyecto, nos dispara todos los componentes en el orden correcto (se puede ver en la consola,
+al iniciarlo, en diferentes colores: webserver, triggerer, etc...), de hecho está hecho para eso, para usarse en fase de desarrollo,
+en ambientes productivos ya es recomendable usarlos separado.
+Si se desea resetear el standalone, en la consola apretar ctrl+c repetidas veces y volver a dispararlo.
