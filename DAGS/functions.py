@@ -3,10 +3,11 @@ from importlib.metadata import files
 import os
 import pandas as pd
 from sqlalchemy import create_engine
-from config import LOG_NAME
+from config import LOG_NAME, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_BUCKET_NAME
 from logger import set_logger
 from DB_connection import get_engine, db_connection
 import logging
+import boto3
 
 # Logs configuration
 log_name = LOG_NAME + datetime.today().strftime("%Y-%m-%d")
@@ -19,7 +20,7 @@ def extract(university):
     db_connection()
     logger.info("Getting data.")
 
-    query = open(f"SQL/{university}.sql", "r").read()
+    query = open(f"{university}.sql", "r").read()
     df = pd.read_sql(query, engine)
 
     if not os.path.exists("files"):
@@ -79,12 +80,19 @@ def normalization(university):
     return df.to_csv(f"files/{university}.txt", index=False)
 
 
-def load():
+def load(university):
     """
     Load data to S3.
     """
-
+    session = boto3.Session(
+            aws_access_key_id=AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+        )
+    s3 = session.resource("s3")
+    s3.meta.client.upload_file(Filename=f"files/{university}.txt", Bucket=AWS_BUCKET_NAME, Key=f"{university}.txt")
+    logger.info(f"File {university}.txt uploaded to S3.")
 
 if __name__ == "__main__":
-    extract()
-    normalization()
+    extract("u_de_palermo")
+    normalization("u_de_palermo")
+    load("u_de_palermo")
