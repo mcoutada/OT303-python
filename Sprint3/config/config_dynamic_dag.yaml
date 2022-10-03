@@ -1,0 +1,32 @@
+default: 
+  default_args:
+  owner: 'airflow'
+  start_date: 2022-10-03
+  schedule_interval: '0 1 * * *'
+  description: 'etl universidades'
+  tags: ['universidad_etl']
+
+etl_dynamic_dag:
+  default_args:
+    owner: 'airflow'
+    description: 'DAG dinamico para universidades F'
+  task:
+    extract_task:
+      operator: airflow.operator.python.PythonOperator
+      python_callable: extract
+      python_callable_file: /home/richarcos/airflow/dags/etl_universities.py
+    transform_task:
+      operator: airflow.operator.python.PythonOperator
+      python_callable: transform
+      python_callable_file: /home/richarcos/airflow/dags/etl_universities.py
+      dependencies: [extract_task]
+    load_moron:
+      operator: airflow.operator.python.PythonOperator
+      python_callable: load_moron
+      python_callable_file: /home/richarcos/airflow/dags/etl_universities.py
+      dependencies: [transform_task]
+    load_rio:
+      operator: airflow.operator.python.PythonOperator
+      python_callable: load_rio
+      python_callable_file: /home/richarcos/airflow/dags/etl_universities.py
+      depencies: [load_moron]
