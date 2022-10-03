@@ -28,3 +28,15 @@ Task OT303-55: Implementar el Python Operator para el grupo de universidades C
 Task OT303-63: Crear una función Python con Pandas para cada universidad para el grupo de universidades C
 * En el archivo functions.py se encuentra la funcion normalization() 
 * En la carpeta files se encuentran los archivos .txt requeridos por la task
+
+# Sprint 3:
+
+Task OT303-73: Utilizar un operador creado por la comunidad para subir a S3 el archivo de Universidad Nacional De Jujuy.
+
+Task OT303-74: Utilizar un operador creado por la comunidad para subir a S3 el archivo de Universidad De Palermo.
+* En el archivo functions.py se encuentra la funcion load() 
+* En la carpeta dags se encuentran los operators para cada universidad con la funcion transform y la ejecucion de la normalizacion de los datos del siguiente task.
+
+ 
+
+
