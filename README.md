@@ -34,8 +34,8 @@ Task OT303-63: Crear una función Python con Pandas para cada universidad para e
 Task OT303-73: Utilizar un operador creado por la comunidad para subir a S3 el archivo de Universidad Nacional De Jujuy.
 
 Task OT303-74: Utilizar un operador creado por la comunidad para subir a S3 el archivo de Universidad De Palermo.
-* En el archivo functions.py se encuentra la funcion load() 
-* En la carpeta dags se encuentran los operators para cada universidad con la funcion transform y la ejecucion de la normalizacion de los datos del siguiente task.
+* En el archivo functions.py se encuentra la funcion load() utilizando la libreria boto3 
+* En la carpeta DAGS se encuentran en cada archivo de universidad el operator con la funcion load y la ejecucion de la normalizacion de los datos del siguiente task.
 
  
 
