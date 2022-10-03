@@ -1,30 +1,17 @@
-# Descripción "OT203-43"
-
-# COMO: Analista de datos
-# QUIERO: Configurar los log
-# PARA: Mostrarlos en consola
-
-# Criterios de aceptación: 
-
-# Configurar logs para Facultad Latinoamericana De Ciencias Sociales
-
-# Configurar logs para Universidad J. F. Kennedy
-
-# Utilizar la librería de Loggin de python: https://docs.python.org/3/howto/logging.html
-
-# Realizar un log al empezar cada DAG con el nombre del logger
-
-# Formato del log: %Y-%m-%d - nombre_logger - mensaje
-# Aclaración:
-# Deben dejar la configuración lista para que se pueda incluir dentro de las funciones futuras. No es necesario empezar a escribir logs
-
-from config import LOGS_PATH
+from utils.utils import create_folder
+from config.conf import LOGS_PATH
 import logging
+import logging.config
+import os
+from config.Handler import FileHandler
 
-from utils import create_folder
 
-
-
+# Logging level:
+# INFO: Confirmation that things are working as expected.
+# DEBUG: Detailed information, typically of interest only when diagnosing problems.
+# WARNING: An indication that something unexpected happened, or indicative of some problem in the near future (e.g. ‘disk space low’). The software is still working as expected.
+# ERROR: Due to a more serious problem, the software has not been able to perform some function.
+# CRITICAL: A serious error, indicating that the program itself may be unable to continue running.
 
 def create_logger(name_logger, log_path):
     """Create log file.
@@ -42,8 +29,8 @@ def create_logger(name_logger, log_path):
     logger.setLevel(logging.INFO)
     # Create formatter.
     formatter = logging.Formatter(
-        # %Y-%m-%d - nombre_logger - mensaje
-        fmt='%(asctime)s - %(name)s - %(message)s',
+        # %Y-%m-%d - level_name - nombre_logger - mensaje
+        fmt='%(asctime)s_%(levelname)s_%(name)s_%(message)s',
         datefmt='%Y-%m-%d')
 
     # Stream Handler (for console)
@@ -57,3 +44,28 @@ def create_logger(name_logger, log_path):
         mode='a')  # 'a' continue, 'w' truncate.
     fh.setFormatter(formatter)
     logger.addHandler(fh)
+
+    return logger
+
+
+def create_logger_from_file(config: str) -> None:
+    """Create logger using config file. TASK ID OT303-99.
+    Args:
+        config (str): logger config file name.
+    """
+    logging.handlers.MyFileHandler = MyFileHandler
+
+    log_file_path = os.path.join(
+        os.path.dirname(os.path.dirname(__file__)), 'config', config)
+
+    logging.config.fileConfig(log_file_path)
+
+
+def get_logger(name: str) -> logging.Logger:
+    """Get logger created before. 
+    Args:
+        name (str): logger name.
+    Returns:
+        logging.Logger: return a logger with the specific name.
+    """
+    return logging.getLogger(name)
