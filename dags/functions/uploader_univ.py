@@ -1,7 +1,7 @@
 import boto3
  
  
-def uploader_txt_s3(AWS_ACCESS_KEY, AWS_SECRET_ACCESS,s3_output_key,bucket_name, input_file_path):
+def uploader_txt_s3(AWS_ACCESS_KEY, AWS_SECRET_ACCESS, s3_output_key, bucket_name, input_file_path):
     session = boto3.Session(
         aws_access_key_id=AWS_ACCESS_KEY,
         aws_secret_access_key=AWS_SECRET_ACCESS)
