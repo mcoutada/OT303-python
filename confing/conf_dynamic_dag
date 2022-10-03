@@ -1,0 +1,32 @@
+default:
+  default_args:
+    owner: "airflow"
+    depends_on_past: False
+    start_date: 2020-10-03
+    retries: 1
+    retry_delay_sec: 300
+  schedule_interval: "0 1 * * *" # (min hour dayMonth Month dayWeek)
+  concurrency: 1
+  max_active_runs: 1
+  dagrun_timeout_sec: 60
+  tags: ['university_etl']
+
+etl_dynamic_dag:
+  default_args:
+    owner: 'lgramu97'
+    description: "ETL dynamic dag for Universities group G."
+  tasks:
+    extract_task:
+      operator: airflow.operators.python_operator.PythonOperator
+      python_callable_name: extract
+      python_callable_file: /root/airflow/dags/university_etl_dag.py
+    transform_task:
+      operator: airflow.operators.python_operator.PythonOperator
+      python_callable_name: transform
+      python_callable_file: /root/airflow/dags/university_etl_dag.py
+      dependencies: [extract_task]
+    load_task:
+      operator: airflow.operators.python_operator.PythonOperator
+      python_callable_name: load
+      python_callable_file: /root/airflow/dags/university_etl_dag.py
+      dependencies: [transform_task]
