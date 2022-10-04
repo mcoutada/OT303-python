@@ -35,7 +35,7 @@ logger=get_logger(LOG_DB)
 #parametros que ya hemos usado anteriormente
 with dag(
 
-    "OT303_19",
+    "OT303_40",
     default_args=default_args,
     description="DAG universidades D",
     start_date=datetime(2022,9,18).replace(hour=00),
