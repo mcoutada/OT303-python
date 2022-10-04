@@ -10,8 +10,7 @@ import logging
 import boto3
 
 # Logs configuration
-log_name = LOG_NAME + datetime.today().strftime("%Y-%m-%d")
-logger = set_logger(name_logger=log_name)
+logger = set_logger("ETL")
 
 
 def extract(university):
@@ -20,7 +19,7 @@ def extract(university):
     db_connection()
     logger.info("Getting data.")
 
-    query = open(f"{university}.sql", "r").read()
+    query = open(f"SQL/{university}.sql", "r").read()
     df = pd.read_sql(query, engine)
 
     if not os.path.exists("files"):

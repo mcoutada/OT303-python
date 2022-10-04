@@ -6,8 +6,8 @@ from logger import set_logger
 from decouple import config
 
 # Logs configuration 
-log_name= LOG_NAME + datetime.today().strftime('%Y-%m-%d')
-logger=set_logger(name_logger=log_name)
+
+logger = set_logger("ETL")
 
 
 def get_engine():
