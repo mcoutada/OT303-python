@@ -26,6 +26,8 @@ se implementaron los retries para los ingresos a la base de datos de las univers
 
 // configuramos un bucket para la carga de los archivos de ambas universidades
 
-// se coniguraron los logs para la creacion del entorno en big data
+// se configuraron los logs para la creacion del entorno en big data
 
 //implementacion de un dag dinamico
+
+//utilizacion de mapReduce con python para ambas universidades
