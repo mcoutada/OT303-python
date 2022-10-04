@@ -3,7 +3,7 @@ from datetime import timedelta, datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
-from yaml import load
+from config.config import CONNECTION, BUCKET_NAME
 
 default_args = {
     'owner' : 'airflow',
@@ -16,7 +16,8 @@ default_args = {
 }
 
 def load_to_s3(filename: str, key: str, bucket_name: str) -> None:
-    hook = S3Hook('s3_conn')
+    hook = S3Hook(CONNECTION)
+
     hook.load_file(filename = filename,
                     key = key,
                     bucket_name = bucket_name,
@@ -37,7 +38,7 @@ with DAG(
         op_kwargs={
             'filename': 'Sprint3/files/universidad_rio.txt',
             'key': 'load_universidad_rio_txt',
-            'bucket_name': 'cohorte-septiembre-5efe33c6'
+            'bucket_name': BUCKET_NAME
         }
     )
 
