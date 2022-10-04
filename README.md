@@ -37,6 +37,12 @@ Task OT303-74: Utilizar un operador creado por la comunidad para subir a S3 el a
 * En el archivo functions.py se encuentra la funcion load() utilizando la libreria boto3 
 * En la carpeta DAGS se encuentran en cada archivo de universidad el operator con la funcion load y la ejecucion de la normalizacion de los datos del siguiente task.
 
+
+Task OT303-87: Arreglar un Dag dinamico para el grupo de universidades C.
+
+
+
+Task OT303-95:Configurar los log para el grupo de datos C
  
 
 
