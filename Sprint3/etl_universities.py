@@ -1,9 +1,11 @@
 from datetime import timedelta, datetime
 from utils.functions import extract_data, transform_data, load_to_s3
-from utils.logger import log
+from utils.logger import get_logger
 
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+
+log = get_logger
 
 default_args = {
     'owner' : 'airflow',

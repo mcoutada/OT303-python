@@ -1,11 +1,14 @@
+from webbrowser import get
 from sqlalchemy import create_engine, exc, inspect
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 
-from config.cfg import DB_USER, PASSWORD, HOST, PORT, DB_NAME, CONNECTION, BUCKET_NAME
-from utils.logger import log
+from config.config import DB_USER, PASSWORD, HOST, PORT, DB_NAME, CONNECTION, BUCKET_NAME
+from utils.logger import get_logger
 
 import time
 import pandas as pd
+
+log = get_logger()
 
 # Funciones de conexion a la BD
 def get_engine():
