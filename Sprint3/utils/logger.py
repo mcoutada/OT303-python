@@ -1,6 +1,9 @@
-import logging as log
+import logging
+import logging.config
 
-# Haciendo las configuraciones del log para usarlo en el DAG.
-log.basicConfig(level = log.INFO, 
-                format = '%(asctime)s: %(levelname)s [%(filename)s: %(lineno)s] %(message)s',
-                datefmt = '%Y-%m-%d %I:%M:%S %p')
+logging.config.fileConfig('../config/logger.cfg')
+
+# Creando log desde un archivo cfg
+def get_logger():
+    return logging.getLogger("root")
+
