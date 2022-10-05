@@ -61,7 +61,7 @@ with DAG(
             except exc.SQLAlchemyError:
                 retry_count=retry_count+1
                 time.sleep(60)
-    check_db_connection() >> logger
+    logger >> check_db_connection()
     #run_this = check_db_connection()
 
     # db connection, querying data and downloading into csv (universidad de la pampa)
@@ -101,6 +101,7 @@ with DAG(
     dag_upload_la_pampa=PythonOperator(task_id='dag_upload_la_pampa',
     python_callable=upload_la_pampa,
     dag=dag)
+
 
     logger >> dag_extract_la_pampa >> dag_transform_la_pampa >> dag_upload_la_pampa
 
@@ -144,4 +145,6 @@ with DAG(
     dag_upload_interamericana=PythonOperator(task_id='dag_upload_interamericana',
     python_callable=upload_interamericana,
     dag=dag)
+
+
     logger >> dag_extract_abierta_interamericana >> dag_transform_abierta_interamericana >> dag_upload_interamericana  
