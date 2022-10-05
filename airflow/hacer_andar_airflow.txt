@@ -116,9 +116,10 @@ sudo update
 Es probable que al terminar nos diga:
 *** System restart required ***
 
-Para restart, en una ventana de cmd de Windows:
+Para restart, en una ventana de cmd de Windows con permisos de Administrador:
 wsl --shutdown
 
+El comando debe cerrar las consolas abiertas de Ubuntu.
 # Nuevamente, abrimos una consola en Ubuntu. Verificamos que no haya más nada
 sudo update
 
@@ -131,10 +132,10 @@ https://askubuntu.com/questions/1077086/a-new-command-combining-apt-update-apt-u
 ##########################################################
 # Actualizar librerías Python
 ##########################################################
-# Instalamos/actualizamos las librerías que usaremos
+# Instalamos/actualizamos pip3
 sudo apt-get -y install python3-pip
 
-# Nos aseguramos de tener la última versión de pip
+# Nos aseguramos de tener la última versión de pip y pip3
 sudo -H pip install --upgrade pip
 sudo -H pip3 install --upgrade pip # corriendo este por último, también defaulteamos a pip3 en caso de llamar pip
 
@@ -143,8 +144,6 @@ sudo pip3 uninstall decouple # un clásico error es instalar esta en vez de la d
 sudo pip3 install python-decouple --upgrade
 sudo pip3 install SQLAlchemy --upgrade
 sudo pip3 install psycopg2-binary --upgrade
-
-
 
 # Actualizar todas las librerías de Python
 sudo pip3 install pipupgrade # usaremos pipugrade para actualizar todo
