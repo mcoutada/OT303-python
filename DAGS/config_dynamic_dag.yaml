@@ -1,0 +1,53 @@
+default:
+  default_args:
+    owner: "airflow"
+    depends_on_past: False
+    start_date: 2020-09-30
+    retries: 1
+    retry_delay_sec: 300
+  schedule_interval: "0 1 * * *" # (min hour dayMonth Month dayWeek)
+  concurrency: 1
+  max_active_runs: 1
+  dagrun_timeout_sec: 60
+  tags: ['university_etl']
+
+dag_palermo:
+  default_args:
+    owner: 'MartinCifre'
+    description: "ETL dag for University of Palermo."
+  tasks:
+    extract_task:
+      operator: airflow.operators.python_operator.PythonOperator
+      python_callable_name: extract_p
+      python_callable_file: /home/martincifre/airflow/dags/functions.py
+    transform_task:
+      operator: airflow.operators.python_operator.PythonOperator
+      python_callable_name: transform_p
+      python_callable_file: /home/martincifre/airflow/dags/functions.py
+      dependencies: [extract_task]
+    load_task:
+      operator: airflow.operators.python_operator.PythonOperator
+      python_callable_name: load_p
+      python_callable_file: /home/martincifre/airflow/dags/functions.py
+      dependencies: [transform_task]
+
+dag_jujuy:
+  default_args:
+    owner: 'MartinCifre'
+    description: "ETL dag for University of Jujuy."
+  tasks:
+    extract_task:
+      operator: airflow.operators.python_operator.PythonOperator
+      python_callable_name: extract_j
+      python_callable_file: /home/martincifre/airflow/dags/functions.py
+    transform_task:
+      operator: airflow.operators.python_operator.PythonOperator
+      python_callable_name: transform_j
+      python_callable_file: /home/martincifre/airflow/dags/functions.py
+      dependencies: [extract_task]
+    load_task:
+      operator: airflow.operators.python_operator.PythonOperator
+      python_callable_name: load_j
+      python_callable_file: /home/martincifre/airflow/dags/functions.py
+      dependencies: [transform_task]
+          
