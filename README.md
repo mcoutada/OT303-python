@@ -58,6 +58,15 @@
 * En config/config_dynamic_dag.yaml se implementa la estructura del dag.
 * dynamic_etl_dag.py crea el dag implementado.
 
+## TASK ID: OT303-101 (MapReduce Grupo A)
+* En la carpeta big_data se encuentran los archivos de esta tarea.
+* mapper_stdin.py y reducer_stdin.py son ejemplos de prueba ejecutados a traves de consola con standar input/output.
+* parsing.py es otro archivo de prueba para comprobar el funcionamiento de parsing de datos xml.
+* top_10_positive_tags.py: Top 10 tags with higher answer accepted.
+* avg_wrods_score.py: Relation between number of words and score in a post.
+* avg_answer_post.py: Average time answer in post.
+
+
 #
 # Aclaración:
 * Para ejecutar los DAGs, dentro de la carpeta /airflow/dags/ copiar los archivos usados o cambiar las rutas en los scripts.py.
