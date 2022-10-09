@@ -1,4 +1,5 @@
 from functools import reduce
+import time
 from bs4 import BeautifulSoup
 import re
 from utils import parse, chunkify
@@ -101,7 +102,7 @@ def reducer(d1, d2):
 
 if __name__ == "__main__":
     '''Relation between number of words and score in a post'''
-
+    start_time = time.time()
     # Main path where data is.
     root_path = '/home/lautaro/Cursos/Alkemy/Stack Overflow 11-2010/112010 Meta Stack Overflow'
     # Get root from xml file.
@@ -128,6 +129,7 @@ if __name__ == "__main__":
     for i in sorted_dict:
         print(f'Key: {i[0]} , Value: {i[1]}')
 
+    print('Final time: ' , round((time.time() - start_time), 2))
 
 # Pseudocode
     # Por cada post de posts.xml ->

@@ -1,5 +1,6 @@
 from collections import Counter
 from functools import reduce
+import time
 
 from utils import chunkify, parse
 import re
@@ -77,7 +78,7 @@ def reducer(c1, c2):
 
 if __name__ == "__main__":
     '''Top 10 tags with higher answer accepted'''
-
+    start_time = time.time()
     # Main path where data is.
     root_path = '/home/lautaro/Cursos/Alkemy/Stack Overflow 11-2010/112010 Meta Stack Overflow'
     # Get root from xml file.
@@ -95,6 +96,8 @@ if __name__ == "__main__":
     # Print top 10.
     for x in reduce_counter.most_common(10):
         print(f' Tag: {x[0]} , Score: {x[1]}')
+
+    print('Final time: ', round((time.time() - start_time), 2))
 
 
 # Pseudocode

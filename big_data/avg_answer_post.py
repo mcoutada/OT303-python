@@ -1,5 +1,6 @@
 from datetime import datetime
 from functools import reduce
+import time
 from utils import chunkify, parse
 
 
@@ -138,7 +139,7 @@ def calculate_avg_time(dict_questions, dict_answ):
 
 if __name__ == "__main__":
     '''Average time answer in post'''
-
+    start_time = time.time()
     # Main path where data is.
     root_path = '/home/lautaro/Cursos/Alkemy/Stack Overflow 11-2010/112010 Meta Stack Overflow'
     # Get root from xml file.
@@ -182,6 +183,8 @@ if __name__ == "__main__":
             break
         print(f'PostId: {x[0]} , AvgTime: {x[1]}')
         i += 1
+   
+    print('Final time: ' , round((time.time() - start_time), 2))
 
     # Warning. Some of the data is corrupted answer_date < question_date. (That is not possible)
 
