@@ -32,7 +32,7 @@ se implementaron los retries para los ingresos a la base de datos de las univers
 
 //utilizacion de mapReduce con python para ambas universidades
 
-#sprint 4/5
+# sprint 4/5
 
 //optimizamos el mapreduce por medio de diferentes funciones anteriormente agregadas
 
