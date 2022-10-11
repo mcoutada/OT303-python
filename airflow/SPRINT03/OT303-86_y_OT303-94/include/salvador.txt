@@ -68,7 +68,7 @@ universidad del salvador,farmacia,2020-11-06,kathy,williams,female,95,5275,agua 
 universidad del salvador,farmacia,2020-11-06,kathy,williams,female,95,4750,agua colorada,brooke36@hotmail.com
 universidad del salvador,farmacia,2020-11-06,kathy,williams,female,95,4724,agua colorada,brooke36@hotmail.com
 universidad del salvador,farmacia,2020-11-06,kathy,williams,female,95,4119,agua colorada,brooke36@hotmail.com
-universidad del salvador,licenciatura en sociología,2020-09-20,edwin,jackson,male,16,3306,centinela,andersonnatalie@hotmail.com
+universidad del salvador,licenciatura en sociología,2020-09-20,edwin,jackson,male,17,3306,centinela,andersonnatalie@hotmail.com
 universidad del salvador,contador público,2021-01-13,steven,smith,male,6,8201,25 de mayo,jason52@gmail.com
 universidad del salvador,contador público,2021-01-13,steven,smith,male,6,6660,25 de mayo,jason52@gmail.com
 universidad del salvador,contador público,2021-01-13,steven,smith,male,6,5615,25 de mayo,jason52@gmail.com
@@ -155,7 +155,7 @@ universidad del salvador,arquitectura,2021-01-07,daniel,bryant,male,93,8115,bajo
 universidad del salvador,ingeniería electrónica,2021-01-30,lisa,webb,female,76,7633,maori,amandacabrera@gmail.com
 universidad del salvador,bioquímica,2021-01-24,darrell,holmes,male,75,2617,sancti spiritu,ujackson@gmail.com
 universidad del salvador,licenciatura en relaciones del trabajo,2021-01-23,angela,myers,female,56,3181,arroyo moreira,alexanderhinton@hotmail.com
-universidad del salvador,ciencias veterinarias,2020-09-25,craig,morgan,male,8,1655,jose leon suarez,jacqueline43@gmail.com
+universidad del salvador,ciencias veterinarias,2020-09-25,craig,morgan,male,9,1655,jose leon suarez,jacqueline43@gmail.com
 universidad del salvador,licenciatura en artes,2020-11-07,lori,bishop,female,13,3046,arrascaeta,mirandajones@hotmail.com
 universidad del salvador,licenciatura en ciencias antropológicas,2020-11-06,sarah,hamilton,female,61,7220,funke,kayla99@gmail.com
 universidad del salvador,bioquímica,2020-09-10,janet,jenkins,female,10,6300,barrancas coloradas,patrick54@gmail.com
@@ -825,7 +825,7 @@ universidad del salvador,licenciatura en ciencias ambientales,2020-11-14,luis,mc
 universidad del salvador,licenciatura en ciencia y tecnología de alimentos,2020-09-03,james,esparza,male,87,3309,arroyo tomas,benjamin89@hotmail.com
 universidad del salvador,diseño de imagen y sonido,2021-01-27,thomas,rodriguez,male,26,3132,el pingo,wendy23@hotmail.com
 universidad del salvador,licenciatura en musicoterapia,2020-09-07,ralph,jones,male,16,6612,capdepont,hensontracy@yahoo.com
-universidad del salvador,diseño de imagen y sonido,2020-09-16,rebecca,johnson,female,53,6230,francisco casal,jenna90@yahoo.com
+universidad del salvador,diseño de imagen y sonido,2020-09-16,rebecca,johnson,female,54,6230,francisco casal,jenna90@yahoo.com
 universidad del salvador,licenciatura en kinesiología y fisiatría,2020-12-12,troy,christian,male,11,5471,agua blanca,lvazquez@gmail.com
 universidad del salvador,licenciatura en kinesiología y fisiatría,2020-12-12,troy,christian,male,11,5301,agua blanca,lvazquez@gmail.com
 universidad del salvador,licenciatura en kinesiología y fisiatría,2020-12-12,troy,christian,male,11,4168,agua blanca,lvazquez@gmail.com
@@ -1815,7 +1815,7 @@ universidad del salvador,ingeniería mecánica,2020-10-13,kimberly,wiggins,femal
 universidad del salvador,licenciatura en ciencias ambientales,2020-11-25,kristine,sullivan,female,1,1884,berazategui,flowersjames@yahoo.com
 universidad del salvador,actuario,2020-10-11,julia,webb,female,57,2946,el espinillo,dlee@hotmail.com
 universidad del salvador,licenciatura en ciencias de la computación,2020-11-06,anna,fuentes,female,32,9311,cañadon leon,xparker@gmail.com
-universidad del salvador,licenciatura en ciencias ambientales,2020-10-17,jared,rollins,male,27,8315,achico,houstonalexander@gmail.com
+universidad del salvador,licenciatura en ciencias ambientales,2020-10-17,jared,rollins,male,28,8315,achico,houstonalexander@gmail.com
 universidad del salvador,licenciatura en musicoterapia,2020-12-16,tyler,sullivan,male,61,7113,la lucila del mar,renee54@gmail.com
 universidad del salvador,licenciatura en ciencia política,2020-09-23,rodney,wilkerson,male,91,3371,cabure,johncannon@gmail.com
 universidad del salvador,diseño de imagen y sonido,2020-12-03,jeffrey,kelley,male,98,3716,campo largo,xjohnson@gmail.com
