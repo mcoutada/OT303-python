@@ -7,7 +7,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
 from map_reduce.mrjob_top10_positive_tags import MRJobTop10PositiveTags
-from fixture import raw_data,row_1,row_2
+from fixture import raw_data, header, post_tag_ini, post_tag_end, row_1, row_2, row_3
 
 
 @pytest.fixture

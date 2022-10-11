@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 import sys
 import os
 import pytest
-from fixture import raw_data, row_1, row_2, row_3
+from fixture import raw_data, header, post_tag_ini, post_tag_end, row_1, row_2, row_3
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))

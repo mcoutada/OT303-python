@@ -2,13 +2,13 @@ import xml.etree.ElementTree as ET
 import sys
 import os
 import pytest
-from fixture import raw_data, row_1, row_2, row_3
-from datetime import datetime
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
-from map_reduce.mrjob_avg_answer_post import MRJobAvgAnswerPost
 
+from datetime import datetime
+from map_reduce.mrjob_avg_answer_post import MRJobAvgAnswerPost
+from fixture import raw_data, header, post_tag_ini, post_tag_end, row_1, row_2, row_3
 
 def test_question_answer(row_1, row_2, row_3):
     """Test function question answer.
@@ -69,11 +69,12 @@ def test_timedelta_to_datetime(date):
     d2 = date_time.split("T")[0]
     assert d1 == d2
 
+
 @pytest.mark.parametrize(
     "date",
-    [ [{"id":"1", "creation_date": "2009-06-28T07:14:29.363"},
-       {"id":"1", "creation_date": "2009-07-28T07:14:29.363"},
-       {"id":"2", "creation_date": "2009-07-28T07:14:29.363"}]],
+    [[{"id": "1", "creation_date": "2009-06-28T07:14:29.363"},
+      {"id": "1", "creation_date": "2009-07-28T07:14:29.363"},
+      {"id": "2", "creation_date": "2009-07-28T07:14:29.363"}]],
 )
 def test_combine_dates(date):
     """Test combine creations dates.
@@ -82,8 +83,21 @@ def test_combine_dates(date):
         date (list): list of dict.
     """
     avg_ans_post = MRJobAvgAnswerPost()
-    expected = {"1": ["2009-06-28T07:14:29.363","2009-07-28T07:14:29.363"],
+    expected = {"1": ["2009-06-28T07:14:29.363", "2009-07-28T07:14:29.363"],
                 "2": ["2009-07-28T07:14:29.363"]}
     result = avg_ans_post._combine_dates(date)
     assert result == expected
-    
+
+
+def test_mapper(raw_data):
+    avg_ans_post = MRJobAvgAnswerPost()
+    data = []
+    for line in raw_data:
+        mapper = avg_ans_post.mapper_qa(None, line)
+        try:
+            while True:
+                data.append(next(mapper))
+        except:
+            pass
+    assert data == [('1', {'id': '1', 'creation_date': '2009-06-28T07:14:29.363'}),
+                    ('2', {'id': '1', 'creation_date': '2009-06-28T08:14:46.627'})]
