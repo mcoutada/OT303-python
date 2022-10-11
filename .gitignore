@@ -4,3 +4,6 @@ settings.ini
 
 #Visual Studio
 __pycache__/
+.vscode/
+
+.pytest_cache/
