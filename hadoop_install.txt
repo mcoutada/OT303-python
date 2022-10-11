@@ -1,0 +1,256 @@
+Para ser específicos, habilite WSL ejecutando el siguiente código de PowerShell como administrador (o habilítelo a través del Panel de control):
+
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+Y luego instale Ubuntu o Debian u otra distribución de Linux desde Microsoft Store.
+
+Una vez completada la descarga, haga clic en el botón Iniciar para almorzar la aplicación. Hace que tarde unos minutos en instalarse.
+
+
+Durante la instalación, debe ingresar un nombre de usuario y una contraseña. Una vez hecho esto, estará listo para usar el terminal WSL.
+
+wsl -d $Distro_Name
+*Reemplace el nombre de la distribución en consecuencia. Por ejemplo, ejecutar la distribución de Debian mediante el siguiente comando:
+
+wsl -d Debian
+Los siguientes pasos se probaron en una distribución de Ubuntu.
+
+
+Instalar Open JDK
+Ejecute el siguiente comando para actualizar el índice del paquete:
+
+sudo apt update
+Compruebe si Java ya está instalado:
+
+java -version
+El comando 'java' no se encuentra, pero se puede instalar con:
+
+sudo apt install default-jre
+sudo apt install openjdk-11-jre-headless
+sudo apt install openjdk-8-jre-headless
+Instale OpenJDK a través del siguiente comando:
+
+sudo apt-get install openjdk-8-jdk
+Compruebe la versión instalada:
+
+openjdk version "1.8.0_212"
+OpenJDK Runtime Environment (build 1.8.0_212-8u212-b03-0ubuntu1.18.04.1-b03)
+OpenJDK 64-Bit Server VM (build 25.212-b03, mixed mode)
+También puede utilizar Java 11 desde esta versión, ya que ahora es compatible.
+
+También puede seguir Instalar Open JDK en WSL (kontext.tech) para instalar Open JDK.
+
+Descargar Hadoop binario
+Vaya a la página de lanzamiento del sitio web de Hadoop para encontrar una URL de descarga para Hadoop 3.3.2:
+
+Lanzamientos de Hadoop
+
+Para mí, el espejo más cercano es:
+
+https://dlcdn.apache.org/hadoop/common/hadoop-3.3.2/hadoop-3.3.2.tar.gz 
+
+Ejecute el siguiente comando en el terminal Ubuntu para descargar un binario de Internet:
+
+wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.2/hadoop-3.3.2.tar.gz
+Espere hasta que se complete la descarga.
+
+Si encuentra errores similares como los siguientes:
+
+ERROR: El certificado de 'dlcdn.apache.org' no es de confianza.
+ERROR: El certificado de 'dlcdn.apache.org' ha caducado.
+Instale las certificaciones de CA mediante el siguiente comando:
+
+sudo apt-get install ca-certificates
+También puede omitir la validación del certificado SSL, aunque es arriesgado y no se recomienda:
+
+wget --no-check-certificate  https://dlcdn.apache.org/hadoop/common/hadoop-3.3.2/hadoop-3.3.2.tar.gz
+Descomprimir el binario de Hadoop
+Ejecute el siguiente comando para crear una carpeta hadoop en la carpeta de inicio del usuario:
+
+mkdir ~/hadoop
+Y luego ejecute el siguiente comando para descomprimir el paquete binario:
+
+tar -xvzf hadoop-3.3.2.tar.gz -C ~/hadoop
+Una vez desempaquetado, cambie el directorio actual a la carpeta Hadoop:
+
+cd ~/hadoop/hadoop-3.3.2/
+Configurar frases de contraseña ssh
+Este paso es crítico y asegúrese de seguir los pasos.
+
+Asegúrese de que puede SSH a localhost en Ubuntu:
+
+ssh localhost
+Si no existe, instálelo con el siguiente comando:ssh
+
+sudo apt install ssh 
+Si no puede ssh a localhost sin una frase de contraseña, ejecute el siguiente comando para inicializar las claves privadas y públicas:
+
+ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 0600 ~/.ssh/authorized_keys
+Si encuentra errores como 'ssh: connect to host localhost port 22: Connection refused', ejecute los siguientes comandos:
+
+sudo apt-get install ssh
+# And then restart the service:
+sudo service ssh restart
+Si los comandos anteriores siguen sin funcionar, pruebe la solución de este comentario.
+
+*El enlace de comentario te redirigirá a otro artículo para una versión diferente de la instalación de Hadoop.
+
+Configurar el modo pseudodistribuido (modo de un solo nodo)
+Ahora, podemos seguir la guía oficial para configurar un solo nodo:
+
+Operación pseudodistribuida
+
+1) Configurar variables de entorno (opcional)
+
+Configure las variables de entorno editando el archivo ~/.bashrc.
+
+ vi ~/.bashrc
+Agregue las siguientes variables de entorno:
+
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+export HADOOP_HOME=~/hadoop/hadoop-3.3.2
+export PATH=$PATH:$HADOOP_HOME/bin
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+Ejecute el siguiente comando para obtener las variables más recientes:
+
+source ~/.bashrc
+2) Edite el archivo etc/hadoop/hadoop-env.sh:
+
+vi etc/hadoop/hadoop-env.sh
+Establezca una variable de entorno JAVA_HOME:
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+Recuerde actualizar la ruta a su ruta JDK en consecuencia.
+
+3) Editar etc/hadoop/core-site.xml:
+
+vi etc/hadoop/core-site.xml
+Agregue la siguiente configuración:
+
+<configuration>
+     <property>
+         <name>fs.defaultFS</name>
+         <value>hdfs://localhost:9000</value>
+     </property>
+</configuration>
+4) Editar etc/hadoop/hdfs-site.xml:
+
+vi etc/hadoop/hdfs-site.xml
+Agregue la siguiente configuración:
+
+<configuration>
+     <property>
+         <name>dfs.replication</name>
+         <value>1</value>
+     </property>
+     <property>
+         <name>dfs.namenode.name.dir</name>
+         <value>/home/tangr/hadoop/dfs/name332</value>
+     </property>
+     <property>
+         <name>dfs.datanode.data.dir</name>
+         <value>/home/tangr/hadoop/dfs/data332</value>
+     </property>
+</configuration>
+Recuerde reemplazar el nombre de usuario resaltado en consecuencia. También puede cambiar los caminos a los suyos propios.
+
+Asegúrese de crear también estas rutas:
+
+mkdir -p ~/hadoop/dfs/name332
+mkdir -p ~/hadoop/dfs/data332
+5) Editar archivo etc/hadoop/mapred-site.xml:
+
+vi etc/hadoop/mapred-site.xml
+Agregue la siguiente configuración:
+
+<configuration>
+     <property>
+         <name>mapreduce.framework.name</name>
+         <value>yarn</value>
+     </property>
+     <property>
+         <name>mapreduce.application.classpath</name>
+         <value>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*</value>
+     </property>
+</configuration>
+6) Editar archivo etc/hadoop/yarn-site.xml:
+
+vi etc/hadoop/yarn-site.xml
+Agregue la siguiente configuración:
+
+<configuration>
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.env-whitelist</name>
+        <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
+    </property>
+</configuration>
+Formato namenode
+Ejecute el siguiente comando para dar formato al nodo de nombre:
+
+bin/hdfs namenode -format
+Ejecutar demonios DFS
+1) Ejecute los siguientes comandos para iniciar los demonios NameNode y DataNode:
+
+tangr@raymond-pc:~/hadoop/hadoop-3.3.2$ sbin/start-dfs.sh
+Starting namenodes on [localhost]
+Starting datanodes
+Starting secondary namenodes [raymond-pc]
+2) Verifique el estado a través del comando jps:
+
+tangr@raymond-pc:~/hadoop/hadoop-3.3.2$ jps
+4693 SecondaryNameNode
+4837 Jps
+4217 NameNode
+4431 DataNode
+Cuando los servicios se inician correctamente, debería poder ver estos cuatro procesos.
+
+3) Ver portal de nodos de nombre
+
+Puede ver el nodo de nombre a través de la siguiente dirección URL:
+
+http://localhost:9870/dfshealth.html#tab-overview
+
+Ejecutar demonio YARN
+1) Ejecute el siguiente comando para iniciar el demonio YARN:
+
+sbin/start-yarn.sh
+~/hadoop/hadoop-3.3.2$ sbin/start-yarn.sh
+Starting resourcemanager
+Starting nodemanagers
+2) Comprobar el estado a través del comando jps
+
+tangr@raymond-pc:~/hadoop/hadoop-3.3.2$ jps
+5345 NodeManager
+4693 SecondaryNameNode
+4217 NameNode
+5533 Jps
+4431 DataNode
+4975 ResourceManager
+Una vez iniciados los servicios, puede ver dos procesos más para NodeManager y ResourceManager.
+
+3) Ver el portal web de YARN
+
+Puede ver la interfaz de usuario web del administrador de recursos de YARN a través de la siguiente dirección URL:
+
+http://localhost:8088/cluster
+
+Puede ver todas las aplicaciones a través de este portal web.
+
+Servicios de apagado
+Una vez que haya completado las exploraciones, puede usar el siguiente comando para apagar esos demonios:
+
+sbin/stop-yarn.sh
+sbin/stop-dfs.sh
+Puede verificar a través del comando jps que solo mostrará un proceso ahora:
+
+tangr@raymond-pc:~/hadoop/hadoop-3.3.2$ jps
+6543 Jps
+Resumen
+¡Felicidades! Ahora ha instalado con éxito un clúster hadoop 3.3.2 de un solo nodo en su subsistema Ubuntu de Windows 10 o Windows 11. Es relativamente más fácil en comparación con la instalación nativa de Windows, ya que no necesitamos descargar o crear bibliotecas HDFS nativas de Hadoop.
+
+Diviértete con Hadoop 3.3.2.
