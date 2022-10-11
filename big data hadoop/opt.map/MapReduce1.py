@@ -201,6 +201,6 @@ end = time.time()
 print(end - start)
 
     # Graba los resultados en un CSV
-savetoCSV(list_result[0], "top10tags.csv", ["TAG", "COUNT"], 1)
-savetoCSV(list_result[1], "words-views.csv", ["WORDS_COUNT", "VIEW_COUNT"], 1)
-savetoCSV(list_result[2], "score_answer_mean.csv", ["FAVORITE_COUNT"],2 )
+savetoCSV(list_result[0], "top10_pregunts_map.csv", ["TAG", "COUNT"], 1)
+savetoCSV(list_result[1], "top10_sin_respuest.csv", ["WORDS_COUNT", "VIEW_COUNT" , "TAG"], 1)
+savetoCSV(list_result[2], "respuestas_fav.csv", ["FAVORITE_COUNT"],2 )
