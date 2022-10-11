@@ -31,3 +31,11 @@ se implementaron los retries para los ingresos a la base de datos de las univers
 //implementacion de un dag dinamico
 
 //utilizacion de mapReduce con python para ambas universidades
+
+# sprint 4/5
+
+//optimizamos el mapreduce por medio de diferentes funciones anteriormente agregadas
+
+//incorporamos el script al cluster de hadoop para separar la informacion en hilos
+
+//ejecutamos un testing QA para el script
