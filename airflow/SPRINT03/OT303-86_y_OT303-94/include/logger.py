@@ -27,7 +27,7 @@ def set_logger(logger_name, is_debug=False):
     # If it's new, then it has no handler, so we need to set it up
     if len(logger.handlers) == 0:
 
-        # The path where the first file has been triggered
+        # The path from where the first file has been triggered
         # Example:
         # cd /path/to/root_folder/main.py
         # python main.py
@@ -62,8 +62,8 @@ def set_logger(logger_name, is_debug=False):
             # fmt="%(asctime)s.%(msecs)03d [%(name)-20s:%(lineno)-4d] %(levelname)8s: %(message)s",
             # datefmt="%Y-%m-%d %H:%M:%S",
             # The format requested by the task:
-            fmt="%(asctime)s - %(name)s - %(message)s",
-            datefmt="%Y-%m-%d",
+            fmt="%(asctime)s:%(levelname)s:%(name)s:%(message)s",
+            datefmt="%d/%m/%Y",
         )
 
         # Set up a console handler
@@ -79,6 +79,9 @@ def set_logger(logger_name, is_debug=False):
         # logged to a log file
         if log_file_abs_path:
             fh = logging.FileHandler(log_file_abs_path)
+            # Set a weekly log file
+            fh = logging.handlers.TimedRotatingFileHandler(filename=log_file_abs_path, when="W0")
+            
             fh.setFormatter(formatter)
             # Add the file handler to the logger
             logger.addHandler(fh)
