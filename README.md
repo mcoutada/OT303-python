@@ -66,6 +66,20 @@
 * avg_wrods_score.py: Relation between number of words and score in a post.
 * avg_answer_post.py: Average time answer in post.
 
+#
+# SPRINT IV
+## TASK ID: OT303-109 y OT303-117 (MapReduce Grupo A optimizaciones/hadoop)
+* Utilice la librería mrjob para implementar nuevamente las funciones de map reduce.
+* En la carpeta big_data/map_reduce se enceuntran los scripts anteriores y los nuevos implementados con mrjob.
+* Los scripts de mrjobs pueden correrse tanto localmente como en hadoop.
+* Para correr en hadoop, si se esta usando un docker container, instalar python sobre el mismo, y las dependencias. Copiar los scripts al container y los inputs.
+* Ejecutar: python3 name_script.py input > output
+* Hadoop: pyton3 name_script.py input -r hadoop > output
+
+## TASK ID: OT303:125 (Unit Test)
+* Utilice PyTest para crear test unitarios.
+* Cada funcion de los scripts mrjobs_.py tiene test unitarios.
+* Carpeta big_data/tests.
 
 #
 # Aclaración:
