@@ -87,7 +87,7 @@ cd /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102
 cat test.xml | ./mapper.py | ./reducer.py
 
 
-	
+
 # o tambien:
 
 xmldir="/mnt/c/Users/asd/Downloads/Stack_Overflow_11-2010/112010_Meta_Stack_Overflow"
@@ -106,7 +106,7 @@ cat $xml | python $mapper | python $reducer
 
 
 
-	   
+
 ################ otros, mas adelante... ################
 
 find ~ | grep --p "hadoop-streaming-$HADOOP_VERSION.jar"
@@ -122,37 +122,36 @@ hadoop jar $HADOOPSTRJAR \
     -file reducer.py \
     -mapper ./mapper.py \
     -reducer ./reducer.py
-	
-	
+
+
 
 sprint3 86 94 y 102
-sprint4 110 118 y 126 
+sprint4 110 118 y 126
 
 
 
 from readme.txt:
 
    - **posts**.xml
-       - Id 
+       - Id
        - PostTypeId
           - 1: Question
           - 2: Answer
        - ParentID (only present if PostTypeId is 2)
        - AcceptedAnswerId (only present if PostTypeId is 1)
-       - CreationDate 
-       - Score 
+       - CreationDate
+       - Score
        - ViewCount
-       - Body 
+       - Body
        - OwnerUserId
-       - LastEditorUserId 
-       - LastEditorDisplayName="Jeff Atwood" 
-       - LastEditDate="2009-03-05T22:28:34.823" 
-       - LastActivityDate="2009-03-11T12:51:01.480" 
-       - CommunityOwnedDate="2009-03-11T12:51:01.480" 
-       - ClosedDate="2009-03-11T12:51:01.480" 
-       - Title= 
-       - Tags= 
-       - AnswerCount 
-       - CommentCount 
+       - LastEditorUserId
+       - LastEditorDisplayName="Jeff Atwood"
+       - LastEditDate="2009-03-05T22:28:34.823"
+       - LastActivityDate="2009-03-11T12:51:01.480"
+       - CommunityOwnedDate="2009-03-11T12:51:01.480"
+       - ClosedDate="2009-03-11T12:51:01.480"
+       - Title=
+       - Tags=
+       - AnswerCount
+       - CommentCount
        - FavoriteCount
-	   
