@@ -1,0 +1,59 @@
+## Task 1
+COMO: Analista de datos
+QUIERO: Utilizar MapReduce
+PARA: Analizar los datos de StackOverflow
+
+Criterios de aceptación: 
+
+    Top 10 fechas con mayor cantidad de post creados
+
+    Relación entre cantidad de respuestas y sus visitas.
+
+     Del ranking de los primeros 0-100 por score, tomar el tiempo de respuesta promedio e informar un único valor.
+     
+     
+     
+     ## Task 2
+COMO: Analista de datos
+QUIERO: Optimizar la ejecución actual del MapReduce
+PARA: Poder ejectuar la misma o mayor cantidad de datos en menos tiempo
+
+Criterios de aceptación: 
+
+    Utilizar otra técnica compatible con Hadoop vistas en la clase 
+
+    Documentación de referencia: https://hadoop.apache.org/docs/r1.2.1/mapred_tutorial.html
+
+    Otras técnicas interesantes: https://techvidvan.com/tutorials/mapreduce-job-optimization-techniques/
+
+     
+     
+     ## Task 3
+COMO: Analista de datos
+QUIERO: Incorporar el script de MapReduce a Hadoop
+PARA: Poder correr las tareas en distintos hilos
+
+Criterios de aceptación: 
+Para esto, utilizar el script que analiza los siguientes datos:
+
+    Top 10 fechas con mayor cantidad de post creados
+
+    Relación entre cantidad de respuestas y sus visitas.
+
+    Tiempo de respuesta promedio en top 0-100 post con mayor puntaje
+
+     
+     
+     ## Task 4
+COMO: Analista de datos
+QUIERO: Realizar test unitarios
+PARA: Para poder hacer un desarrollo escalable y a prueba de errores
+
+Criterios de aceptación: 
+Para esto necesitamos realizar test unitarios de cada funcion que se utilice en el script de map reduce que procesa los siguientes datos:
+
+    Top 10 fechas con mayor cantidad de post creados
+
+    Relación entre cantidad de respuestas y sus visitas.
+
+    Tiempo de respuesta promedio en top 0-100 post con mayor puntaje
