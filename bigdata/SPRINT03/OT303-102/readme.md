@@ -82,15 +82,11 @@ hdfs dfs -rm -R -skipTrash /alkemybigdata/*
 
 # testear sin hadoop:
 cd /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102
-
-cat posts.xml | ./mapper.py | ./reducer.py
+cat test.xml | ./mapper.py | ./reducer.py
 
 
 	
 # o tambien:
-xmldir="/home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102"
-xml=$xmldir/test.xml
-
 
 xmldir="/mnt/c/Users/asd/Downloads/Stack_Overflow_11-2010/112010_Meta_Stack_Overflow"
 xml="$xmldir/posts.xml"
