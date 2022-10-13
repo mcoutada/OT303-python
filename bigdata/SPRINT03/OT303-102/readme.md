@@ -54,7 +54,7 @@ drwxr-xr-x   - mcoutada supergroup          0 2022-10-12 15:37 /alkemybigdata
 # Vemos las primeras 5 lineas de nuestro archivo:
 hdfs dfs -cat /license.txt | head -5
 
-subimos todos los archivos de bigdata (dejar solo "posts.xml", es el unico que se necesita)
+# subimos todos los archivos de bigdata (dejar solo "posts.xml", es el unico que se necesita)
 
 winfold="/mnt/c/Users/asd/Downloads/Stack_Overflow_11-2010"
 
