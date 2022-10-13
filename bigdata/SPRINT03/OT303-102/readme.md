@@ -82,6 +82,7 @@ hdfs dfs -rm -R -skipTrash /alkemybigdata/*
 
 # testear sin hadoop:
 cd /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102
+
 cat test.xml | ./mapper.py | ./reducer.py
 
 
@@ -103,7 +104,9 @@ cat $xml | python $mapper | python $reducer
 
 	   
 ################ otros, mas adelante... ################
+
 find ~ | grep --p "hadoop-streaming-$HADOOP_VERSION.jar"
+
 find ~ | grep --p ".*hadoop.*streaming.*.jar"
 
 HADOOPSTRJAR=/home/mcoutada/hadoop/hadoop-3.3.4/share/hadoop/tools/lib/hadoop-streaming-3.3.4.jar
