@@ -10,6 +10,7 @@ import re
 
 
 # Mapping information and returning data
+
 for line in sys.stdin:
     line = line.strip()
     post = (str(re.findall("PostTypeId=\".*?\"",line)).replace("PostTypeId=\"","").replace("\"",""))
@@ -18,5 +19,5 @@ for line in sys.stdin:
     views = (str(re.findall("ViewCount=\".*?\"",line)).replace("ViewCount=\"","").replace("\"",""))
     answers = (str(re.findall("AnswerCount=\".*?\"",line)).replace("AnswerCount=\"","").replace("\"",""))
 
-    print '%s%s%d' % (post, date, score, views, answers)
+    print '%s\t%s' % (post, date, score, views, answers)
 
