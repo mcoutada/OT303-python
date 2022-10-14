@@ -11,4 +11,6 @@ for line in sys.stdin:
     scores_cnt += 1
 
 
-print(f"Average answers with more favorites: {scores_sum/scores_cnt}")
+print(
+    f"Average answers with more favorites: {scores_sum/scores_cnt if scores_cnt>0  else None}"
+)
