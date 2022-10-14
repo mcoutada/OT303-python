@@ -52,7 +52,7 @@ hdfs dfs -put /mnt/c/Users/mcoutada/Downloads/Stack_Overflow_11-2010/112010_Meta
 hdfs dfs -mkdir -p /alkemybigdata
 
 # ver los todo lo subido a hdfs:
-hadoop fs -ls -R /alkemybigdata
+hadoop fs -ls -R /
 
 # vemos:
 drwxr-xr-x   - mcoutada supergroup          0 2022-10-12 15:37 /alkemybigdata
