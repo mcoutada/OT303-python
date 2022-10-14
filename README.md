@@ -81,6 +81,11 @@
 * Cada funcion de los scripts mrjobs_.py tiene test unitarios.
 * Carpeta big_data/tests.
 
+## TASK ID: OT303:133 (Documentar Test)
+* Carpeta big_data/tests.
+* Todas las funciones desarrolladas a lo largo de esta certificación fueron documentadas utilizando docstrings.
+* Si se utiliza Visual Studio: (https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring)
+
 #
 # Aclaración:
 * Para ejecutar los DAGs, dentro de la carpeta /airflow/dags/ copiar los archivos usados o cambiar las rutas en los scripts.py.
