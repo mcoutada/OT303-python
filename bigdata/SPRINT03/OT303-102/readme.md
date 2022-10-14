@@ -101,8 +101,7 @@ hdfs dfs -rm -R -skipTrash /alkemybigdata/*
 # testear sin hadoop:
 cd /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102
 
-cat test.xml | ./mapper.py | ./reducer.py
-
+cat test.xml | python mapper.py | python reducer.py
 
 
 # o tambien:

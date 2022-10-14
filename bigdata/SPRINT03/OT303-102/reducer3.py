@@ -12,5 +12,5 @@ for line in sys.stdin:
 
 
 print(
-    f"Average answers with more favorites: {scores_sum/scores_cnt if scores_cnt>0  else None}"
+    f"Average answers with more favorites: {scores_sum/scores_cnt if scores_cnt>0 else None}"
 )
