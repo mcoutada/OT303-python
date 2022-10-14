@@ -1,10 +1,9 @@
-# Top 10 tipo de post con mayor respuestas aceptadas
 
-import xml.etree.ElementTree as ET
-from functools import reduce
+#!/usr/bin/python3
 import re
 from collections import Counter
-
+import sys
+from xml.etree import ElementTree as xml
 
 def get_data():
     """
@@ -28,7 +27,7 @@ def get_post_accept(post):
     post_accept = post.get('AcceptedAnswerId')
     post_tags = post.get('Tags')
     if post_accept != None:
-        return re.findall(r'<([^>]+)>' ,post_tags)
+        return re.findall(r'<([^>]+)>' , post_tags)
 
 def mapper(chunker_list):
     """
@@ -37,19 +36,14 @@ def mapper(chunker_list):
     convert to list unique value pair
     return counter pair of list mapped
     """
-    mapper_data = list(map(get_post_accept, chunker_list))
-    mapper_data = list([x for x in mapper_data if x is not None])
+    mapper_data = (map(get_post_accept, chunker_list))
+    mapper_data = ([x for x in mapper_data if x is not None])
     mapper_data = [item for subl in mapper_data for item in subl]
-    return Counter(mapper_data)
+    mapper_data= Counter(mapper_data)
+    # print stdout mapper data pairs key, values 
+    for key, value in mapper_data.items():
+        print('%s\t%s' % (key, value))
 
-def reducer_counter(type_post, type_count):
-    """
-    Reducer values to sum 
-    of fav_count and user_id
-    return [type_post,count(type_pos)]
-    """
-    type_post.update(type_count)
-    return type_post
 
 if '__main__' == __name__:
     """
@@ -59,9 +53,5 @@ if '__main__' == __name__:
     accepted post type
     """
     xml_data = get_data()
-    chunker_list = chunkify(xml_data, 32)
-    mapped = list(map(mapper, chunker_list))
-    mapped = reduce(reducer_counter, mapped)
-
-    # Get Top 10 most post type
-    top_10_aceept = mapped.most_common(10) 
+    chunker_list = chunkify(xml_data, 100)
+    mapped =list(map(mapper, chunker_list))
