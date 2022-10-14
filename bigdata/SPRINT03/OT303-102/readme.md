@@ -94,7 +94,7 @@ drwxr-xr-x   - mcoutada supergroup          0 2022-10-12 15:48 /alkemybigdata/11
 
 
 
-# para eliminar todo en el hdfs:
+# si quisieramos eliminar todo en el hdfs:
 hdfs dfs -rm -R -skipTrash /alkemybigdata/*
 
 
