@@ -30,10 +30,15 @@ jps
 
 # tenes que ver algo asi:
 21186 NameNode
+
 21330 DataNode
+
 22661 Jps
+
 21782 ResourceManager
+
 21562 SecondaryNameNode
+
 21931 NodeManager
 
 # si alguno de estos no aparece es porque no esta corriendo y hay que arreglarlo
