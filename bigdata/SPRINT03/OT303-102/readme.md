@@ -73,15 +73,25 @@ hdfs dfs -put $winfold /alkemybigdata
 hadoop fs -ls -R /alkemybigdata
 
 vemos:
+
 drwxr-xr-x   - mcoutada supergroup          0 2022-10-12 15:48 /alkemybigdata/112010_Meta_Stack_Overflow
+
 -rw-r--r--   1 mcoutada supergroup    3498440 2022-10-12 15:48 /alkemybigdata/112010_Meta_Stack_Overflow/badges.xml
+
 -rw-r--r--   1 mcoutada supergroup   30849022 2022-10-12 15:48 /alkemybigdata/112010_Meta_Stack_Overflow/comments.xml
+
 -rw-r--r--   1 mcoutada supergroup       1731 2022-10-12 15:48 /alkemybigdata/112010_Meta_Stack_Overflow/license.txt
+
 -rw-r--r--   1 mcoutada supergroup   89837591 2022-10-12 15:48 /alkemybigdata/112010_Meta_Stack_Overflow/posthistory.xml
+
 -rw-r--r--   1 mcoutada supergroup   54792981 2022-10-12 15:48 /alkemybigdata/112010_Meta_Stack_Overflow/posts.xml
+
 -rw-r--r--   1 mcoutada supergroup       4678 2022-10-12 15:48 /alkemybigdata/112010_Meta_Stack_Overflow/readme.txt
+
 -rw-r--r--   1 mcoutada supergroup    7435967 2022-10-12 15:48 /alkemybigdata/112010_Meta_Stack_Overflow/users.xml
+
 -rw-r--r--   1 mcoutada supergroup   27409310 2022-10-12 15:48 /alkemybigdata/112010_Meta_Stack_Overflow/votes.xml
+
 
 
 # para eliminar todo en el hdfs:
