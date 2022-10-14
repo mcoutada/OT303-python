@@ -43,9 +43,10 @@ jps
 
 # si alguno de estos no aparece es porque no esta corriendo y hay que arreglarlo
 
-################################ Coorer Hadoop - Fin ################################
+################################ Correr Hadoop - Fin ################################
 
-
+# probamos subir un archivo de prueba a la raiz de nuestro hdfs:
+hdfs dfs -put /mnt/c/Users/mcoutada/Downloads/Stack_Overflow_11-2010/112010_Meta_Stack_Overflow/license.txt /
 
 # creamos un directorio
 hdfs dfs -mkdir -p /alkemybigdata
@@ -55,14 +56,15 @@ hadoop fs -ls -R /alkemybigdata
 
 # vemos:
 drwxr-xr-x   - mcoutada supergroup          0 2022-10-12 15:37 /alkemybigdata
+
 -rw-r--r--   1 mcoutada supergroup       1731 2022-10-12 15:33 /license.txt
 
 # Vemos las primeras 5 lineas de nuestro archivo:
 hdfs dfs -cat /license.txt | head -5
 
-# subimos todos los archivos de bigdata (dejar solo "posts.xml", es el unico que se necesita)
+# subimos todos los archivos de bigdata (podes subir solo "posts.xml", es el unico que se necesita)
 
-winfold="/mnt/c/Users/asd/Downloads/Stack_Overflow_11-2010"
+winfold="/mnt/c/Users/mcoutada/Downloads/Stack_Overflow_11-2010"
 
 hdfs dfs -put $winfold /alkemybigdata
 
@@ -95,7 +97,7 @@ cat test.xml | ./mapper.py | ./reducer.py
 
 # o tambien:
 
-xmldir="/mnt/c/Users/asd/Downloads/Stack_Overflow_11-2010/112010_Meta_Stack_Overflow"
+xmldir="/mnt/c/Users/mcoutada/Downloads/Stack_Overflow_11-2010/112010_Meta_Stack_Overflow"
 
 xml="$xmldir/posts.xml"
 
