@@ -1,6 +1,9 @@
 import sys
 import re 
 
+# Del ranking de los primeros 0-100 por score tomar el tiempo de respuesta promedio 
+# informar un único valor.
+
 for line in sys.stdin:
     line = line.strip()
 
