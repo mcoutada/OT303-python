@@ -5,10 +5,6 @@ import re
 
 # Relación entre cantidad de respuestas y sus visitas. -> Then mapping answers and views
 
-# Del ranking de los primeros 0-100 por score tomar el tiempo de respuesta promedio 
-# informar un único valor.  -> Then mapping scores 
-
-
 # Mapping information and returning data
 
 for line in sys.stdin:
