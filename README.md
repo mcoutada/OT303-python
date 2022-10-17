@@ -39,3 +39,7 @@ se implementaron los retries para los ingresos a la base de datos de las univers
 //incorporamos el script al cluster de hadoop para separar la informacion en hilos
 
 //ejecutamos un testing QA para el script
+
+# sprint 5/5
+
+// documentacion del proceso realizado anteriormente en hadoop para llevar una mejor visualizacion del trabajo (comentarios y doctrins)
