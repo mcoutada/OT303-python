@@ -86,6 +86,10 @@ def test_combine_dates(date):
 
 
 def test_mapper(raw_data):
+    """Test map function.
+    Args:
+        raw_data (raw): raw data with header and info.
+    """
     avg_ans_post = MRJobAvgAnswerPost()
     data = []
     for line in raw_data:
