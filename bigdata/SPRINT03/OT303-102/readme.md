@@ -94,18 +94,43 @@ hdfs dfs -rm -R -skipTrash /alkemybigdata/*
 
 ### Testear sin hadoop (con un test.xml con un par de lineas de posts.xml):
 ```
-cd /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102
-cat test.xml | python3 mapper.py | python3 reducer.py
+cd /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include
+cat test.xml | python3 mapper1.py | python3 reducer1.py
 ```
 
-### O tambien:
+### Nos devuelve:
 ```
-xmldir="/mnt/c/Users/mcoutada/Downloads/Stack_Overflow_11-2010/112010_Meta_Stack_Overflow"
+1  feature-request     2
+2  openid              2
+3  status-declined     1
+4  login               1
+5  google              1
+6  search              1
+```
+
+### O tambien podemos hacerlo con el posts.xml mas pequeño:
+```
+xmldir="/mnt/c/Users/asd/Downloads/Stack_Overflow_11-2010/112010_Meta_Stack_Overflow"
 xml="$xmldir/posts.xml"
-wkdir="/home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102"
-mapper="$wkdir/mapper3.py"
-reducer="$wkdir/reducer3.py"
+wkdir="/home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include"
+mapper="$wkdir/mapper1.py"
+reducer="$wkdir/reducer1.py"
 cat $xml | python3 $mapper | python3 $reducer
+```
+
+
+### Nos devuelve:
+```
+1  discussion          2912
+2  feature-request     2814
+3  bug                 1396
+4  support             1261
+5  stackoverflow       848
+6  status-completed    647
+7  tags                524
+8  reputation          426
+9  area51              372
+10 questions           354
 ```
 
 ### Ya tenemos todos los archivos y hemos testeado... podemos correr con hadoop. Necesitamos confirmar que tenemos nuestro hadoop streaming jar
@@ -148,7 +173,7 @@ if [ -f $reducer ]; then echo $reducer: OK; else echo $reducer: NOT FOUND; fi
 /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/reducer1.py: OK
 ```
 
-### Eliminamos el directorio de salida si existe
+### Eliminamos el directorio de salida si existe (Hadoop falla si existe de antemano)
 ```
 hdfs dfs -rm -R -skipTrash $xmldir/output
 ```
@@ -158,8 +183,8 @@ hdfs dfs -rm -R -skipTrash $xmldir/output
 hadoop jar $hadoopstrjar \
  -input $big_xml \
  -output $xmldir/output \
- -mapper "python $mapper" \
- -reducer "python $reducer"
+ -mapper "python3 $mapper" \
+ -reducer "python3 $reducer"
 ```
 
 ### Ejemplo de log:
@@ -265,6 +290,7 @@ packageJobJar: [/tmp/hadoop-unjar3674033946199609670/] [] /tmp/streamjob69903837
                 Bytes Written=300
 2022-10-16 20:37:48,449 INFO streaming.StreamJob: Output directory: /alkemybigdata/Stack_Overflow_11-2010/output
 ```
+
 ### Chequeamos el contenido
 ```
 hdfs dfs -cat $xmldir/output/part-00000 | head -10
@@ -299,6 +325,16 @@ hdfs dfs -cat $xmldir/output/part-00000 | head -10
 10 c++                 12856
 ```
 
+### Ya tenemos todo para automatizarlo en un script python.
+```
+python3 main.py
+```
+
+### Y sus resultados se guardan en el log, se ha dejado el siguiente a modo de ejemplo.
+
+```
+/logs/OT303-102.log_ejemplo
+```
 ---
 
  otros, mas adelante...
