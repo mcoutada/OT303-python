@@ -37,6 +37,7 @@ univ_N['location'] = df['location'].replace(["_", "-", ","])
 df['email'] = df['email'].str.lower()
 df['email'] = df['email'].replace(["-", ","])
 
+#creo un txt trabajando sobre el dataframe y que me devuelva un archivo txt
 
 def create_txt(df: pd.DataFrame, file_name: str):
     path = os.path.join(__path, file_name + '.txt')

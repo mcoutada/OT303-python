@@ -47,7 +47,7 @@ def setup_applevel_logger(logger_name,log_path):
     logger.handlers.clear()
     logger.addHandler(sh)
 
-
+    #fileHandler para el formato de mi archivo y configuracion
     fh = logging.FileHandler(
             file_name={0}/{1}.log.format(log_path, name_logger),
         mode ='a')

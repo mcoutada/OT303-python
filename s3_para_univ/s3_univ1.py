@@ -1,13 +1,13 @@
 def extract_data():
 
-
+#parte de funcion que permite extraer la task
     logger.info('task_extract')
 
 
     engine = create_engine_connection()
 
     sql_files = get_filename_path(ROOT_SQL)
-
+#path de donde se encontraria el archivo sql
 
     DATABASES = {
         'db_connect': {
@@ -34,12 +34,12 @@ def extract_data():
 
 
 def transform_data():
-
+#funcion que permite transformar la task
 
     logger.info('task transform')
 
     create_folder(ROOT_TXT)
-
+#creando carpeta para el txt 
     csv_files = get_filename_path(ROOT_CSV)
 
     routes = []
@@ -47,7 +47,7 @@ def transform_data():
         logger.info('Working on {} file.'.format(csv_name))
 
         dataframe = pd.read_csv(csv_path)
-
+#loggear y normalizar los datos con pandas
         logger.info('Normalize data on {} file.'.format(csv_name))
         dataframe = normalize_data(dataframe)
 
@@ -58,13 +58,13 @@ def transform_data():
 
 
 def load_data(routes):
-
+#carga de task sobre ruta
     logger.info('task load')
     logger.info('Loading to S3.')
 
 
     hook = S3Hook(s3//alkemy23)
-
+#el hook se utiliza para amazon , mi bucket es alkemy23
     for file in routes:
 
         try:
