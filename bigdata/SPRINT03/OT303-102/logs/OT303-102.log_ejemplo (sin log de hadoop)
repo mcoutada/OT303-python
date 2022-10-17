@@ -1,0 +1,67 @@
+17/10/2022:INFO:/main.py:Starting __main__.main()
+17/10/2022:INFO:/main.py:/home/mcoutada/hadoop/hadoop-3.3.4/share/hadoop/tools/lib/hadoop-streaming-3.3.4.jar: OK
+17/10/2022:INFO:/main.py:/home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/mapper1.py: OK
+17/10/2022:INFO:/main.py:/home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/mapper2.py: OK
+17/10/2022:INFO:/main.py:/home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/mapper3.py: OK
+17/10/2022:INFO:/main.py:/home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/reducer1.py: OK
+17/10/2022:INFO:/main.py:/home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/reducer2.py: OK
+17/10/2022:INFO:/main.py:/home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/reducer3.py: OK
+17/10/2022:INFO:/main.py:/alkemybigdata/Stack_Overflow_11-2010/112010_Meta_Stack_Overflow/posts.xml: OK
+17/10/2022:INFO:/main.py:/alkemybigdata/Stack_Overflow_11-2010/112010_Stack_Overflow/posts.xml: OK
+17/10/2022:INFO:/main.py:Processing:
+hadoop jar /home/mcoutada/hadoop/hadoop-3.3.4/share/hadoop/tools/lib/hadoop-streaming-3.3.4.jar -input /alkemybigdata/Stack_Overflow_11-2010/112010_Meta_Stack_Overflow/posts.xml -output /alkemybigdata/Stack_Overflow_11-2010/output -mapper "python3 /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/mapper1.py" -reducer "python3 /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/reducer1.py"
+17/10/2022:INFO:/main.py:Output:
+1  discussion          2912	
+2  feature-request     2814	
+3  bug                 1396	
+4  support             1261	
+5  stackoverflow       848	
+6  status-completed    647	
+7  tags                524	
+8  reputation          426	
+9  area51              372	
+10 questions           354
+17/10/2022:INFO:/main.py:Processing:
+hadoop jar /home/mcoutada/hadoop/hadoop-3.3.4/share/hadoop/tools/lib/hadoop-streaming-3.3.4.jar -input /alkemybigdata/Stack_Overflow_11-2010/112010_Stack_Overflow/posts.xml -output /alkemybigdata/Stack_Overflow_11-2010/output -mapper "python3 /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/mapper1.py" -reducer "python3 /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/reducer1.py"
+17/10/2022:INFO:/main.py:Output:
+1  c#                  35996	
+2  java                26921	
+3  iphone              23215	
+4  php                 21418	
+5  asp.net             20252	
+6  javascript          19320	
+7  .net                17249	
+8  jquery              15376	
+9  android             13132	
+10 c++                 12856
+17/10/2022:INFO:/main.py:Processing:
+hadoop jar /home/mcoutada/hadoop/hadoop-3.3.4/share/hadoop/tools/lib/hadoop-streaming-3.3.4.jar -input /alkemybigdata/Stack_Overflow_11-2010/112010_Meta_Stack_Overflow/posts.xml -output /alkemybigdata/Stack_Overflow_11-2010/output -mapper "python3 /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/mapper2.py" -reducer "python3 /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/reducer2.py"
+17/10/2022:INFO:/main.py:Output:
+Post_Id: 1          wrd_cnt/view_cnt: 0.04	
+Post_Id: 10         wrd_cnt/view_cnt: 0.12	
+Post_Id: 100        wrd_cnt/view_cnt: 0.05	
+Post_Id: 10000      wrd_cnt/view_cnt: 1.14	
+Post_Id: 10025      wrd_cnt/view_cnt: 1.62	
+Post_Id: 10026      wrd_cnt/view_cnt: 0.08	
+Post_Id: 10027      wrd_cnt/view_cnt: 1.16	
+Post_Id: 10032      wrd_cnt/view_cnt: 0.64	
+Post_Id: 10034      wrd_cnt/view_cnt: 0.28	
+Post_Id: 1004       wrd_cnt/view_cnt: 0.10	
+Post_Id: 10044      wrd_cnt/view_cnt: 0.80	
+Post_Id: 10047      wrd_cnt/view_cnt: 1.80	
+Post_Id: 10053      wrd_cnt/view_cnt: 0.49	
+Post_Id: 10055      wrd_cnt/view_cnt: 0.62	
+Post_Id: 10059      wrd_cnt/view_cnt: 1.17
+17/10/2022:INFO:/main.py:Processing:
+hadoop jar /home/mcoutada/hadoop/hadoop-3.3.4/share/hadoop/tools/lib/hadoop-streaming-3.3.4.jar -input /alkemybigdata/Stack_Overflow_11-2010/112010_Stack_Overflow/posts.xml -output /alkemybigdata/Stack_Overflow_11-2010/output -mapper "python3 /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/mapper2.py" -reducer "python3 /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/reducer2.py"
+17/10/2022:INFO:/main.py:Output:
+
+17/10/2022:INFO:/main.py:Processing:
+hadoop jar /home/mcoutada/hadoop/hadoop-3.3.4/share/hadoop/tools/lib/hadoop-streaming-3.3.4.jar -input /alkemybigdata/Stack_Overflow_11-2010/112010_Meta_Stack_Overflow/posts.xml -output /alkemybigdata/Stack_Overflow_11-2010/output -mapper "python3 /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/mapper3.py" -reducer "python3 /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/reducer3.py"
+17/10/2022:INFO:/main.py:Output:
+
+17/10/2022:INFO:/main.py:Processing:
+hadoop jar /home/mcoutada/hadoop/hadoop-3.3.4/share/hadoop/tools/lib/hadoop-streaming-3.3.4.jar -input /alkemybigdata/Stack_Overflow_11-2010/112010_Stack_Overflow/posts.xml -output /alkemybigdata/Stack_Overflow_11-2010/output -mapper "python3 /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/mapper3.py" -reducer "python3 /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include/reducer3.py"
+17/10/2022:INFO:/main.py:Output:
+
+17/10/2022:INFO:/main.py:Ended __main__.main(). Elapsed: 293.9119 seconds
