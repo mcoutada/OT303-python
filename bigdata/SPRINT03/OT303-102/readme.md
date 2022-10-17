@@ -1,7 +1,5 @@
 
 ---
----
-
 # Correr hadoop:
 ```
 HADOOP_VERSION=3.3.4
@@ -41,16 +39,13 @@ jps
 21562 SecondaryNameNode
 21931 NodeManager
 ```
-
 ### Si alguno de estos no aparece es porque no esta corriendo y hay que arreglarlo
 
----
----
- Correr Hadoop - Fin 
- 
----
----
+<br>
+<br>
 
+
+# Subir archivos
 ### Probamos subir un archivo de prueba a la raiz de nuestro hdfs:
 ```
 hdfs dfs -put /mnt/c/Users/mcoutada/Downloads/Stack_Overflow_11-2010/112010_Meta_Stack_Overflow/license.txt /
@@ -97,7 +92,7 @@ drwxr-xr-x   - mcoutada supergroup          0 2022-10-14 13:30 /alkemybigdata/St
 hdfs dfs -rm -R -skipTrash /alkemybigdata/*
 ```
 
-### Testear sin hadoop (crear un test.xml con un par de lineas de posts.xml):
+### Testear sin hadoop (con un test.xml con un par de lineas de posts.xml):
 ```
 cd /home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102
 cat test.xml | python3 mapper.py | python3 reducer.py
@@ -118,8 +113,13 @@ cat $xml | python3 $mapper | python3 $reducer
 ```
 find ~ | grep --p ".*/lib/.*hadoop.*streaming.*.jar"
 ```
+### Retorna:
+```
+/home/mcoutada/hadoop/hadoop-3.3.4/share/hadoop/tools/lib/hadoop-streaming-3.3.4.jar
+```
 
-### Ahora llamamos al jar pero con nuestro xml subido en hdfs
+# Correr Hadoop
+### Ahora llamamos al jar pero con nuestro xml subido en hdfs, steamos las variables necesarias:
 ```
 hadoopstrjar=$(find ~ | grep --p ".*/lib/.*hadoop.*streaming.*.jar")
 xmldir="/alkemybigdata/Stack_Overflow_11-2010"
@@ -137,6 +137,15 @@ if hdfs dfs -test -f $small_xml; then echo $small_xml: OK; else echo $small_xml:
 if hdfs dfs -test -f $big_xml; then echo $big_xml: OK; else echo $big_xml: NOT FOUND; fi
 if [ -f $mapper ]; then echo $mapper: OK; else echo $mapper: NOT FOUND; fi
 if [ -f $reducer ]; then echo $reducer: OK; else echo $reducer: NOT FOUND; fi
+```
+
+### Debe retornar todo OK:
+```
+/home/mcoutada/hadoop/hadoop-3.3.4/share/hadoop/tools/lib/hadoop-streaming-3.3.4.jar: OK
+/alkemybigdata/Stack_Overflow_11-2010/112010_Meta_Stack_Overflow/posts.xml: OK
+/alkemybigdata/Stack_Overflow_11-2010/112010_Stack_Overflow/posts.xml: OK
+/home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/mapper1.py: OK
+/home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/reducer1.py: OK
 ```
 
 ### Eliminamos el archivo de salida si existe
@@ -170,7 +179,7 @@ hdfs dfs -cat $xmldir/output/part-00000 | head -10
 7  tags                524
 8  reputation          426
 9  area51              372
-10 questions           354`
+10 questions           354
 ```
 
 ### Big file:
@@ -187,7 +196,6 @@ hdfs dfs -cat $xmldir/output/part-00000 | head -10
 10 c++                 12856
 ```
 
----
 ---
 
  otros, mas adelante...
