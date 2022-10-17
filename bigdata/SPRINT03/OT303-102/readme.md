@@ -333,7 +333,8 @@ python3 main.py
 ### Y sus resultados se guardan en el log, se ha dejado el siguiente a modo de ejemplo.
 
 ```
-/logs/OT303-102.log_ejemplo
+/logs/OT303-102.log_ejemplo (sin log de hadoop)
+/logs/OT303-102.log_ejemplo (con log de hadoop)
 ```
 ---
 
