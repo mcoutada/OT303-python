@@ -1,6 +1,13 @@
 # [Alkemy.org](https://alkemy.org) - Python + Data Analytics
 
-In this course we learned tools and techniques for Data analytics.
+In this course, we learned tools and techniques for ETL and Data analytics.
+The main tools used were:
+
+- Python (Pandas, logging, requests, decouple, SQLAlchemy, venv)
+- PostgreSQL
+- Apache Airflow
+- Apache Hadoop
+
 The main tools used were:
 - Python (Pandas, logging, requests, decouple, SQLAlchemy, venv)
 - PostgreSQL
