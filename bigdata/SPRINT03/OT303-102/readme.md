@@ -1,6 +1,11 @@
 
----
+
 # Correr hadoop:
+
+Ya tenemos Hadoop instalado y corriendo. Ver mi guía anterior sino.
+https://github.com/alkemyTech/OT303-python/blob/marianocoutada/bigdata/instalar_hadoop.md
+
+# Seteamos variable y directorio
 ```
 HADOOP_VERSION=3.3.4
 cd ~/hadoop/hadoop-${HADOOP_VERSION}/
