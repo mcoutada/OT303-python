@@ -21,9 +21,9 @@ Install Ubuntu's Windows Subsystem for Linux (WSL).<br>
 Install Apache Airflow in WSL.<br>
 Create SQL queries to extract info from a PostgreSQL DB using SQLAlchemy.<br>
 Create a DAG with 3 tasks (extract, load, transform).<br>
-- Extract from the database using the SQL script to a CSV file.<br>
-- Transform the CSV files using Python's Pandas library and save them into TXT files.<br>
-- Load the TXT files into an AWS S3 bucket.<br>
+- Extract from the database using the SQL script to a CSV file.
+- Transform the CSV files using Python's Pandas library and save them into TXT files.
+- Load the TXT files into an AWS S3 bucket.
 Refactor the DAG to be generated dynamically using YAML/jinja2.<br>
 Generate a log of the process using Python's logging library.<br>
 The DB config is taken from a .env file using Python's decouple library.<br>
