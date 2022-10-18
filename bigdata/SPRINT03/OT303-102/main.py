@@ -2,13 +2,6 @@ from include import logger
 import subprocess
 import os
 
-"""
-if [ -f $hadoopstrjar ]; then echo $hadoopstrjar: OK; else echo $hadoopstrjar: NOT FOUND; fi
-if hdfs dfs -test -f $small_xml; then echo $small_xml: OK; else echo $small_xml: NOT FOUND; fi
-if hdfs dfs -test -f $big_xml; then echo $big_xml: OK; else echo $big_xml: NOT FOUND; fi
-if [ -f $mapper ]; then echo $mapper: OK; else echo $mapper: NOT FOUND; fi
-if [ -f $reducer ]; then echo $reducer: OK; else echo $reducer: NOT FOUND; fi
-"""
 log = logger.set_logger(logger_name=f"{logger.get_rel_path(__file__)}")
 
 
@@ -77,7 +70,7 @@ def main():
     for i in [1, 2, 3]:
         for hdfs_xml in hdfs_xmls:
             hadoop_cmd = f'hadoop jar {hadoopstrjar} -input {hdfs_xml} -output {hdfs_xml_path_out} -mapper "python3 {mapper[i]}" -reducer "python3 {reducer[i]}"'
-            log.info(f'Processing:\n{hadoop_cmd}')
+            log.info(f"Processing:\n{hadoop_cmd}")
 
             # Delete output directory if ixists (Hadoop fails otherwise)
             run_bash(f"hdfs dfs -rm -R -skipTrash {hdfs_xml_path_out}")
@@ -85,7 +78,7 @@ def main():
 
             # Log the results up to 15 lines
             cmd_stdout = run_bash(f"hdfs dfs -cat {hdfs_xml_file_out} | head -15")
-            log.info(f'Output:\n{cmd_stdout}')
+            log.info(f"Output:\n{cmd_stdout}")
 
 
 if __name__ == "__main__":
