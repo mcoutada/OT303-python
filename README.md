@@ -8,11 +8,6 @@ The main tools used were:
 - Apache Airflow
 - Apache Hadoop
 
-The main tools used were:
-- Python (Pandas, logging, requests, decouple, SQLAlchemy, venv)
-- PostgreSQL
-- Apache Airflow
-- Apache Hadoop
 <br>
 The course is divided into 3 main projects:<br>
 1. Admission challenge.<br>
