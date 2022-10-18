@@ -13,6 +13,10 @@ def run_bash(in_file_cmd):
 
 @logger.log_basics(log)
 def main():
+
+    # I validate this through bash as I am keeping the same already done logic,
+    # it could be done with python but I prefer to keep consistency with the previous steps
+
     find_hadoopstrjar_cmd = 'find ~ | grep --p ".*/lib/.*hadoop.*streaming.*.jar"'
     find_hadoopstrjar_cmd_out = subprocess.run(
         find_hadoopstrjar_cmd, capture_output=True, shell=True
@@ -43,8 +47,6 @@ def main():
     os_files = [hadoopstrjar, *list(mapper.values()), *list(reducer.values())]
     hdfs_xmls = [hdfs_small_xml, hdfs_big_xml]
 
-    # we validate this through bash as I am keeping the same already done logic,
-    # it could be done with python but I prefer to keep consistency with the previous steps
     os_files_cmd = [
         f"if [ -f {os_file} ]; then echo {os_file}: OK; else echo {os_file}: NOT FOUND; fi"
         for os_file in os_files
