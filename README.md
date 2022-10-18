@@ -1,6 +1,13 @@
 # [Alkemy.org](https://alkemy.org) - Python + Data Analytics
 
-The course is divided in 3 main projects:
+In this course we learned tools and techniques for Data analytics.
+The main tools used were:
+- Python (Pandas, logging, requests, decouple, SQLAlchemy, venv)
+- PostgreSQL
+- Apache Airflow
+- Apache Hadoop
+<br>
+The course is divided into 3 main projects:
 1. Admission challenge.
 2. Creating Dags with Apache Airflow
 3. Processing Big Data files with Apache Hadoop
