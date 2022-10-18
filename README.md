@@ -7,7 +7,7 @@ The main tools used were:
 - Apache Airflow
 - Apache Hadoop
 <br>
-The course is divided into 3 main projects:
+The course is divided into 3 main projects:<br>
 1. Admission challenge.<br>
 2. Creating Dags with Apache Airflow<br>
 3. Processing Big Data files with Apache Hadoop<br>
