@@ -1,4 +1,6 @@
 
+# Instalar Hadoop
+
 Yo he seguido principalmente esta guía, consultarla si quieren más detalles pero recomiendo seguir mis comandos ya que facilité algunos pasos.
 https://kontext.tech/article/978/install-hadoop-332-in-wsl-on-windows
 
@@ -273,41 +275,57 @@ bin/hdfs namenode -format
 
 
 
-correr hadoop:
+# Correr hadoop:
 
-
+```
 HADOOP_VERSION=3.3.4
 cd ~/hadoop/hadoop-${HADOOP_VERSION}/
+```
 
 corroborar que no haya nada corriendo:
+```
 sbin/stop-all.sh
+```
 
+```
 bin/hdfs namenode -format
+```
 
 si te dice que esta bloqueado el puerto 22:
+```
 sudo service ssh start
 sudo service ssh restart
+```
 
+```
 sbin/start-all.sh
+```
 
 ya podrias entrar aca:
+```
 http://localhost:9870/dfshealth.html#tab-overview
+```
 
 
-para pararlo:
+Para pararlo:
+```
 sbin/stop-all.sh
+```
 
 para verificar que este corriendo bien:
+```
 jps
+```
 
 tenes que ver algo asi:
+```
 21186 NameNode
 21330 DataNode
 22661 Jps
 21782 ResourceManager
 21562 SecondaryNameNode
 21931 NodeManager
-
+```
 
 si alguno de estos no aparece es porque no esta corriendo y hay que arreglarlo
 

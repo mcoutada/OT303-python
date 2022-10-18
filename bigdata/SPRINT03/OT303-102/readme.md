@@ -1,11 +1,11 @@
 
 
-# Correr hadoop:
+# Guía para utiilizar MapReduce en Hadoop:
 
 Ya tenemos Hadoop instalado y corriendo. Ver mi guía anterior sino.
-https://github.com/alkemyTech/OT303-python/blob/marianocoutada/bigdata/instalar_hadoop.md
+> https://github.com/alkemyTech/OT303-python/blob/marianocoutada/bigdata/instalar_hadoop.md
 
-# Seteamos variable y directorio
+### Seteamos variable y directorio
 ```
 HADOOP_VERSION=3.3.4
 cd ~/hadoop/hadoop-${HADOOP_VERSION}/
@@ -23,7 +23,7 @@ sudo service ssh start
 sudo service ssh restart
 sbin/start-all.sh
 ```
-### Ya podrias entrar aca:
+### Ya podrías entrar aca:
 http://localhost:9870/dfshealth.html#tab-overview
 
 ### Para pararlo:
@@ -44,9 +44,8 @@ jps
 21562 SecondaryNameNode
 21931 NodeManager
 ```
-### Si alguno de estos no aparece es porque no esta corriendo y hay que arreglarlo
+### Si alguno de estos no aparece es porque no esta corriendo y hay que arreglarlo.
 
-<br>
 <br>
 
 
@@ -68,12 +67,12 @@ hadoop fs -ls -R /
 drwxr-xr-x   - mcoutada supergroup          0 2022-10-12 15:37 /alkemybigdata
 -rw-r--r--   1 mcoutada supergroup       1731 2022-10-12 15:33 /license.txt
 ```
-### Vemos las primeras 5 lineas de nuestro archivo:
+### Vemos las primeras 5 líneas de nuestro archivo:
 ```
 hdfs dfs -cat /license.txt | head -5
 ```
 
-### Subimos todos los archivos de bigdata (podes subir solo "posts.xml", es el unico que se necesita)
+### Subimos todos los archivos de bigdata (podes subir solo "posts.xml", es el único que se necesita)
 ```
 winfold="/mnt/c/Users/asd/Downloads/Stack_Overflow_11-2010"
 hdfs dfs -put $winfold /alkemybigdata
@@ -113,7 +112,7 @@ cat test.xml | python3 mapper1.py | python3 reducer1.py
 6  search              1
 ```
 
-### O tambien podemos hacerlo con el posts.xml mas pequeño:
+### O también podemos hacerlo con el posts.xml más pequeño:
 ```
 xmldir="/mnt/c/Users/asd/Downloads/Stack_Overflow_11-2010/112010_Meta_Stack_Overflow"
 xml="$xmldir/posts.xml"
@@ -138,7 +137,7 @@ cat $xml | python3 $mapper | python3 $reducer
 10 questions           354
 ```
 
-### Ya tenemos todos los archivos y hemos testeado... podemos correr con hadoop. Necesitamos confirmar que tenemos nuestro hadoop streaming jar
+### Ya tenemos todos los archivos y hemos testeado... podemos correr con Hadoop. Necesitamos confirmar que tenemos nuestro Hadoop streaming jar
 
 ```
 find ~ | grep --p ".*/lib/.*hadoop.*streaming.*.jar"
@@ -160,7 +159,7 @@ mapper="$wkdir/mapper1.py"
 reducer="$wkdir/reducer1.py"
 ```
 
-### Verificamos si las variables estan bien asignadas
+### Verificamos si las variables estan bien asignadas:
 ```
 if [ -f $hadoopstrjar ]; then echo $hadoopstrjar: OK; else echo $hadoopstrjar: NOT FOUND; fi
 if hdfs dfs -test -f $small_xml; then echo $small_xml: OK; else echo $small_xml: NOT FOUND; fi
@@ -330,21 +329,14 @@ hdfs dfs -cat $xmldir/output/part-00000 | head -10
 10 c++                 12856
 ```
 
-### Ya tenemos todo para automatizarlo en un script python.
+### Ya tenemos todo para automatizarlo en un script python, yo lo he hecho en `main.py`.
 ```
 python3 main.py
 ```
 
-### Y sus resultados se guardan en el log, se ha dejado el siguiente a modo de ejemplo.
+### Y sus resultados se guardan en el log, he dejado lo siguiente a modo de ejemplo.
 
 ```
 /logs/OT303-102.log_ejemplo (sin log de hadoop)
 /logs/OT303-102.log_ejemplo (con log de hadoop)
 ```
----
-
- otros, mas adelante...
-
-
-sprint3 86 94 y 102
-sprint4 110 118 y 126
