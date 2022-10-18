@@ -39,8 +39,10 @@ especifican para cada grupo de universidades, utilizando Pandas.
 # Assets 🎨
 La base de datos con la información que reunió el Ministerio de Educación se
 encuentra aquí:
+```
 ● Host: http://training-main.cghe7e6sfljt.us-east-1.rds.amazonaws.com
 ● Database: training
 ● Credenciales: pedirla a su mentor/a
 El archivo auxiliar de códigos postales se encuentra
 aquí: https://drive.google.com/file/d/1or8pr7-XRVf5dIbRblSKlRmcP0wiP9QJ/view
+```
