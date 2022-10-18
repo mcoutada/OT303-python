@@ -1,4 +1,3 @@
-from typing import final
 import numpy as np
 
 from datetime import date

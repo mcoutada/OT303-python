@@ -2,7 +2,6 @@ import os
 import re
 import xml.etree.ElementTree as ET
 
-from numpy import save
 
 file_path = '/home/richarcos/Documentos/Stack Overflow 11-2010/112010 Meta Stack Overflow'
 save_path  = 'Sprint3/mapreduce/files'
