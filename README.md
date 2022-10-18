@@ -5,7 +5,7 @@ The course is divided in 3 main projects:
 2. Creating Dags with Apache Airflow
 3. Processing Big Data files with Apache Hadoop
 
-Led by an expert in the field as a mentor. Organized using Agile methodology, with weekly sprints, and daily meetings, everything formalized through JIRA tickets.
+Led by an expert in the field as a mentor. Organized using Agile methodology, with weekly sprints, daily meetings, and JIRA tickets.
 
 ## Admission challenge:
 Extract CSV files from different sources through Python's Requests library.
