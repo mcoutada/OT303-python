@@ -24,6 +24,7 @@ Create a DAG with 3 tasks (extract, load, transform).<br>
 - Extract from the database using the SQL script to a CSV file.
 - Transform the CSV files using Python's Pandas library and save them into TXT files.
 - Load the TXT files into an AWS S3 bucket.
+
 Refactor the DAG to be generated dynamically using YAML/jinja2.<br>
 Generate a log of the process using Python's logging library.<br>
 The DB config is taken from a .env file using Python's decouple library.<br>
@@ -33,7 +34,8 @@ The DB config is taken from a .env file using Python's decouple library.<br>
 Install Hadoop in WSL.<br>
 Implement a MapReduce technique for 3 different tasks using:
 - A Python's mapper.py and reducer.py to process a small file (200mb).
-- Using Hadoop to process a big file (4 GB), loading it into HDFS and processing it with hadoop-streaming-X.X.X.jar.<br>
+- Using Hadoop to process a big file (4 GB), loading it into HDFS and processing it with hadoop-streaming-X.X.X.jar.
+
 Automate the Bash commands through a main.py script for the 3 tasks.<br>
 Creation of Unit Tests.<br>
 Unit Test Documentation.<br>
