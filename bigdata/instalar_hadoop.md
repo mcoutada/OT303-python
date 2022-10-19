@@ -28,6 +28,7 @@ HADOOP_VERSION=3.3.4
 wget https://dlcdn.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz
 mkdir ~/hadoop
 tar -xvzf hadoop-${HADOOP_VERSION}.tar.gz -C ~/hadoop
+rm -f ~/hadoop-${HADOOP_VERSION}.tar.gz
 cd ~/hadoop/hadoop-${HADOOP_VERSION}/
 sudo apt install ssh 
 ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
