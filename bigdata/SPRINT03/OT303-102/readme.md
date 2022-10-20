@@ -154,7 +154,7 @@ hadoopstrjar=$(find ~ | grep --p ".*/lib/.*hadoop.*streaming.*.jar")
 xmldir="/alkemybigdata/Stack_Overflow_11-2010"
 small_xml="$xmldir/112010_Meta_Stack_Overflow/posts.xml"
 big_xml="$xmldir/112010_Stack_Overflow/posts.xml"
-wkdir="/home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102"
+wkdir="/home/mcoutada/alkemy/OT303-python/bigdata/SPRINT03/OT303-102/include"
 mapper="$wkdir/mapper1.py"
 reducer="$wkdir/reducer1.py"
 ```
