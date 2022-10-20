@@ -268,7 +268,7 @@ y no aparecia Datanode.
 
 ```
 sbin/stop-all.sh
-# resetear todo (se va a borrar la data que hayas subdio):
+# resetear todo (se va a borrar la data que hayas subido):
 rm -Rf /home/mcoutada/hadoop/dfs/data334/*
 rm -Rf /home/mcoutada/hadoop/dfs/name334/*
 bin/hdfs namenode -format
