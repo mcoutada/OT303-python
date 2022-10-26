@@ -3,7 +3,7 @@ from decouple import RepositoryIni, Config
 from pathlib import Path
 
 config = Config(RepositoryIni(os.path.join(
-    Path().resolve().parent, 'lautaro/airflow/dags/settings.ini')))
+    Path().resolve().parent, 'airflow/dags/settings.ini')))
 
 # Database Information
 DB_USER = config('DB_USER')
@@ -26,8 +26,8 @@ ROOT_TXT = os.path.join(ROOT, 'airflow/dags/clear_data')
 LOGS_PATH = os.path.join(ROOT, 'airflow/dags/logs')
 
 # Tables Names
-FLORES = 'uba_kenedy'
-VILLA_MARIA = 'last_sociales_cine'
+universidad-j.-f.-kennedy = 'uba_kenedy'
+-FACULTAD-LATINOAMERICANA-DE-CIENCIAS-SOCIALES = 'last_sociales_cine'
 LOCALIDAD = 'localidad2'
 
 # Loggers
