@@ -171,6 +171,8 @@ sudo pip3 install pyOpenSSL --upgrade # solucionó un montón de errores para po
 sudo pip3 install cryptography --upgrade # solucionó un montón de errores para poder actualizar varios paquetes
 sudo apt install -y build-essential libdbus-glib-1-dev libgirepository1.0-dev meson patchelf # solucionó poder actualizar dbus-python
 sudo apt-get install -y libcairo2-dev # solucionó poder actualizar PyGObject
+sudo apt-get install -y libsystemd-dev
+sudo pip3 install systemd-python --ignore-installed
 
 Correr pipupgrade nuevamente y verificar que no actualice nada.
 
